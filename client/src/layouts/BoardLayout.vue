@@ -99,6 +99,11 @@
         const res = await axios.get('/api/identities')
         const user = res.data[0] || null
         this.user = user
+        ws = new WebSocket('wss://liveboard.tew.tw' + '/data')
+	      ws.onmessage = async (e) => {
+          console.log(e)
+        }
+        ws.send('Hello')
       } catch (err) {
         this.user = null
       }
