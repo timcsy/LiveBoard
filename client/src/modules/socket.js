@@ -45,6 +45,7 @@ class MainSocket {
 			console.console.warn('waiting for socket init...')
 		}
 		this.ws.send(data)
+		console.log(data)
 	}
 }
 
