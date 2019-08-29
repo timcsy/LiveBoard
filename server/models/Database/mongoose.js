@@ -12,8 +12,10 @@ const authMechanism = 'DEFAULT';
 // Connetion url
 const url = f('mongodb://%s:%s@%s:%d/%s?authSource=admin', user, password, hostname, port, dbName)
 
-mongoose.set('useCreateIndex', true)
-
-mongoose.connect(url, {authMechanism: authMechanism, useNewUrlParser: true})
+mongoose.connect(url, {
+	authMechanism: authMechanism,
+	useNewUrlParser: true,
+	useCreateIndex: true
+})
 
 module.exports = mongoose
