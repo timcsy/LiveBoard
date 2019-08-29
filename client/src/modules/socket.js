@@ -37,7 +37,7 @@ class MainSocket {
 			}
 		}
 
-		this.ws.onopen = function() {
+		this.ws.onopen = () => {
 			while (this.msgs.length > 0) {
         this.ws.send(this.msgs.shift())
       }
