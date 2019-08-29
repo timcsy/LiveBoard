@@ -7,7 +7,7 @@ router.all('/data', RBAC.auth(), async (ctx) => {
 	console.log(ctx.state.user)
 	ctx.websocket.on('message', function(message) {
 		console.log(message)
-		ctx.websocket.send({ on: 'receive', data: message})
+		ctx.websocket.send(JSON.stringify({on: 'receive', data: message}))
 	})
 })
 
