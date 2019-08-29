@@ -100,7 +100,9 @@
         const res = await axios.get('/api/identities')
         const user = res.data[0] || null
         this.user = user
+        console.log('HHHHHHH1')
         ws.send('Hello')
+        console.log('HHHHHHH2')
       } catch (err) {
         this.user = null
       }
