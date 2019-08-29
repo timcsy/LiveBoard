@@ -84,9 +84,11 @@
     props: {
       items: {
         type: Array,
-        default: [
-          {icon: 'home', text: '首頁', url: '/'}
-        ]
+        default: function() {
+          return [
+            {icon: 'home', text: '首頁', url: '/'}
+          ]
+        }
       }
     },
     methods: {
