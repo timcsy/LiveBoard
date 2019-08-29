@@ -1,4 +1,4 @@
-import WS_HOST from '../../config'
+import { WS_HOST } from '../../config'
 
 class MainSocket {
 	constructor() {
