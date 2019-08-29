@@ -61,4 +61,4 @@ class MainSocket {
 	}
 }
 
-export default new MainSocket()
+export default ws = new MainSocket()
