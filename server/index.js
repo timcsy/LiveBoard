@@ -27,8 +27,8 @@ app.use(router.routes())
 app.use(static(path.resolve(__dirname, '../client/dist')))
 
 // server
-app.listen(50040, () => {
-	console.log('Remember to open MongoDB server: npm run db')
-	console.log('Remember to setup at first time: npm run setup')
-	console.log('Server is running at http://localhost')
+app.listen(config.PORT, () => {
+	console.log(`Remember to open MongoDB server: npm run db`)
+	console.log(`Remember to setup at first time: npm run setup`)
+	console.log(`Server is running at http://localhost:${config.PORT}`)
 })
