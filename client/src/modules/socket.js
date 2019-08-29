@@ -2,6 +2,7 @@ import { WS_HOST } from '../../config'
 
 class MainSocket {
 	constructor() {
+		this.msgs = new Array()
 		this.init()
 	}
 
@@ -35,20 +36,24 @@ class MainSocket {
 				await hangup(true)
 			}
 		}
+
+		this.ws.onopen(function() {
+			while (this.msgs.length > 0) {
+        ws.send(msgs.shift())
+      }
+		})
 	}
 
 	send(data) {
-		console.log(data)
+		this.msgs.push(data)
+		if (this.ws.readyState !== OPEN) {
+			this.msgs.push(data)
+		} else {
+			this.ws.send(data)
+		}
 		if (this.ws.readyState === WebSocket.CLOSED) {
 			this.init()
 		}
-		console.log(data)
-		while(this.ws.readyState !== WebSocket.OPEN) {
-			console.console.warn('waiting for socket init...')
-		}
-		console.log(data)
-		this.ws.send(data)
-		console.log(data)
 	}
 }
 
