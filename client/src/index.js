@@ -38,19 +38,7 @@ const app = new Vue({
 			{icon: 'account_circle', text: '註冊', url: '/signup'},
 			{ divider: true },
 			{ heading: 'Pages' },
-			{ icon: 'touch_app', text: 'Reminders' },
-			{ divider: true },
-			{ heading: 'Labels' },
-			{ icon: 'add', text: 'Create new label' },
-			{ divider: true },
-			{ icon: 'archive', text: 'Archive' },
-			{ icon: 'delete', text: 'Trash' },
-			{ divider: true },
-			{ icon: 'settings', text: 'Settings' },
-			{ icon: 'chat_bubble', text: 'Trash' },
-			{ icon: 'help', text: 'Help' },
-			{ icon: 'phonelink', text: 'App downloads' },
-			{ icon: 'keyboard', text: 'Keyboard shortcuts' }
+			{ icon: 'touch_app', text: 'Reminders' }
 		]
 	}
 })

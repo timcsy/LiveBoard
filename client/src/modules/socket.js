@@ -3,6 +3,7 @@ import { WS_HOST } from '../../config'
 class MainSocket {
 	constructor() {
 		this.msgs = new Array()
+		this.callbacks = {}
 		this.init()
 	}
 
@@ -12,6 +13,8 @@ class MainSocket {
 			const message = e.data
 			const msg = JSON.parse(message)
 			// console.log(msg)
+			this.callbacks[on].forEach(callback => await callback(msg))
+
 			if (msg.cmd === 'after:render') {
 				afterRender(msg)
 			} else if (msg.cmd === 'ready') {
@@ -58,6 +61,11 @@ class MainSocket {
 
 	close(code, reason) {
 		this.ws.close(code, reason)
+	}
+
+	on(on, callback) {
+		if (!this.callbacks[on]) this.callbacks[on] = new Array()
+		this.callbacks[on].push(callback)
 	}
 }
 
