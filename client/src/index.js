@@ -1,3 +1,7 @@
+// for global
+import adapter from 'webrtc-adapter'
+
+// for Vue
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
@@ -5,6 +9,7 @@ import colors from 'vuetify/es5/util/colors'
 
 import MainLayout from './layouts/MainLayout.vue'
 import CenteredForm from './layouts/CenteredForm.vue'
+import BoardLayout from './layouts/BoardLayout.vue'
 import SummaryCard from './components/SummaryCard.vue'
 
 Vue.use(Vuetify, {
@@ -21,6 +26,7 @@ Vue.use(Vuetify, {
 
 Vue.component('main-layout', MainLayout)
 Vue.component('centered-form', CenteredForm)
+Vue.component('board-layout', BoardLayout)
 Vue.component('summary-card', SummaryCard)
 
 const app = new Vue({

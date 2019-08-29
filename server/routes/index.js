@@ -3,6 +3,7 @@ const views = require('koa-views')
 const path = require('path')
 
 const authRouter = require('./auth')
+const boardRouter = require('./board')
 const dataRouter = require('./data')
 const apiRouter = require('./api')
 
@@ -14,6 +15,9 @@ router.use(views(path.resolve(__dirname, '../../client/dist'), {
 
 // Auth resource
 router.use(authRouter.routes())
+
+// Board resource
+router.use(boardRouter.routes())
 
 // Data resource
 router.use(dataRouter.routes())
