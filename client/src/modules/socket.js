@@ -41,7 +41,9 @@ class MainSocket {
 		if (this.ws.readyState === WebSocket.CLOSED) {
 			this.init()
 		}
-		while(this.ws.readyState !== WebSocket.OPEN) {}
+		while(this.ws.readyState !== WebSocket.OPEN) {
+			console.console.warn('waiting for socket init...')
+		}
 		this.ws.send(message)
 	}
 }
