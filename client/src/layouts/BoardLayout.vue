@@ -103,7 +103,7 @@
 	      ws.onmessage = async (e) => {
           console.log(e)
         }
-        ws.send('Hello')
+        ws.send(JSON.stringify('Hello'))
       } catch (err) {
         this.user = null
       }
