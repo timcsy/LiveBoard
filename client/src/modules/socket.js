@@ -39,7 +39,7 @@ class MainSocket {
 
 		this.ws.onopen = function() {
 			while (this.msgs.length > 0) {
-        ws.send(msgs.shift())
+        this.ws.send(this.msgs.shift())
       }
 		}
 	}
