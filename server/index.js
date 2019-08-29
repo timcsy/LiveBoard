@@ -23,6 +23,9 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 // Websocket routes
+app.ws.use(session(app))
+app.ws.use(passport.initialize())
+app.ws.use(passport.session())
 app.ws.use(wsRouter.routes())
 
 // routes
