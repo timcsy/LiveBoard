@@ -44,6 +44,7 @@ class MainSocket {
 		while(this.ws.readyState !== WebSocket.OPEN) {
 			console.console.warn('waiting for socket init...')
 		}
+		console.log(data)
 		this.ws.send(data)
 		console.log(data)
 	}
