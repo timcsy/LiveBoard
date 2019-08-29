@@ -73,6 +73,7 @@
 
 <script>
   import axios from 'axios'
+  import ws from '../modules/socket'
   export default {
     data: () => ({
       drawer: null,
@@ -99,11 +100,7 @@
         const res = await axios.get('/api/identities')
         const user = res.data[0] || null
         this.user = user
-        ws = new WebSocket('wss://liveboard.tew.tw' + '/data')
-	      ws.onmessage = async (e) => {
-          console.log(e)
-        }
-        for (let i = 0; i < 1000; i++) ws.send('Hello')
+        ws.send('Hello')
       } catch (err) {
         this.user = null
       }
