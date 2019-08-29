@@ -1,6 +1,7 @@
 const Koa = require('koa')
 const session = require('koa-session')
 const bodyParser = require('koa-bodyparser')
+const websockify = require('koa-websocket')
 const passport = require('./lib/passort')
 const router = require('./routes')
 const wsRouter = require('./routes/ws')
@@ -8,7 +9,7 @@ const static = require('koa-static')
 const path = require('path')
 const config = require('./config/server')
 
-const app = new Koa()
+const app = websockify(new Koa())
 
 // sessions
 app.keys = config.SESSION_KEYS
