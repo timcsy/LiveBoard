@@ -37,11 +37,11 @@ class MainSocket {
 			}
 		}
 
-		this.ws.onopen(function() {
+		this.ws.onopen = function() {
 			while (this.msgs.length > 0) {
         ws.send(msgs.shift())
       }
-		})
+		}
 	}
 
 	send(data) {
