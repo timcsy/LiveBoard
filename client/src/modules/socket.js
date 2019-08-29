@@ -55,8 +55,12 @@ class MainSocket {
 			this.init()
 		}
 	}
+
+	close(code, reason) {
+		this.ws.close(code, reason)
+	}
 }
 
 const ws = new MainSocket()
 
-export { ws }
+export default ws
