@@ -2,7 +2,7 @@ import WS_HOST from '../../config'
 
 class MainSocket {
 	constructor() {
-		init()
+		this.init()
 	}
 
 	init() {
@@ -39,7 +39,7 @@ class MainSocket {
 
 	send(message) {
 		if (this.ws.readyState === WebSocket.CLOSED) {
-			init()
+			this.init()
 		}
 		while(this.ws.readyState !== WebSocket.OPEN) {}
 		this.ws.send(message)
