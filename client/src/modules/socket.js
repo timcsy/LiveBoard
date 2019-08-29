@@ -38,9 +38,11 @@ class MainSocket {
 	}
 
 	send(data) {
+		console.log(data)
 		if (this.ws.readyState === WebSocket.CLOSED) {
 			this.init()
 		}
+		console.log(data)
 		while(this.ws.readyState !== WebSocket.OPEN) {
 			console.console.warn('waiting for socket init...')
 		}
