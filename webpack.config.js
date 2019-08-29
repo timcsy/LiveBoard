@@ -61,6 +61,10 @@ module.exports = {
       filename: 'data/index.html',
       template: path.resolve(__dirname, 'client/views/data/index.html')
     }),
+    new HtmlWebpackPlugin({
+      filename: 'board/index.html',
+      template: path.resolve(__dirname, 'client/views/board/index.html')
+    }),
     new VueLoaderPlugin()
   ],
   resolve: {
