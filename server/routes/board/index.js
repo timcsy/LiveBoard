@@ -3,7 +3,7 @@ const RBAC = require('../../lib/rbac')
 
 const router = new Router()
 
-router.get('/board', RBAC.auth(true), async (ctx) => {
+router.get('/board', RBAC.auth(), async (ctx) => {
 	await ctx.render('board/index')
 })
 
