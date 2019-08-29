@@ -49,4 +49,6 @@ class MainSocket {
 	}
 }
 
-export default new MainSocket()
+const ws = new MainSocket()
+
+export { ws }

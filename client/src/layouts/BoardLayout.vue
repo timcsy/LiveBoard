@@ -73,7 +73,7 @@
 
 <script>
   import axios from 'axios'
-  import ws from '../modules/socket'
+  import { ws } from '../modules/socket'
   export default {
     data: () => ({
       drawer: null,
