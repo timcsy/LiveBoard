@@ -84,7 +84,7 @@
     props: {
       items: {
         type: Array,
-        default: function() {
+        default: () => {
           return [
             {icon: 'home', text: '首頁', url: '/'}
           ]
