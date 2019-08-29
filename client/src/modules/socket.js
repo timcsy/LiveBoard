@@ -13,7 +13,7 @@ class MainSocket {
 			const message = e.data
 			const msg = JSON.parse(message)
 			// console.log(msg)
-			this.callbacks[on].forEach(async(callback) => await callback(msg))
+			this.callbacks[msg.on].forEach(async(callback) => await callback(msg))
 
 			if (msg.cmd === 'after:render') {
 				afterRender(msg)
