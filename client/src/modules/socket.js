@@ -37,17 +37,17 @@ class MainSocket {
 		}
 	}
 
-	send(message) {
+	send(data) {
 		if (this.ws.readyState === WebSocket.CLOSED) {
 			this.init()
 		}
 		while(this.ws.readyState !== WebSocket.OPEN) {
 			console.console.warn('waiting for socket init...')
 		}
-		this.ws.send(message)
+		this.ws.send(data)
 	}
 }
 
 const ws = new MainSocket()
 
-export { ws }
+export default ws
