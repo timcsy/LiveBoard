@@ -61,15 +61,15 @@
     </v-app-bar>
 
     <v-content light fill-height>
-      <v-container fluid class="grey lighten-4">
-        <v-layout align-center justify-start column fill-height>
+      <v-container fluid class="grey lighten-4" fill-height>
+        <v-layout align-center justify-start column>
           
           <slot></slot>
 
           <v-layout v-if="!isCalling">
             <v-btn v-if="showCallBtn" @click="call()">Call</v-btn>
             <v-btn v-if="showHangupBtn" @click="hangup()">Hangup</v-btn>
-            <v-list subheader>
+            <v-list subheader light>
               <v-subheader>Invitations</v-subheader>
 
               <v-list-item
