@@ -78,7 +78,8 @@
                 :key="invitation.id"
               >
                 <v-list-item-avatar>
-                  <v-img :src="invitation.inviter.picture"></v-img>
+                  <v-img v-if="invitation.inviter.picture" :src="invitation.inviter.picture"></v-img>
+                  <v-icon v-else x-large>account_circle</v-icon>
                 </v-list-item-avatar>
 
                 <v-list-item-content>
@@ -92,7 +93,7 @@
             </v-list>
           </v-container>
 
-          <v-container v-if="isCalling">
+          <v-container v-else>
             <v-btn v-if="showCallBtn" @click="call()">Call</v-btn>
             <v-btn v-if="showHangupBtn" @click="hangup()">Hangup</v-btn>
           </v-container>
