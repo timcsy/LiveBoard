@@ -35,6 +35,13 @@ class Session {
 		this.send('session:accept')
 	}
 
+	get receiver() {
+		return this.receiver
+	}
+	set receiver(receiver) {
+		this.receiver = receiver
+	}
+
 	send(on, data) {
 		ws.send(JSON.stringify({session: this.id, on, data}))
 	}
