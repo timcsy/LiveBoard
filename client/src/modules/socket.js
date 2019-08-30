@@ -24,7 +24,6 @@ class MainSocket {
 	}
 
 	send(data) {
-		this.msgs.push(data)
 		if (this.ws.readyState !== WebSocket.OPEN) {
 			this.msgs.push(data)
 		} else {
