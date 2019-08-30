@@ -61,8 +61,8 @@
     </v-app-bar>
 
     <v-content light fill-height>
-
-        <v-container fluid class="grey lighten-4" align-center justify-start column fill-height>
+      <v-container fluid class="grey lighten-4">
+        <v-layout align-center justify-start column fill-height>
           
           <slot></slot>
 
@@ -97,8 +97,8 @@
             <v-btn v-if="showHangupBtn" @click="hangup()">Hangup</v-btn>
           </v-layout>
 
-        </v-container>
-
+        </v-layout>
+      </v-container>
     </v-content>
   </v-app>
 </template>
