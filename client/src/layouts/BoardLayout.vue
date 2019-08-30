@@ -97,12 +97,12 @@
     },
     methods: {
       call: async function () {
-        this.$ref.callBtn.disabled = true
-	      this.$ref.hangupBtn.disabled = false
+        this.$refs.callBtn.disabled = true
+	      this.$refs.hangupBtn.disabled = false
       },
       hangup: async function () {
-        this.$ref.hangupBtn.disabled = true
-	      this.$ref.callBtn.disabled = false
+        this.$refs.hangupBtn.disabled = true
+	      this.$refs.callBtn.disabled = false
       },
     },
     created: async function () {
