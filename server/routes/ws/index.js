@@ -96,7 +96,7 @@ router.all('/data', RBAC.auth(), async (ctx) => {
 						}
 
 						else if (msg.on == 'webrtc:ice') {
-							ws.send(JSON.stringify({on: 'webrtc:ice', data: {sdp: msg.data.ice}}))
+							ws.send(JSON.stringify({on: 'webrtc:ice', data: {ice: msg.data.ice}}))
 						}
 
 						else if (msg.on == 'webrtc:disconnected') {
