@@ -188,7 +188,7 @@
           await this.ready()
           this.stream.start()
         })
-        ws.on('session:close', msg => { // for passive side (w.r.t. hangup)
+        ws.on('session:close', async (msg) => { // for passive side (w.r.t. hangup)
           await this.close()
         })
       } catch (err) {
