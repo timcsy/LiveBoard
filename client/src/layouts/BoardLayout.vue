@@ -99,12 +99,12 @@
     },
     methods: {
       call: async function () {
-        this.showCallBtn = false
-	      this.showHangupBtn = true
+        this.$set('showCallBtn', false)
+        this.$set('showHangupBtn', true)
       },
       hangup: async function () {
-        this.showCallBtn = true
-	      this.showHangupBtn = false
+        this.$set('showCallBtn', true)
+        this.$set('showHangupBtn', false)
       },
     },
     created: async function () {
