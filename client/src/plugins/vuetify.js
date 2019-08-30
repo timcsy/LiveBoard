@@ -7,8 +7,8 @@ Vue.use(Vuetify)
 
 export default new Vuetify({
   theme: {
+		dark: true,
     themes: {
-			dark: true,
       dark: {
         primary: colors.cyan.darken2,
 				secondary: colors.amber.darken2,

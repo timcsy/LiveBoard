@@ -5,7 +5,7 @@
         <div v-if="user">
           <v-toolbar flat class="transparent">
             <v-list class="pa-0">
-              <v-list-item avatar>
+              <v-list-item>
                 <v-list-item-avatar>
                   <img v-if="user.picture" :src="user.picture">
                   <v-icon v-else x-large>account_circle</v-icon>
@@ -45,7 +45,7 @@
     </v-navigation-drawer>
 
     <v-app-bar color="primary" app fixed clipped-left>
-      <v-app-bar-nav-icon color="" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <span class="title ml-3 mr-5">Liveboard</span>
       <v-text-field
         solo-inverted
