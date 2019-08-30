@@ -166,7 +166,7 @@
         ws.on('session:invite', msg => {
           this.inviteList.push(msg.data)
         })
-        ws.on('session:ready', msg => {
+        ws.on('session:ready', async (msg) => {
           const stream = await navigator.mediaDevices.getUserMedia({audio: true, video: false})
           this.stream = new LiveStream(this.session, stream)
           const startTime = Date.now()
