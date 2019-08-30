@@ -43,7 +43,7 @@ class LiveStream {
       this.pc = new RTCPeerConnection(this.configuration)
       this.pc.addEventListener('icecandidate', e => this.onIceCandidate(e))
       this.pc.addEventListener('iceconnectionstatechange', e => this.onIceStateChange(e))
-      this.pc.addEventListener('track', e => this.playRemoteStream(e))
+      // this.pc.addEventListener('track', e => this.playRemoteStream(e))
       // Add local stream to pc
       this.localStream.getTracks().forEach(track => this.pc.addTrack(track, this.localStream))
     }
