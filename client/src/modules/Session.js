@@ -10,7 +10,7 @@ class Session {
 	}
 
 	start() {
-		ws.send({on: 'session:start'})
+		ws.send(JSON.stringify({on: 'session:start'}))
 	}
 
 	onStart(msg) {
