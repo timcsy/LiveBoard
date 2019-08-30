@@ -65,8 +65,15 @@
           
           <slot></slot>
 
-          <v-btn v-if="showCallBtn" @click="call()">Call</v-btn>
-          <v-btn v-if="showHangupBtn" @click="hangup()">Hangup</v-btn>
+          <v-layout v-if="!isCalling">
+            <v-btn v-if="showCallBtn" @click="call()">Call</v-btn>
+            <v-btn v-if="showHangupBtn" @click="hangup()">Hangup</v-btn>
+          </v-layout>
+
+          <v-layout v-if="isCalling">
+            <v-btn v-if="showCallBtn" @click="call()">Call</v-btn>
+            <v-btn v-if="showHangupBtn" @click="hangup()">Hangup</v-btn>
+          </v-layout>
 
         </v-container>
       </v-layout>
@@ -77,7 +84,7 @@
 
 <script>
   import axios from 'axios'
-  import ws from '../modules/MainSocket'
+  import Session from '../modules/Session'
   import LiveStream from '../modules/LiveStream'
   export default {
     data: () => ({
@@ -88,7 +95,8 @@
       },
       showCallBtn: true,
       showHangupBtn: false,
-      contact: ''
+      contact: '',
+      isCalling: false
     }),
     props: {
       items: {
@@ -105,9 +113,12 @@
         this.showCallBtn = false
         this.showHangupBtn = true
         const stream = await navigator.mediaDevices.getUserMedia({audio: true, video: false})
-        this.stream = new LiveStream(stream, this.contact)
+        this.session = new Session()
+        this.session.start()
+        this.session.invite(this.contact)
+        this.stream = new LiveStream(this.session, stream)
         const startTime = Date.now()
-        ws.send(JSON.stringify({to: this.contact, on: 'webrtc:start', data: {time: startTime} }))
+        this.session.send('webrtc:start', { time: startTime })
       },
       hangup: async function () {
         this.showCallBtn = true

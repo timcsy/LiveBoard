@@ -1,9 +1,9 @@
 import ws from './MainSocket'
 
 class LiveStream {
-  constructor(localStream, receiver) {
+  constructor(session, localStream) {
     this.localStream = localStream
-    this.receiver = receiver
+    this.session = session
     this.isServerMode = false
 
     // STUN / TURN Server
@@ -25,13 +25,12 @@ class LiveStream {
   }
 
   start(msg) {
-    this.receiver = msg.sendFrom
-    ws.send(JSON.stringify({to: caller, on: 'webrtc:ready'}))
+    this.session.send('webrtc:ready')
   }
 
   close() {
     // Ending call
-    this.pc.close()
+    if (this.pc) this.pc.close()
     this.pc = null
   }
 
@@ -61,15 +60,14 @@ class LiveStream {
       }
   
       // send sdp
-      ws.send(JSON.stringify({to: this.receiver, on: 'webrtc:offer', data: {sdp: offer.toJSON()}}))
+      this.session.send('webrtc:offer', { sdp: offer.toJSON() })
     } catch (e) {
       console.error(`Failed to create session description: ${e.toString()}`)
     }
   }
 
   async receiveOffer(msg) {
-    const desc = new RTCSessionDescription(msg.sdp)
-    const sendFrom = msg.sendFrom
+    const desc = new RTCSessionDescription(msg.data.sdp)
 
     if (!this.pc) this.createPeerConnection()
   
@@ -86,27 +84,26 @@ class LiveStream {
     // accept the incoming offer of audio and video.
     try {
       const answer = await this.pc.createAnswer()
-      await this.sendAnswer(answer, sendFrom)
+      await this.sendAnswer(answer)
     } catch (e) {
       console.error(`Failed to set session description: ${e.toString()}`)
     }
   }
 
-  async sendAnswer(desc, sendFrom) {
+  async sendAnswer(desc) {
     try {
       await this.pc.setLocalDescription(desc)
       console.log(`pc setLocalDescription complete`)
   
       // send sdp
-      const msg = {to: sendFrom, on: 'webrtc:answer', data: {sdp: desc.toJSON()}}
-      ws.send(JSON.stringify(msg))
+      this.session.send('webrtc:answer', { sdp: desc.toJSON() })
     } catch (e) {
       console.error(`Failed to set session description: ${e.toString()}`)
     }
   }
 
   async receiveAnswer(msg) {
-    const desc = new RTCSessionDescription(msg.sdp)
+    const desc = new RTCSessionDescription(msg.data.sdp)
 
     if (!this.pc) await this.createPeerConnection()
   
@@ -119,12 +116,11 @@ class LiveStream {
   }
 
   sendICE(ice) {
-    const msg = {to: this.receiver, on: 'webrtc:ice', data: {ice: ice.toJSON()}}
-    ws.send(JSON.stringify(msg))
+    this.session.send('webrtc:ice', { ice: ice.toJSON() })
   }
   
   async receiveICE(msg) {
-    const ice = new RTCIceCandidate(msg.ice)
+    const ice = new RTCIceCandidate(msg.data.ice)
 
     if (!this.pc) this.createPeerConnection()
   
@@ -146,7 +142,7 @@ class LiveStream {
       console.log(`pc ICE state: ${this.pc.iceConnectionState}`)
       console.log(event)
       if (this.pc.iceConnectionState === 'disconnected') {
-        ws.send(JSON.stringify({to: this.receiver, on: 'webrtc:disconnected'}))
+        this.session.send('webrtc:disconnected')
       } else if (this.pc.iceConnectionState === 'connected') {
         this.isServerMode = false
       }

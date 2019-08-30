@@ -11,9 +11,10 @@ class MainSocket {
 		this.ws = new WebSocket(WS_HOST + '/data')
 		this.ws.onmessage = async (e) => {
 			const message = e.data
-			const msg = JSON.parse(message)
+			const msg = JSON.parse(message) // {on, data}
 			// console.log(msg)
-			this.callbacks[msg.on].forEach(async(callback) => await callback(msg))
+			if (this.callbacks[msg.on])
+				this.callbacks[msg.on].forEach(async(callback) => await callback(msg))
 		}
 
 		this.ws.onopen = () => {
