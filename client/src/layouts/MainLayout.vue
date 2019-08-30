@@ -2,7 +2,7 @@
   <v-app>
 
     <v-navigation-drawer v-model="drawer" fixed clipped class="grey lighten-4" app light>
-      <v-list dense class="grey lighten-4">
+      <v-list dense class="grey lighten-4" subheader>
         <div v-if="user">
           <v-toolbar flat class="transparent">
             <v-list class="pa-0">
@@ -23,13 +23,9 @@
         <div v-else class="mb-3"></div>
 
         <template v-for="(item, i) in items">
-          <v-layout v-if="item.heading" :key="i" row align-center>
-            <v-flex xs6>
-              <v-subheader v-if="item.heading">
-                {{item.heading}}
-              </v-subheader>
-            </v-flex>
-          </v-layout>
+          <v-subheader v-if="item.heading" :key="i">
+            {{item.heading}}
+          </v-subheader>
           <v-divider v-else-if="item.divider" :key="i" dark class="my-3"></v-divider>
           <v-list-item v-else  :key="i" :href="item.url">
             <v-list-item-action>
