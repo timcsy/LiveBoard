@@ -66,7 +66,7 @@
           
           <slot></slot>
 
-          <v-layout v-if="!isCalling">
+          <v-container v-if="!isCalling">
             <v-btn v-if="showCallBtn" @click="call()">Call</v-btn>
             <v-btn v-if="showHangupBtn" @click="hangup()">Hangup</v-btn>
             <v-list subheader light>
@@ -90,12 +90,12 @@
                 </v-list-item-icon>
               </v-list-item>
             </v-list>
-          </v-layout>
+          </v-container>
 
-          <v-layout v-if="isCalling">
+          <v-container v-if="isCalling">
             <v-btn v-if="showCallBtn" @click="call()">Call</v-btn>
             <v-btn v-if="showHangupBtn" @click="hangup()">Hangup</v-btn>
-          </v-layout>
+          </v-container>
 
         </v-layout>
       </v-container>
