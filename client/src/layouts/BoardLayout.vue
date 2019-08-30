@@ -63,7 +63,7 @@
 
     <v-content light fill-height>
       <v-container fluid class="grey lighten-4" fill-height>
-        <v-layout align-center justify-start column>
+        <v-layout align-center justify-start column style="overflow: scroll">
           
           <slot></slot>
 
@@ -168,7 +168,7 @@
         this.stream.init(this.session, stream)
         this.speech.init(this.session, stream)
         this.speech.startRecognition()
-        
+
         this.showCallBtn = false
         this.showHangupBtn = true
         this.isCalling = true
