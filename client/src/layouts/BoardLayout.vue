@@ -112,6 +112,9 @@
   import ws from '../modules/MainSocket'
   import Session from '../modules/Session'
   import LiveStream from '../modules/LiveStream'
+
+  let session, stream
+
   export default {
     data: () => ({
       drawer: null,
@@ -139,20 +142,20 @@
       call: async function () {
         this.showCallBtn = false
         this.showHangupBtn = true
-        this.session = new Session()
-        this.session.start()
-        this.session.invite(this.contact)
+        session = new Session()
+        session.start()
+        session.invite(this.contact)
       },
       hangup: async function () {
         this.showCallBtn = true
         this.showHangupBtn = false
-        this.stream.close()
+        stream.close()
       },
       accept: async function (index) {
-        this.session.accept(this.inviteList[index].id, this.inviteList[index].inviter)
+        session.accept(this.inviteList[index].id, this.inviteList[index].inviter)
       },
       decline: async function (index) {
-        this.session.decline(this.inviteList[index].id)
+        session.decline(this.inviteList[index].id)
         this.inviteList.splice(index, 1)
       }
     },
@@ -162,17 +165,15 @@
         const user = res.data[0] || null
         this.user = user
 
-        this.session = null
-        this.stream = null
         // setting ws events
         ws.on('session:invite', msg => {
           this.inviteList.push(msg.data)
         })
         ws.on('session:ready', async (msg) => {
-          const stream = await navigator.mediaDevices.getUserMedia({audio: true, video: false})
-          this.stream = new LiveStream(this.session, stream)
+          const localStream = await navigator.mediaDevices.getUserMedia({audio: true, video: false})
+          stream = new LiveStream(session, localStream)
           const startTime = Date.now()
-          this.session.send('webrtc:start', { time: startTime })
+          session.send('webrtc:start', { time: startTime })
         })
         ws.on('session:close', msg => {
           this.hangup()
