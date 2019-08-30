@@ -97,8 +97,16 @@
           </v-container>
 
           <v-container v-else>
-            <v-btn v-if="showCallBtn" @click="call()">Call</v-btn>
-            <v-btn v-if="showHangupBtn" @click="hangup()">Hangup</v-btn>
+            <div style="position: absolute;">
+              <canvas id="canvas_remote" width="600" height="450" style="border:1px solid #aaa">
+                Your browser doesn't support canvas.
+              </canvas>
+            </div>
+            <div style="position: absolute;">
+              <canvas id="canvas_local" width="600" height="450" style="border:1px solid #aaa">
+                Your browser doesn't support canvas.
+              </canvas>
+            </div>
           </v-container>
 
         </v-layout>
@@ -113,6 +121,7 @@
   import Session from '../modules/Session'
   import LiveStream from '../modules/LiveStream'
   import Speech from '../modules/Speech'
+  import { fabric } from 'fabric'
   export default {
     data: () => ({
       drawer: null,
@@ -194,6 +203,14 @@
       } catch (err) {
         this.user = null
       }
+    },
+    mounted: async function () {
+      const canvas = new fabric.Canvas('canvas_local', {
+        isDrawingMode: true
+      })
+      const canvas_remote = new fabric.Canvas('canvas_remote', {
+        isDrawingMode: false
+      })
     }
   }
 </script>
