@@ -104,6 +104,7 @@
         ws.on('receive', async (msg) => console.log('Async Second'))
         ws.send('Hello')
       } catch (err) {
+        console.log(err)
         this.user = null
       }
     }
