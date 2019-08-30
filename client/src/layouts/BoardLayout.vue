@@ -87,7 +87,10 @@
                 </v-list-item-content>
 
                 <v-list-item-icon @click="accept(index)">
-                  <v-icon color="grey">v-container</v-icon>
+                  <v-icon>call</v-icon>
+                </v-list-item-icon>
+                <v-list-item-icon @click="decline(index)">
+                  <v-icon>call:end</v-icon>
                 </v-list-item-icon>
               </v-list-item>
             </v-list>
@@ -151,6 +154,9 @@
       accept: async function (index) {
         this.session.setReceiver(this.inviteList[index].inviter)
         this.session.accept(this.inviteList[index].id)
+      },
+      decline: async function (index) {
+        this.session.decline(this.inviteList[index].id)
       }
     },
     created: async function () {

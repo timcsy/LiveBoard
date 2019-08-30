@@ -35,12 +35,18 @@ class Session {
 		this.send('session:accept')
 	}
 
+	accept(id) {
+		this.id = id
+		this.send('session:decline')
+		this.id = null
+	}
+
 	setReceiver(receiver) {
 		this.receiver = receiver
 	}
 
 	send(on, data) {
-		ws.send(JSON.stringify({session: this.id, on, data}))
+		if (this.id) ws.send(JSON.stringify({session: this.id, on, data}))
 	}
 
 	close() {
@@ -54,7 +60,6 @@ class Session {
 
 	onClose() {
 		this.receiver = {}
-		ws.close()
 	}
 }
 
