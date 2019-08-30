@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app dark>
     <v-navigation-drawer v-model="drawer" fixed clipped class="grey lighten-4" app light>
       <v-list dense class="grey lighten-4">
         <div v-if="user">
@@ -45,7 +45,7 @@
     </v-navigation-drawer>
 
     <v-app-bar color="primary" app fixed clipped-left>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon color="" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <span class="title ml-3 mr-5">Liveboard</span>
       <v-text-field
         solo-inverted
