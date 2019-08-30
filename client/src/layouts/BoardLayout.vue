@@ -66,6 +66,8 @@
           <slot></slot>
 
           <v-layout v-if="!isCalling">
+            <v-btn v-if="showCallBtn" @click="call()">Call</v-btn>
+            <v-btn v-if="showHangupBtn" @click="hangup()">Hangup</v-btn>
             <v-list subheader>
               <v-subheader>Invitations</v-subheader>
 
