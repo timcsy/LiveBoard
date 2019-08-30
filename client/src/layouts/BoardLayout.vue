@@ -64,8 +64,8 @@
           
           <slot></slot>
 
-          <v-btn id="callBtn" @click="call()">Call</v-btn>
-          <v-btn id="hangupBtn" @click="hangup()" disabled>Hangup</v-btn>
+          <v-btn ref="callBtn" @click="call()">Call</v-btn>
+          <v-btn ref="hangupBtn" @click="hangup()" disabled>Hangup</v-btn>
 
         </v-container>
       </v-layout>
@@ -97,12 +97,12 @@
     },
     methods: {
       call: async function () {
-        this.$callBtn.disabled = true
-	      this.$hangupBtn.disabled = false
+        this.$ref.callBtn.disabled = true
+	      this.$ref.hangupBtn.disabled = false
       },
       hangup: async function () {
-        this.$hangupBtn.disabled = true
-	      this.$callBtn.disabled = false
+        this.$ref.hangupBtn.disabled = true
+	      this.$ref.callBtn.disabled = false
       },
     },
     created: async function () {
