@@ -90,7 +90,7 @@
                   <v-icon>call</v-icon>
                 </v-list-item-icon>
                 <v-list-item-icon @click="decline(index)">
-                  <v-icon>call:end</v-icon>
+                  <v-icon>call_end</v-icon>
                 </v-list-item-icon>
               </v-list-item>
             </v-list>
@@ -157,6 +157,7 @@
       },
       decline: async function (index) {
         this.session.decline(this.inviteList[index].id)
+        this.inviteList.splice(index, 1)
       }
     },
     created: async function () {

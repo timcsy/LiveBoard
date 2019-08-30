@@ -35,7 +35,7 @@ class Session {
 		this.send('session:accept')
 	}
 
-	accept(id) {
+	decline(id) {
 		this.id = id
 		this.send('session:decline')
 		this.id = null
