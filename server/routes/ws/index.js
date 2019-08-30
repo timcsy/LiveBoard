@@ -1,5 +1,5 @@
 const Router = require('koa-router')
-const streaming = require('./src/streaming')
+const streaming = require('../../src/streaming')
 const RBAC = require('../../lib/rbac')
 const Local = require('../../models/Auth/Local')
 const User = require('../../models/Auth/User')
