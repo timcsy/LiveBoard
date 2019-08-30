@@ -52,8 +52,9 @@
         solo-inverted
         flat
         hide-details
-        label="Search"
+        label="Contact"
         prepend-inner-icon="search"
+        v-model="contact"
       ></v-text-field>
       <v-spacer></v-spacer>
     </v-toolbar>
@@ -76,7 +77,7 @@
 
 <script>
   import axios from 'axios'
-  import ws from '../modules/socket'
+  import LiveStream from '../modules/stream'
   export default {
     data: () => ({
       drawer: null,
@@ -85,7 +86,8 @@
         picture: ''
       },
       showCallBtn: true,
-      showHangupBtn: false
+      showHangupBtn: false,
+      contact: ''
     }),
     props: {
       items: {
@@ -101,10 +103,13 @@
       call: async function () {
         this.showCallBtn = false
         this.showHangupBtn = true
+        const stream = await navigator.mediaDevices.getUserMedia({audio: true, video: false})
+        this.stream = new LiveStream(stream, this.contact)
       },
       hangup: async function () {
         this.showCallBtn = true
         this.showHangupBtn = false
+        this.stream.close()
       },
     },
     created: async function () {
@@ -112,9 +117,6 @@
         const res = await axios.get('/api/identities')
         const user = res.data[0] || null
         this.user = user
-        ws.on('receive', msg => console.log(msg.data))
-        ws.on('receive', async (msg) => console.log('Async Second'))
-        ws.send('Hello')
       } catch (err) {
         this.user = null
       }

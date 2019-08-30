@@ -155,6 +155,8 @@ class LiveStream {
   }
 
   playRemoteStream(e) {
+    const remoteAudio = document.createElement('audio')
+    remoteAudio.setAttribute('autoplay', true)
     if (remoteAudio.srcObject !== e.streams[0]) {
       remoteAudio.srcObject = e.streams[0]
       console.log('pc received remote stream')
@@ -162,25 +164,14 @@ class LiveStream {
   }
 }
 
-
-const callButton = document.getElementById('callButton')
-const hangupButton = document.getElementById('hangupButton')
-const remoteAudio = document.getElementById('remoteAudio')
-callButton.disabled = false
-hangupButton.disabled = true
-
+export default LiveStream
 
 async function call(passive, caller) {
   // Requesting local stream
   await startRecognition(passive)
-  callButton.disabled = true
-	hangupButton.disabled = false
 
 }
 
 async function hangup(passive) {
   await stopRecognition(passive)
-  
-  hangupButton.disabled = true
-  callButton.disabled = false
 }
