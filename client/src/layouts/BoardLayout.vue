@@ -105,6 +105,7 @@
         this.showHangupBtn = true
         const stream = await navigator.mediaDevices.getUserMedia({audio: true, video: false})
         this.stream = new LiveStream(stream, this.contact)
+        ws.send(JSON.stringify({to: this.contact, on: 'webrtc:start', data: {time: startTime} }))
       },
       hangup: async function () {
         this.showCallBtn = true

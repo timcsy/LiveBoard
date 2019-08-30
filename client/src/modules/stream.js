@@ -18,16 +18,15 @@ class LiveStream {
       offerToReceiveAudio: 1
     }
 
+    ws.on('webrtc:start', this.start)
     ws.on('webrtc:ready', this.sendOffer)
     ws.on('webrtc:offer', this.receiveOffer)
     ws.on('webrtc:answer', this.receiveAnswer)
   }
 
-  start(caller) {
-    if (caller) {
-      this.receiver = caller
-      ws.send(JSON.stringify({to: caller, on: 'ready'}))
-    }
+  start(msg) {
+    this.receiver = msg.sendFrom
+    ws.send(JSON.stringify({to: caller, on: 'webrtc:ready'}))
   }
 
   close() {
