@@ -153,6 +153,10 @@
       decline: async function (index) {
         this.session.decline(this.inviteList[index].id)
         this.inviteList.splice(index, 1)
+      },
+      ready: async function () { // for both side
+        const stream = await navigator.mediaDevices.getUserMedia({audio: true, video: false})
+        this.stream.init(this.session, stream)
       }
     },
     created: async function () {
@@ -167,11 +171,14 @@
         ws.on('session:invite', msg => {
           this.inviteList.push(msg.data)
         })
-        ws.on('session:ready', async (msg) => {
-          const stream = await navigator.mediaDevices.getUserMedia({audio: true, video: false})
-          this.stream.init(this.session, stream)
+        ws.on('session:ready', async (msg) => { // for caller side
+          await this.ready()
           const startTime = Date.now()
           this.session.send('webrtc:start', { time: startTime })
+        })
+        ws.on('webrtc:start', async (msg) => { // for receiver side
+          await this.ready()
+          this.session.start()
         })
         ws.on('session:close', msg => {
           this.hangup()

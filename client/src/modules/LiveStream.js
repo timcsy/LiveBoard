@@ -16,11 +16,10 @@ class LiveStream {
       offerToReceiveAudio: 1
     }
 
-    ws.on('webrtc:start', msg => this.start())
     ws.on('webrtc:ready', msg => this.sendOffer())
     ws.on('webrtc:offer', msg => this.receiveOffer(msg.data.sdp))
     ws.on('webrtc:answer', msg => this.receiveAnswer(msg.data.sdp))
-    ws.on('webrtc:ice', msg => this.receiveICE(msg.data.sdp))
+    ws.on('webrtc:ice', msg => this.receiveICE(msg.data.ice))
   }
 
   init(session, localStream) {
@@ -29,7 +28,8 @@ class LiveStream {
   }
 
   start() {
-    this.session.send('webrtc:ready')
+    const startTime = Date.now()
+    this.session.send('webrtc:ready', { time: startTime })
   }
 
   close() {

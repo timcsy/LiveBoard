@@ -51,7 +51,7 @@ class Session {
 		this.id = null
 	}
 
-	onReady(receiver) {
+	onReady(receiver) { // for caller side
 		this.receiver = receiver
 	}
 

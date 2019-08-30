@@ -63,6 +63,7 @@ router.all('/data', RBAC.auth(), async (ctx) => {
 				if (receiver) {
 					const ws = sockets[receiver]
 					if (ws && ws.readyState == 1) {
+
 						if (msg.on == 'session:accept') {
 							await session.save()
 							const user = await User.findById(ctx.state.user).populate('identities').exec()
@@ -71,10 +72,37 @@ router.all('/data', RBAC.auth(), async (ctx) => {
 								picture: user.identities[0].picture
 							}
 							ws.send(JSON.stringify({on: 'session:ready', data: profile}))
-						} else if (msg.on == 'session:decline') {
+						}
+
+						else if (msg.on == 'session:decline') {
 							await Session.deleteOne({ _id: session._id }).exec()
 							ws.send(JSON.stringify({on: 'session:close'}))
 						}
+
+						else if (msg.on == 'webrtc:start') {
+							ws.send(JSON.stringify({on: 'webrtc:start'}))
+						}
+
+						else if (msg.on == 'webrtc:ready') {
+							ws.send(JSON.stringify({on: 'webrtc:ready'}))
+						}
+
+						else if (msg.on == 'webrtc:offer') {
+							ws.send(JSON.stringify({on: 'webrtc:offer', data: {sdp: msg.data.sdp}}))
+						}
+
+						else if (msg.on == 'webrtc:answer') {
+							ws.send(JSON.stringify({on: 'webrtc:answer', data: {sdp: msg.data.sdp}}))
+						}
+
+						else if (msg.on == 'webrtc:ice') {
+							ws.send(JSON.stringify({on: 'webrtc:ice', data: {sdp: msg.data.ice}}))
+						}
+
+						else if (msg.on == 'webrtc:disconnected') {
+							ws.send(JSON.stringify({on: 'webrtc:disconnected'}))
+						}
+
 					}
 				}
 			}
