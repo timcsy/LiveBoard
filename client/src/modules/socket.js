@@ -25,7 +25,7 @@ class MainSocket {
 
 	send(data) {
 		this.msgs.push(data)
-		if (this.ws.readyState !== OPEN) {
+		if (this.ws.readyState !== WebSocket.OPEN) {
 			this.msgs.push(data)
 		} else {
 			this.ws.send(data)
@@ -37,6 +37,7 @@ class MainSocket {
 
 	close(code, reason) {
 		this.ws.close(code, reason)
+		this.msgs.length = 0
 	}
 
 	on(on, callback) {
