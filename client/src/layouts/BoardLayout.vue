@@ -45,7 +45,9 @@
     </v-navigation-drawer>
 
     <v-app-bar color="primary" app fixed clipped-left>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer">
+        <v-icon>menu</v-icon>
+      </v-app-bar-nav-icon>
       <span class="title ml-3 mr-5">Liveboard</span>
       <v-text-field
         solo-inverted
