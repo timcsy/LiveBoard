@@ -112,6 +112,7 @@
   import ws from '../modules/MainSocket'
   import Session from '../modules/Session'
   import LiveStream from '../modules/LiveStream'
+  import Speech from '../modules/Speech'
   export default {
     data: () => ({
       drawer: null,
@@ -142,10 +143,9 @@
         this.session.start()
         this.session.invite(this.contact)
       },
-      hangup: async function () {
-        this.showCallBtn = true
-        this.showHangupBtn = false
-        this.stream.close()
+      hangup: async function () { // for both side
+        this.session.close()
+        await this.close()
       },
       accept: async function (index) {
         this.session.accept(this.inviteList[index].id, this.inviteList[index].inviter)
@@ -157,6 +157,14 @@
       ready: async function () { // for both side
         const stream = await navigator.mediaDevices.getUserMedia({audio: true, video: false})
         this.stream.init(this.session, stream)
+        this.speech.init(this.session, stream)
+        this.speech.startRecognition()
+      },
+      close: async function () { // for both side
+        this.showCallBtn = true
+        this.showHangupBtn = false
+        this.stream.close()
+        this.speech.stopRecognition()
       }
     },
     created: async function () {
@@ -167,21 +175,21 @@
 
         this.session = new Session()
         this.stream = new LiveStream()
+        this.speech = new Speech()
         // setting ws events
         ws.on('session:invite', msg => {
           this.inviteList.push(msg.data)
         })
         ws.on('session:ready', async (msg) => { // for caller side
           await this.ready()
-          const startTime = Date.now()
-          this.session.send('webrtc:start', { time: startTime })
+          this.session.send('webrtc:start')
         })
         ws.on('webrtc:start', async (msg) => { // for receiver side
           await this.ready()
           this.stream.start()
         })
-        ws.on('session:close', msg => {
-          this.hangup()
+        ws.on('session:close', msg => { // for passive side (w.r.t. hangup)
+          await this.close()
         })
       } catch (err) {
         this.user = null

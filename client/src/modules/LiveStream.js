@@ -28,8 +28,7 @@ class LiveStream {
   }
 
   start() {
-    const startTime = Date.now()
-    this.session.send('webrtc:ready', { time: startTime })
+    this.session.send('webrtc:ready')
   }
 
   close() {

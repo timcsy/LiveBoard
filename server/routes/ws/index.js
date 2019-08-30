@@ -100,7 +100,21 @@ router.all('/data', RBAC.auth(), async (ctx) => {
 						}
 
 						else if (msg.on == 'webrtc:disconnected') {
-							ws.send(JSON.stringify({on: 'webrtc:disconnected'}))
+							isServerMode[session._id] = true
+						}
+
+						else if (msg.on == 'speech:start') {
+							isServerMode[session._id] = true
+						}
+
+						else if (msg.on == 'speech:data') {
+							if (isServerMode[session._id])
+								ws.send(JSON.stringify({on: 'speech:data', data: {data: msg.data.data}}))
+						}
+
+						else if (msg.on == 'session:close') {
+							isServerMode[session._id] = undefined
+							ws.send(JSON.stringify({on: 'session:close'}))
 						}
 
 					}

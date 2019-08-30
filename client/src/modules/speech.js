@@ -1,112 +1,107 @@
+import ws from './MainSocket'
+
 const INPUT_BUFFER_SIZE = 16384
 const BUFFER_NUM = 1
 const AudioContext = window.AudioContext || window.webkitAudioContext
-let audioCtx
-let inputProcessor
-let input
-let startTime
-let timeOffset
 
-async function startRecognition(passive) {
-	try {
-		audioCtx = new AudioContext()
-		inputProcessor = audioCtx.createScriptProcessor(INPUT_BUFFER_SIZE, 1, 1)
-		inputProcessor.connect(audioCtx.destination)
-
-		// Requesting local stream
-    const stream = await navigator.mediaDevices.getUserMedia({audio: true, video: false})
-    // Received local stream
-		localStream = stream
-
-		input = audioCtx.createMediaStreamSource(stream)
-		input.connect(inputProcessor)
-
-		let bufPos = 0
-		let buf
-		inputProcessor.onaudioprocess = function (e) {
-			if (!buf) buf = new Float32Array(INPUT_BUFFER_SIZE * BUFFER_NUM)
-			const left = e.inputBuffer.getChannelData(0)
-			buf.set(left, INPUT_BUFFER_SIZE * bufPos)
-			bufPos++
-			if (bufPos == BUFFER_NUM) {
-				const currentTimeOffset = Date.now() - startTime
-				const data = ftob(buf) // Convert the Float32Array to base64
-				const receiver = document.getElementById("receiver").value
-				ws.send(JSON.stringify({to: receiver, cmd: 'speech:data', data: data, time: timeOffset}))
-				bufPos = 0
-				timeOffset = currentTimeOffset
-			}
-		}
-		startTime = Date.now()
-		timeOffset = 0
-		if (!passive) {	
-			const receiver = document.getElementById("receiver").value
-			ws.send(JSON.stringify({to: receiver, cmd: 'speech:start', time: startTime}))
-		}
-  } catch (e) {
-		alert(`error: ${e.name}`)
-		console.error(e)
-  }
-}
-
-async function stopRecognition(passive) {
-	if (!passive) {
-		const receiver = document.getElementById("receiver").value
-		ws.send(JSON.stringify({to: receiver, cmd: 'speech:stop'}))
+class Speech {
+	constructor() {
+		ws.on('speech:data', msg => this.play(btof(msg.data.data)))
 	}
 
-	let track = localStream.getTracks()[0]
-	track.stop()
+	init(session, stream) {
+		this.session = session
+		this.stream = stream
+	}
 
-	input.disconnect(inputProcessor)
-	inputProcessor.disconnect(audioCtx.destination)
-	await audioCtx.close()
-	input = null
-	inputProcessor = null
+	async startRecognition() {
+		try {
+			this.audioCtx = new AudioContext()
+			this.inputProcessor = this.audioCtx.createScriptProcessor(INPUT_BUFFER_SIZE, 1, 1)
+			this.inputProcessor.connect(this.audioCtx.destination)
+
+			this.input = this.audioCtx.createMediaStreamSource(this.stream)
+			this.input.connect(this.inputProcessor)
+
+			let bufPos = 0
+			let buf
+			this.inputProcessor.onaudioprocess = e => {
+				if (!buf) buf = new Float32Array(INPUT_BUFFER_SIZE * BUFFER_NUM)
+				const left = e.inputBuffer.getChannelData(0)
+				buf.set(left, INPUT_BUFFER_SIZE * bufPos)
+				bufPos++
+				if (bufPos == BUFFER_NUM) {
+					const currentTimeOffset = Date.now() - this.startTime
+					const data = ftob(buf) // Convert the Float32Array to base64
+					this.session.send('speech:data', {data, time: this.timeOffset})
+					bufPos = 0
+					this.timeOffset = currentTimeOffset
+				}
+			}
+			this.startTime = Date.now()
+			this.timeOffset = 0
+			this.session.send('speech:start', {time: this.startTime})
+		} catch (e) {
+			alert(`error: ${e.name}`)
+			console.error(e)
+		}
+	}
+
+	async stopRecognition() {
+		let track = localStream.getTracks()[0]
+		track.stop()
+
+		this.input.disconnect(this.inputProcessor)
+		this.inputProcessor.disconnect(this.audioCtx.destination)
+		await this.audioCtx.close()
+		this.input = null
+		this.inputProcessor = null
+	}
+
+	play(buf) {
+		// Get an AudioBufferSourceNode.
+		// This is the AudioNode to use when we want to play an AudioBuffer
+		const source = this.audioCtx.createBufferSource()
+		const audioBuf = this.audioCtx.createBuffer(2, buf.length, 44100)
+		audioBuf.getChannelData(0).set(buf)
+		audioBuf.getChannelData(1).set(buf)
+		// set the buffer in the AudioBufferSourceNode
+		source.buffer = audioBuf
+		// connect the AudioBufferSourceNode to the
+		// destination so we can hear the sound
+		source.connect(this.audioCtx.destination)
+		// start the source playing
+		source.start()
+	}
+
+	addLocalSpeech(text) {
+		const room = document.getElementById('room')
+		const item = document.createElement('div');
+		item.setAttribute('style', 'background-color: #fff');
+		item.textContent = text
+		room.appendChild(item)
+		room.scrollTop = room.scrollHeight
+	}
+
+	showLocalSpeech(msg) {
+		addLocalSpeech(msg.data)
+	}
+
+	addRemoteSpeech(text) {
+		const room = document.getElementById('room')
+		const item = document.createElement('div');
+		item.setAttribute('style', 'background-color: #ccc');
+		item.textContent = text
+		room.appendChild(item)
+		room.scrollTop = room.scrollHeight
+	}
+
+	showRemoteSpeech(msg) {
+		addRemoteSpeech(msg.data)
+	}
 }
 
-function addLocalSpeech(text) {
-	const room = document.getElementById('room')
-	const item = document.createElement('div');
-	item.setAttribute('style', 'background-color: #fff');
-	item.textContent = text
-	room.appendChild(item)
-	room.scrollTop = room.scrollHeight
-}
-
-function showLocalSpeech(msg) {
-	addLocalSpeech(msg.data)
-}
-
-function addRemoteSpeech(text) {
-	const room = document.getElementById('room')
-	const item = document.createElement('div');
-	item.setAttribute('style', 'background-color: #ccc');
-	item.textContent = text
-	room.appendChild(item)
-	room.scrollTop = room.scrollHeight
-}
-
-function showRemoteSpeech(msg) {
-	addRemoteSpeech(msg.data)
-}
-
-
-function play(buf) {
-	// Get an AudioBufferSourceNode.
-	// This is the AudioNode to use when we want to play an AudioBuffer
-	const source = audioCtx.createBufferSource()
-	const audioBuf = audioCtx.createBuffer(2, buf.length, 44100)
-	audioBuf.getChannelData(0).set(buf)
-	audioBuf.getChannelData(1).set(buf)
-	// set the buffer in the AudioBufferSourceNode
-	source.buffer = audioBuf
-	// connect the AudioBufferSourceNode to the
-	// destination so we can hear the sound
-	source.connect(audioCtx.destination)
-	// start the source playing
-	source.start()
-}
+export default Speech
 
 function bufferToBase64(buf) {
 	const binstr = Array.prototype.map.call(buf, function (ch) {

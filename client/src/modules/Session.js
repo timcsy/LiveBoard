@@ -48,7 +48,7 @@ class Session {
 
 	close() {
 		this.send('session:close')
-		this.id = null
+		this.onClose()
 	}
 
 	onReady(receiver) { // for caller side
