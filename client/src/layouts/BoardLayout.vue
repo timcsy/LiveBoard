@@ -178,7 +178,7 @@
         })
         ws.on('webrtc:start', async (msg) => { // for receiver side
           await this.ready()
-          this.session.start()
+          this.stream.start()
         })
         ws.on('session:close', msg => {
           this.hangup()
