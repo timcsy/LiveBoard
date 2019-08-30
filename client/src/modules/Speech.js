@@ -101,9 +101,6 @@ class Speech {
 	}
 }
 
-export default Speech
-
-
 function bufferToBase64(buf) {
 	const binstr = Array.prototype.map.call(buf, function (ch) {
 		return String.fromCharCode(ch)
@@ -124,3 +121,5 @@ function ftob(floatArr) {
 function btof(base64) {
 	return new Float32Array(base64ToBuffer(base64).buffer)
 }
+
+export default Speech

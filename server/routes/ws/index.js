@@ -25,11 +25,11 @@ router.all('/data', RBAC.auth(), async (ctx) => {
 	})
 	ctx.websocket.on('message', async function(message) {
 		// do something with the message from client
-		console.log(message)
 		const msg = JSON.parse(message)
 		// if it is not session
 		if (!msg.session) {
 			if (msg.on == 'session:start') {
+				console.log(ctx.state.user + message)
 				const session = await Session.create()
 				session.clients.push(ctx.state.user)
 				await session.save()
@@ -67,6 +67,7 @@ router.all('/data', RBAC.auth(), async (ctx) => {
 					if (ws && ws.readyState == 1) {
 
 						if (msg.on == 'session:accept') {
+							console.log(ctx.state.user + message)
 							await session.save()
 							const user = await User.findById(ctx.state.user).populate('identities').exec()
 							const profile = {
@@ -77,36 +78,43 @@ router.all('/data', RBAC.auth(), async (ctx) => {
 						}
 
 						else if (msg.on == 'session:decline') {
+							console.log(ctx.state.user + message)
 							await Session.deleteOne({ _id: session._id }).exec()
 							ws.send(JSON.stringify({on: 'session:close'}))
 						}
 
 						else if (msg.on == 'webrtc:start') {
+							console.log(ctx.state.user + message)
 							ws.send(JSON.stringify({on: 'webrtc:start'}))
 						}
 
 						else if (msg.on == 'webrtc:ready') {
+							console.log(ctx.state.user + message)
 							ws.send(JSON.stringify({on: 'webrtc:ready'}))
 						}
 
 						else if (msg.on == 'webrtc:offer') {
+							console.log(ctx.state.user + message)
 							ws.send(JSON.stringify({on: 'webrtc:offer', data: {sdp: msg.data.sdp}}))
 						}
 
 						else if (msg.on == 'webrtc:answer') {
+							console.log(ctx.state.user + message)
 							ws.send(JSON.stringify({on: 'webrtc:answer', data: {sdp: msg.data.sdp}}))
 						}
 
 						else if (msg.on == 'webrtc:ice') {
+							console.log(ctx.state.user + message)
 							ws.send(JSON.stringify({on: 'webrtc:ice', data: {ice: msg.data.ice}}))
 						}
 
 						else if (msg.on == 'webrtc:disconnected') {
+							console.log(ctx.state.user + message)
 							isServerMode[session._id] = true
 						}
 
 						else if (msg.on == 'speech:start') {
-							isServerMode[session._id] = true
+							console.log(ctx.state.user + message)
 							const id = session._id + ctx.state.user
 							streaming.start(id, function(text) {
 								ws_self.send(JSON.stringify({on: 'speech:local', data: text}))
@@ -115,6 +123,7 @@ router.all('/data', RBAC.auth(), async (ctx) => {
 						}
 
 						else if (msg.on == 'speech:data') {
+							console.log(ctx.state.user + ', on: speech:data, time: ' + msg.data.time)
 							const id = session._id + ctx.state.user
 							if (streaming.isStopped(id)) streaming.start(id, function(text) {
 								ws_self.send(JSON.stringify({on: 'speech:local', data: text}))
@@ -126,6 +135,7 @@ router.all('/data', RBAC.auth(), async (ctx) => {
 						}
 
 						else if (msg.on == 'session:close') {
+							console.log(ctx.state.user + message)
 							const id = session._id + ctx.state.user
 							streaming.stop(id)
 							isServerMode[session._id] = undefined

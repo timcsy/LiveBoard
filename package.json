@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "build": "webpack",
-    "server": "node server",
+    "server": "export GOOGLE_APPLICATION_CREDENTIALS=\"./resources/Live Board-02cd5d7a2df0.json\" && node server",
     "start": "npm run build && npm run server",
     "db": "cd server/config && docker-compose up",
     "setup": "node server/setup.js"
