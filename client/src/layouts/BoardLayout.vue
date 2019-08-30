@@ -83,7 +83,9 @@
       user: {
         name: '',
         picture: ''
-      }
+      },
+      showCallBtn: true,
+      showHangupBtn: false
     }),
     props: {
       items: {
@@ -93,14 +95,12 @@
             {icon: 'home', text: '首頁', url: '/'}
           ]
         }
-      },
-      showCallBtn: true,
-      showHangupBtn: false
+      }
     },
     methods: {
       call: async function () {
-        this.$set('showCallBtn', false)
-        this.$set('showHangupBtn', true)
+        this.showCallBtn = false
+        this.showHangupBtn = true
       },
       hangup: async function () {
         this.$set('showCallBtn', true)
