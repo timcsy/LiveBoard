@@ -2,7 +2,7 @@ import ws from './MainSocket'
 
 class Session {
 	constructor() {
-		this.receiver = {} // {name, picture}
+		this._receiver = {} // {name, picture}
 		this.invitations = []
 		ws.on('session:start', msg => this.onStart(msg.data.id))
 		ws.on('session:ready', this.onReady)
@@ -36,10 +36,10 @@ class Session {
 	}
 
 	get receiver() {
-		return this.receiver
+		return this._receiver
 	}
 	set receiver(receiver) {
-		this.receiver = receiver
+		this._receiver = receiver
 	}
 
 	send(on, data) {
@@ -52,11 +52,11 @@ class Session {
 	}
 
 	onReady(msg) {
-		this.receiver = msg.data
+		this._receiver = msg.data
 	}
 
 	onClose() {
-		this.receiver = {}
+		this._receiver = {}
 		ws.close()
 	}
 }
