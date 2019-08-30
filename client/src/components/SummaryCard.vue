@@ -20,7 +20,7 @@
 			</v-layout>
 			<v-divider light></v-divider>
 			<v-card-actions>
-				<v-btn flat>詳細內容</v-btn>
+				<v-btn text>詳細內容</v-btn>
 			</v-card-actions>
 		</v-card>
 	</v-flex>
