@@ -191,3 +191,10 @@ deny是指列出來的權限是無效的，其他都有效
 範例
 ---
 以Data這個model作為Demo說明
+
+
+注意事項
+---
+將環境變數 GOOGLE_APPLICATION_CREDENTIALS 設為包含服務帳戶金鑰的 JSON 檔案路徑。 
+e.g. export GOOGLE_APPLICATION_CREDENTIALS="./resources/Live Board-02cd5d7a2df0.json"
+remember to add atob btoa library.

@@ -1,4 +1,5 @@
 const Router = require('koa-router')
+const streaming = require('./src/streaming')
 const RBAC = require('../../lib/rbac')
 const Local = require('../../models/Auth/Local')
 const User = require('../../models/Auth/User')
@@ -106,16 +107,31 @@ router.all('/data', RBAC.auth(), async (ctx) => {
 
 						else if (msg.on == 'speech:start') {
 							isServerMode[session._id] = true
+							const id = session._id + ctx.state.user
+							streaming.start(id, function(text) {
+								ws_self.send(JSON.stringify({on: 'speech:local', data: text}))
+								ws.send(JSON.stringify({on: 'speech:remote', data: text}))
+							})
 						}
 
 						else if (msg.on == 'speech:data') {
+							const id = session._id + ctx.state.user
+							if (streaming.isStopped(id)) streaming.start(id, function(text) {
+								ws_self.send(JSON.stringify({on: 'speech:local', data: text}))
+								ws.send(JSON.stringify({on: 'speech:remote', data: text}))
+							})
+							streaming.onData(id, msg.data.data)
 							if (isServerMode[session._id])
 								ws.send(JSON.stringify({on: 'speech:data', data: {data: msg.data.data}}))
 						}
 
 						else if (msg.on == 'session:close') {
+							const id = session._id + ctx.state.user
+							streaming.stop(id)
 							isServerMode[session._id] = undefined
 							ws.send(JSON.stringify({on: 'session:close'}))
+							const remote_id = session._id + receiver
+							streaming.stop(remote_id)
 						}
 
 					}
