@@ -62,7 +62,7 @@
     </v-app-bar>
 
     <v-content light fill-height>
-      <v-container fluid fill-height>
+      <v-container fluid class="white" fill-height>
         <v-layout align-center justify-start column>
           
           <slot></slot>
