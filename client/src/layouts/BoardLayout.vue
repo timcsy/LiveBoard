@@ -150,7 +150,7 @@
         this.stream.close()
       },
       accept: async function (index) {
-        this.session.receiver = this.inviteList[index].inviter
+        this.session.setReceiver(this.inviteList[index].inviter)
         this.session.accept(this.inviteList[index].id)
       }
     },
