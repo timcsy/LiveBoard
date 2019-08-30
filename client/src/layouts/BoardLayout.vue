@@ -64,8 +64,8 @@
           
           <slot></slot>
 
-          <v-btn ref="callBtn" @click="call()">Call</v-btn>
-          <v-btn ref="hangupBtn" @click="hangup()" disabled>Hangup</v-btn>
+          <v-btn v-if="!showCallBtn" @click="call()">Call</v-btn>
+          <v-btn v-if="!showHangupBtn" @click="hangup()">Hangup</v-btn>
 
         </v-container>
       </v-layout>
@@ -93,16 +93,18 @@
             {icon: 'home', text: '首頁', url: '/'}
           ]
         }
-      }
+      },
+      showCallBtn: true,
+      showHangupBtn: false
     },
     methods: {
       call: async function () {
-        this.$refs.callBtn.disabled = true
-	      this.$refs.hangupBtn.disabled = false
+        this.showCallBtn = false
+	      this.showHangupBtn = true
       },
       hangup: async function () {
-        this.$refs.hangupBtn.disabled = true
-	      this.$refs.callBtn.disabled = false
+        this.showCallBtn = true
+	      this.showHangupBtn = false
       },
     },
     created: async function () {
