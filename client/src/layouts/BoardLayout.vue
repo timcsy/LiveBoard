@@ -64,8 +64,8 @@
           
           <slot></slot>
 
-          <v-btn v-if="!showCallBtn" @click="call()">Call</v-btn>
-          <v-btn v-if="!showHangupBtn" @click="hangup()">Hangup</v-btn>
+          <v-btn v-if="showCallBtn" @click="call()">Call</v-btn>
+          <v-btn v-if="showHangupBtn" @click="hangup()">Hangup</v-btn>
 
         </v-container>
       </v-layout>
@@ -103,8 +103,8 @@
         this.showHangupBtn = true
       },
       hangup: async function () {
-        this.$set('showCallBtn', true)
-        this.$set('showHangupBtn', false)
+        this.showCallBtn = true
+        this.showHangupBtn = false
       },
     },
     created: async function () {
