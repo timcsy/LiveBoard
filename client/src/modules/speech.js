@@ -48,7 +48,7 @@ class Speech {
 	}
 
 	async stopRecognition() {
-		let track = localStream.getTracks()[0]
+		let track = this.stream.getTracks()[0]
 		track.stop()
 
 		this.input.disconnect(this.inputProcessor)
@@ -102,6 +102,7 @@ class Speech {
 }
 
 export default Speech
+
 
 function bufferToBase64(buf) {
 	const binstr = Array.prototype.map.call(buf, function (ch) {
