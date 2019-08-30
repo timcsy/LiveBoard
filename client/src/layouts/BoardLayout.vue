@@ -74,7 +74,7 @@
               <v-subheader>Invitations</v-subheader>
 
               <v-list-item
-                v-for="invitation in inviteList"
+                v-for="(invitation, index) in inviteList"
                 :key="invitation.id"
               >
                 <v-list-item-avatar>
@@ -85,7 +85,7 @@
                   <v-list-item-title v-text="invitation.inviter.name"></v-list-item-title>
                 </v-list-item-content>
 
-                <v-list-item-icon>
+                <v-list-item-icon :click="accept(index)">
                   <v-icon>v-container</v-icon>
                 </v-list-item-icon>
               </v-list-item>
@@ -148,6 +148,10 @@
         this.showHangupBtn = false
         this.stream.close()
       },
+      accept: async function (index) {
+        this.session.receiver = this.inviteList[index].inviter
+        this.session.accept(this.inviteList[index].id)
+      }
     },
     created: async function () {
       try {
