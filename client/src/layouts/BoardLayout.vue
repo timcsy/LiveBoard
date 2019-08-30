@@ -139,6 +139,7 @@
       call: async function () {
         this.showCallBtn = false
         this.showHangupBtn = true
+        this.session = new Session()
         this.session.start()
         this.session.invite(this.contact)
       },
@@ -161,7 +162,8 @@
         const user = res.data[0] || null
         this.user = user
 
-        this.session = new Session()
+        this.session = null
+        this.stream = null
         // setting ws events
         ws.on('session:invite', msg => {
           this.inviteList.push(msg.data)
