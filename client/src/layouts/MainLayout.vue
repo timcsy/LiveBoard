@@ -1,21 +1,21 @@
 <template>
-  <v-app dark>
+  <v-app>
 
     <v-navigation-drawer v-model="drawer" fixed clipped class="grey lighten-4" app light>
       <v-list dense class="grey lighten-4">
         <div v-if="user">
           <v-toolbar flat class="transparent">
             <v-list class="pa-0">
-              <v-list-tile avatar>
-                <v-list-tile-avatar>
+              <v-list-item>
+                <v-list-item-avatar>
                   <img v-if="user.picture" :src="user.picture">
                   <v-icon v-else x-large>account_circle</v-icon>
-                </v-list-tile-avatar>
+                </v-list-item-avatar>
 
-                <v-list-tile-content>
-                  <v-list-tile-title class="subheading">{{user.name || user.username}}</v-list-tile-title>
-                </v-list-tile-content>
-              </v-list-tile>
+                <v-list-item-content>
+                  <v-list-item-title class="subheading">{{user.name || user.username}}</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
             </v-list>
           </v-toolbar>
           <v-divider dark class="mb-3"></v-divider>
@@ -31,22 +31,24 @@
             </v-flex>
           </v-layout>
           <v-divider v-else-if="item.divider" :key="i" dark class="my-3"></v-divider>
-          <v-list-tile v-else  :key="i" :href="item.url">
-            <v-list-tile-action>
+          <v-list-item v-else  :key="i" :href="item.url">
+            <v-list-item-action>
               <v-icon>{{item.icon}}</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title class="grey--text">
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title class="grey--text">
                 {{item.text}}
-              </v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
         </template>
       </v-list>
     </v-navigation-drawer>
 
-    <v-toolbar color="primary" app fixed clipped-left>
-      <v-toolbar-side-icon @click="drawer = !drawer"></v-toolbar-side-icon>
+    <v-app-bar color="primary" app fixed clipped-left>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer">
+        <v-icon>menu</v-icon>
+      </v-app-bar-nav-icon>
       <span class="title ml-3 mr-5">Liveboard</span>
       <v-text-field
         solo-inverted
@@ -56,16 +58,16 @@
         prepend-inner-icon="search"
       ></v-text-field>
       <v-spacer></v-spacer>
-    </v-toolbar>
+    </v-app-bar>
 
-    <v-content light>
-      <v-layout align-center justify-start column fill-height>
-        <v-container fluid class="grey lighten-4">
+    <v-content light fill-height>
+      <v-container fluid class="grey lighten-4" fill-height>
+        <v-layout align-center justify-start column>
           
           <slot></slot>
 
-        </v-container>
-      </v-layout>
+        </v-layout>
+      </v-container>
     </v-content>
 
   </v-app>

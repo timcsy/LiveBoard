@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    
     <v-navigation-drawer v-model="drawer" fixed clipped class="grey lighten-4" app light>
       <v-list dense class="grey lighten-4">
         <div v-if="user">
@@ -75,7 +76,6 @@
               <v-list-item
                 v-for="invitation in inviteList"
                 :key="invitation.id"
-                @click=";"
               >
                 <v-list-item-avatar>
                   <v-img :src="invitation.inviter.picture"></v-img>
@@ -86,7 +86,7 @@
                 </v-list-item-content>
 
                 <v-list-item-icon>
-                  <v-icon>chat_bubble</v-icon>
+                  <v-icon>v-container</v-icon>
                 </v-list-item-icon>
               </v-list-item>
             </v-list>
