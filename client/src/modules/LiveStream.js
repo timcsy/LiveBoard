@@ -42,9 +42,9 @@ class LiveStream {
     if (!this.pc) {
       // Create local peer connection object pc1
       this.pc = new RTCPeerConnection(this.configuration)
-      this.pc.addEventListener('icecandidate', this.onIceCandidate)
-      this.pc.addEventListener('iceconnectionstatechange', this.onIceStateChange)
-      this.pc.addEventListener('track', this.gotRemoteStream)
+      this.pc.addEventListener('icecandidate', () => this.onIceCandidate())
+      this.pc.addEventListener('iceconnectionstatechange', () => this.onIceStateChange())
+      this.pc.addEventListener('track', () => this.gotRemoteStream())
       // Add local stream to pc
       this.localStream.getTracks().forEach(track => this.pc.addTrack(track, this.localStream))
     }
