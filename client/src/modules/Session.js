@@ -4,7 +4,7 @@ class Session {
 	constructor() {
 		this.receiver = {} // {name, picture}
 		this.invitations = []
-		ws.on('session:start', () => this.onStart())
+		ws.on('session:start', msg => this.onStart(msg.data.id))
 		ws.on('session:ready', this.onReady)
 		ws.on('session:close', this.onClose)
 	}
@@ -13,8 +13,8 @@ class Session {
 		ws.send(JSON.stringify({on: 'session:start'}))
 	}
 
-	onStart(msg) {
-		this.id = msg.data.id
+	onStart(session_id) {
+		this.id = session_id
 		while (this.invitations.length > 0) {
 			this.send('session:invite', this.invitations.shift())
 		}
