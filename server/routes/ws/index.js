@@ -35,17 +35,19 @@ router.all('/data', RBAC.auth(), async (ctx) => {
 		} else {
 			const session = await Session.findById(msg.session).exec()
 			if (msg.on == 'session:invite') {
-				const receiver = await Local.findOne({username: msg.to}).exec()
+				const receiver = await Local.findOne({username: msg.data.to}).exec()
 				const user = await User.findById(ctx.state.user).populate('identities').exec()
 				const inviter = {
 					name: user.identities[0].name || user.identities[0].username,
 					picture: user.identities[0].picture
 				}
-				if (sockets[receiver.user] && sockets[receiver.user].readyState == 1) {
-					sockets[receiver.user].send(JSON.stringify({ on: 'session:invite', data: {id: session._id, inviter} }))
-				} else {
-					if (!invitations[receiver.user]) invitations[receiver.user] = []
-					invitations[receiver.user].push({id: session._id, inviter})
+				if (receiver) {
+					if (sockets[receiver.user] && sockets[receiver.user].readyState == 1) {
+						sockets[receiver.user].send(JSON.stringify({ on: 'session:invite', data: {id: session._id, inviter} }))
+					} else {
+						if (!invitations[receiver.user]) invitations[receiver.user] = []
+						invitations[receiver.user].push({id: session._id, inviter})
+					}
 				}
 			} else {
 				if (msg.on == 'session:accept') session.clients.push(ctx.state.user)
