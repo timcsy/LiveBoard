@@ -21,10 +21,12 @@ class Session {
 	}
 
 	invite(receiver) {
-		if (!this.id) {
-			this.invitations.push({ to: receiver })
-		} else {
-			this.send('session:invite', { to: receiver })
+		if (receiver) {
+			if (!this.id) {
+				this.invitations.push({ to: receiver })
+			} else {
+				this.send('session:invite', { to: receiver })
+			}
 		}
 	}
 

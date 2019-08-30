@@ -1,7 +1,7 @@
 const Router = require('koa-router')
 const RBAC = require('../../lib/rbac')
 const Local = require('../../models/Auth/Local')
-const Identity = require('../../models/Auth/Identity')
+const User = require('../../models/Auth/User')
 const Session = require('../../models/Board/Session')
 
 const sockets = {} // to store the incoming socket
