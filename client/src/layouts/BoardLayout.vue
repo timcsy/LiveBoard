@@ -168,10 +168,15 @@
         this.stream.init(this.session, stream)
         this.speech.init(this.session, stream)
         this.speech.startRecognition()
+        
+        this.showCallBtn = false
+        this.showHangupBtn = true
+        this.isCalling = true
       },
       close: async function () { // for both side
         this.showCallBtn = true
         this.showHangupBtn = false
+        this.isCalling = false
         this.stream.close()
         this.speech.stopRecognition()
       }
