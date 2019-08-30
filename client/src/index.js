@@ -3,27 +3,12 @@ import adapter from 'webrtc-adapter'
 
 // for Vue
 import Vue from 'vue'
-import Vuetify from 'vuetify/lib'
-import colors from 'vuetify/lib/util/colors'
+import vuetify from './plugins/vuetify'
 
 import MainLayout from './layouts/MainLayout.vue'
 import CenteredForm from './layouts/CenteredForm.vue'
 import BoardLayout from './layouts/BoardLayout.vue'
 import SummaryCard from './components/SummaryCard.vue'
-
-Vue.use(Vuetify)
-
-export default new Vuetify({
-  theme: {
-		primary: colors.cyan.darken2,
-		secondary: colors.amber.darken2,
-		accent: colors.pink.accent4,
-		error: colors.red.darken4,
-		warning: colors.orange,
-		info: colors.grey.darken4,
-		success: colors.lightGreen
-	}
-})
 
 Vue.component('main-layout', MainLayout)
 Vue.component('centered-form', CenteredForm)
@@ -41,5 +26,6 @@ const app = new Vue({
 			{ heading: 'Pages' },
 			{ icon: 'touch_app', text: 'Reminders' }
 		]
-	}
-})
+	},
+	vuetify
+}).$mount('#app')
