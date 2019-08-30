@@ -57,6 +57,7 @@ class Session {
 
 	onClose() {
 		this.receiver = {}
+		this.id = null
 	}
 }
 
