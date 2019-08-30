@@ -50,8 +50,8 @@ class Session {
 	}
 
 	close() {
-		this.id = null
 		this.send('session:close')
+		this.id = null
 	}
 
 	onReady(msg) {

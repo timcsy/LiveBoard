@@ -23,6 +23,7 @@ router.all('/data', RBAC.auth(), async (ctx) => {
 	})
 	ctx.websocket.on('message', async function(message) {
 		// do something with the message from client
+		console.log(message)
 		const msg = JSON.parse(message)
 		// if it is not session
 		if (!msg.session) {
@@ -78,7 +79,6 @@ router.all('/data', RBAC.auth(), async (ctx) => {
 				}
 			}
 		}
-		console.log(message)
 	})
 })
 
