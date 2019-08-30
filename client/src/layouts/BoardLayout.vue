@@ -66,8 +66,27 @@
           <slot></slot>
 
           <v-layout v-if="!isCalling">
-            <v-btn v-if="showCallBtn" @click="call()">Call</v-btn>
-            <v-btn v-if="showHangupBtn" @click="hangup()">Hangup</v-btn>
+            <v-list subheader>
+              <v-subheader>Invitations</v-subheader>
+
+              <v-list-item
+                v-for="invitation in inviteList"
+                :key="invitation.id"
+                @click=";"
+              >
+                <v-list-item-avatar>
+                  <v-img :src="invitation.inviter.picture"></v-img>
+                </v-list-item-avatar>
+
+                <v-list-item-content>
+                  <v-list-item-title v-text="invitation.inviter.name"></v-list-item-title>
+                </v-list-item-content>
+
+                <v-list-item-icon>
+                  <v-icon :color="item.active ? 'deep-purple accent-4' : 'grey'">chat_bubble</v-icon>
+                </v-list-item-icon>
+              </v-list-item>
+            </v-list>
           </v-layout>
 
           <v-layout v-if="isCalling">
@@ -84,6 +103,7 @@
 
 <script>
   import axios from 'axios'
+  import ws from '../modules/MainSocket'
   import Session from '../modules/Session'
   import LiveStream from '../modules/LiveStream'
   export default {
@@ -96,7 +116,8 @@
       showCallBtn: true,
       showHangupBtn: false,
       contact: '',
-      isCalling: false
+      isCalling: false,
+      inviteList: []
     }),
     props: {
       items: {
@@ -131,6 +152,11 @@
         const res = await axios.get('/api/identities')
         const user = res.data[0] || null
         this.user = user
+
+        // setting ws events
+        ws.on('session:invite', msg => {
+          this.inviteList.push(msg.data)
+        })
       } catch (err) {
         this.user = null
       }
