@@ -3,17 +3,18 @@ import adapter from 'webrtc-adapter'
 
 // for Vue
 import Vue from 'vue'
-import Vuetify from 'vuetify'
-import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
-import colors from 'vuetify/es5/util/colors'
+import Vuetify from 'vuetify/lib'
+import colors from 'vuetify/lib/util/colors'
 
 import MainLayout from './layouts/MainLayout.vue'
 import CenteredForm from './layouts/CenteredForm.vue'
 import BoardLayout from './layouts/BoardLayout.vue'
 import SummaryCard from './components/SummaryCard.vue'
 
-Vue.use(Vuetify, {
-	theme: {
+Vue.use(Vuetify)
+
+export default new Vuetify({
+  theme: {
 		primary: colors.cyan.darken2,
 		secondary: colors.amber.darken2,
 		accent: colors.pink.accent4,
