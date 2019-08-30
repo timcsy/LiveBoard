@@ -4,3 +4,4 @@ server/data/db/
 client/config.js
 client/dist
 package-lock.json
+resources/
