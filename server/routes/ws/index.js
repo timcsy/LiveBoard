@@ -21,7 +21,7 @@ router.all('/data', RBAC.auth(), async (ctx) => {
 			invitations[ctx.state.user].length = 0
 		}
 	})
-	ctx.websocket.on('message', function(message) {
+	ctx.websocket.on('message', async function(message) {
 		// do something with the message from client
 		const msg = JSON.parse(message)
 		// if it is not session
