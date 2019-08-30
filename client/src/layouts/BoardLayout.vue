@@ -139,12 +139,8 @@
       call: async function () {
         this.showCallBtn = false
         this.showHangupBtn = true
-        const stream = await navigator.mediaDevices.getUserMedia({audio: true, video: false})
         this.session.start()
         this.session.invite(this.contact)
-        this.stream = new LiveStream(this.session, stream)
-        const startTime = Date.now()
-        this.session.send('webrtc:start', { time: startTime })
       },
       hangup: async function () {
         this.showCallBtn = true
@@ -152,8 +148,7 @@
         this.stream.close()
       },
       accept: async function (index) {
-        this.session.setReceiver(this.inviteList[index].inviter)
-        this.session.accept(this.inviteList[index].id)
+        this.session.accept(this.inviteList[index].id, this.inviteList[index].inviter)
       },
       decline: async function (index) {
         this.session.decline(this.inviteList[index].id)
@@ -170,6 +165,15 @@
         // setting ws events
         ws.on('session:invite', msg => {
           this.inviteList.push(msg.data)
+        })
+        ws.on('session:ready', msg => {
+          const stream = await navigator.mediaDevices.getUserMedia({audio: true, video: false})
+          this.stream = new LiveStream(this.session, stream)
+          const startTime = Date.now()
+          this.session.send('webrtc:start', { time: startTime })
+        })
+        ws.on('session:close', msg => {
+          this.hangup()
         })
       } catch (err) {
         this.user = null

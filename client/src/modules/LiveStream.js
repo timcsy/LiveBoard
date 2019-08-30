@@ -18,13 +18,14 @@ class LiveStream {
       offerToReceiveAudio: 1
     }
 
-    ws.on('webrtc:start', this.start)
-    ws.on('webrtc:ready', this.sendOffer)
-    ws.on('webrtc:offer', this.receiveOffer)
-    ws.on('webrtc:answer', this.receiveAnswer)
+    ws.on('webrtc:start', msg => this.start())
+    ws.on('webrtc:ready', msg => this.sendOffer())
+    ws.on('webrtc:offer', msg => this.receiveOffer(msg.data.sdp))
+    ws.on('webrtc:answer', msg => this.receiveAnswer(msg.data.sdp))
+    ws.on('webrtc:ice', msg => this.receiveICE(msg.data.sdp))
   }
 
-  start(msg) {
+  start() {
     this.session.send('webrtc:ready')
   }
 
@@ -46,7 +47,7 @@ class LiveStream {
     }
   }
 
-  async sendOffer(msg) {
+  async sendOffer() {
     // Starting call
     if (!this.pc) this.createPeerConnection()
 
@@ -66,8 +67,8 @@ class LiveStream {
     }
   }
 
-  async receiveOffer(msg) {
-    const desc = new RTCSessionDescription(msg.data.sdp)
+  async receiveOffer(sdp) {
+    const desc = new RTCSessionDescription(sdp)
 
     if (!this.pc) this.createPeerConnection()
   
@@ -102,8 +103,8 @@ class LiveStream {
     }
   }
 
-  async receiveAnswer(msg) {
-    const desc = new RTCSessionDescription(msg.data.sdp)
+  async receiveAnswer(sdp) {
+    const desc = new RTCSessionDescription(sdp)
 
     if (!this.pc) await this.createPeerConnection()
   
@@ -119,13 +120,13 @@ class LiveStream {
     this.session.send('webrtc:ice', { ice: ice.toJSON() })
   }
   
-  async receiveICE(msg) {
-    const ice = new RTCIceCandidate(msg.data.ice)
+  async receiveICE(ice) {
+    const ICE = new RTCIceCandidate(ice)
 
     if (!this.pc) this.createPeerConnection()
   
     try {
-      await this.pc.addIceCandidate(ice)
+      await this.pc.addIceCandidate(ICE)
       console.log(`pc addIceCandidate success`)
     } catch (e) {
       console.error(`Failed to set session description: ${e.toString()}`)
