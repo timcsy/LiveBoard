@@ -1,9 +1,7 @@
 import ws from './MainSocket'
 
 class LiveStream {
-  constructor(session, localStream) {
-    this.localStream = localStream
-    this.session = session
+  constructor() {
     this.isServerMode = false
 
     // STUN / TURN Server
@@ -23,6 +21,11 @@ class LiveStream {
     ws.on('webrtc:offer', msg => this.receiveOffer(msg.data.sdp))
     ws.on('webrtc:answer', msg => this.receiveAnswer(msg.data.sdp))
     ws.on('webrtc:ice', msg => this.receiveICE(msg.data.sdp))
+  }
+
+  init(session, localStream) {
+    this.localStream = localStream
+    this.session = session
   }
 
   start() {
