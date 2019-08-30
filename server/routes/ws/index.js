@@ -71,7 +71,7 @@ router.all('/data', RBAC.auth(), async (ctx) => {
 							}
 							ws.send(JSON.stringify({on: 'session:ready', data: profile}))
 						} else if (msg.on == 'session:decline') {
-							await Session.findByIdAndRemove(session._id).exec()
+							await Session.deleteOne({ _id: session._id }).exec()
 							ws.send(JSON.stringify({on: 'session:close'}))
 						}
 					}
