@@ -87,7 +87,7 @@
                 </v-list-item-content>
 
                 <v-list-item-icon @click="accept(index)">
-                  <v-icon color="info" dark>v-container</v-icon>
+                  <v-icon color="grey">v-container</v-icon>
                 </v-list-item-icon>
               </v-list-item>
             </v-list>
