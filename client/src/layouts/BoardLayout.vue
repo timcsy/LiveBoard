@@ -86,7 +86,7 @@
                   <v-list-item-title v-text="invitation.inviter.name"></v-list-item-title>
                 </v-list-item-content>
 
-                <v-list-item-icon :click="accept(index)">
+                <v-list-item-icon :click="accept(index)" dark>
                   <v-icon>v-container</v-icon>
                 </v-list-item-icon>
               </v-list-item>
