@@ -5,7 +5,8 @@ const User = require('../../models/Auth/User')
 const Session = require('../../models/Board/Session')
 
 const sockets = {} // to store the incoming socket
-const invitations = {}
+const invitations = {} // to store the invitations
+const isServerMode = {} // to store the webrtc connection state
 
 const router = new Router()
 
