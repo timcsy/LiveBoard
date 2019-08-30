@@ -4,7 +4,7 @@ class Session {
 	constructor() {
 		this.receiver = {} // {name, picture}
 		this.invitations = []
-		ws.on('session:start', this.onStart)
+		ws.on('session:start', () => this.onStart())
 		ws.on('session:ready', this.onReady)
 		ws.on('session:close', this.onClose)
 	}
