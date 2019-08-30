@@ -1,6 +1,5 @@
 <template>
-  <v-app-bar app>
-
+  <v-app>
     <v-navigation-drawer v-model="drawer" fixed clipped class="grey lighten-4" app light>
       <v-list dense class="grey lighten-4">
         <div v-if="user">
@@ -45,7 +44,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-toolbar color="primary" app fixed clipped-left>
+    <v-app-bar color="primary" app fixed clipped-left>
       <v-toolbar-side-icon @click="drawer = !drawer"></v-toolbar-side-icon>
       <span class="title ml-3 mr-5">Liveboard</span>
       <v-text-field
@@ -57,7 +56,7 @@
         v-model="contact"
       ></v-text-field>
       <v-spacer></v-spacer>
-    </v-toolbar>
+    </v-app-bar>
 
     <v-content light>
       <v-layout align-center justify-start column fill-height>
@@ -99,8 +98,7 @@
         </v-container>
       </v-layout>
     </v-content>
-
-  </v-app-bar>
+  </v-app>
 </template>
 
 <script>
