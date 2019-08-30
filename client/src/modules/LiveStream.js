@@ -1,4 +1,4 @@
-import ws from './socket'
+import ws from './MainSocket'
 
 class LiveStream {
   constructor(localStream, receiver) {

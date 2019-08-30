@@ -77,7 +77,8 @@
 
 <script>
   import axios from 'axios'
-  import LiveStream from '../modules/stream'
+  import ws from '../modules/MainSocket'
+  import LiveStream from '../modules/LiveStream'
   export default {
     data: () => ({
       drawer: null,
