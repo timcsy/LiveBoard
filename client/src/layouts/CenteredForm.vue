@@ -1,14 +1,14 @@
 <template>
   <v-app>
     <v-content class="grey lighten-4">
-      <v-container class="grey lighten-4" fluid fill-height>
+      <v-container fluid fill-height>
         <v-layout align-center justify-center>
           <v-flex xs12 sm8 md4>
             <v-card class="elevation-12">
               <v-toolbar dark color="primary">
                 <v-toolbar-title>Login form</v-toolbar-title>
               </v-toolbar>
-              <v-card-text>
+              <v-card-text light>
                 <form :action="action" method="POST" ref="form">
                   <v-text-field prepend-icon="person" name="username" label="Username" type="text"></v-text-field>
                   <v-text-field id="password" prepend-icon="lock" name="password" label="Password" type="password"></v-text-field>
