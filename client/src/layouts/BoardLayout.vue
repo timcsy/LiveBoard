@@ -137,7 +137,6 @@
         this.showCallBtn = false
         this.showHangupBtn = true
         const stream = await navigator.mediaDevices.getUserMedia({audio: true, video: false})
-        this.session = new Session()
         this.session.start()
         this.session.invite(this.contact)
         this.stream = new LiveStream(this.session, stream)
@@ -160,6 +159,7 @@
         const user = res.data[0] || null
         this.user = user
 
+        this.session = new Session()
         // setting ws events
         ws.on('session:invite', msg => {
           this.inviteList.push(msg.data)
