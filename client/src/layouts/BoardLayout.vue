@@ -54,18 +54,16 @@
 
         <v-list-item>
           <v-list-item-content class="grey--text">
-            <span class="mr-1">物件模式</span>
-            <v-switch v-model="drawMode" inset></v-switch>
-            <span>繪圖模式</span>
+            <v-switch v-model="drawMode" inset label="物件/繪圖模式"></v-switch>
           </v-list-item-content>
         </v-list-item>
 
         <v-subheader>畫筆大小</v-subheader>
-        <v-range-slider v-model="brushSize" min="0" max="200">
+        <v-slider v-model="brushSize" min="0" max="200">
           <template v-slot:append>
             <v-text-field v-model="brushSize" width="60px" single-line type="number"></v-text-field>
           </template>
-        </v-range-slider>
+        </v-slider>
 
         <v-subheader>畫筆顏色</v-subheader>
         <v-color-picker show-swatches v-model="color"></v-color-picker>
