@@ -123,7 +123,7 @@
         </v-col>
       </v-row>
       
-      <v-row v-else d-flex align="center" justify="center">
+      <v-row  d-flex align="center" justify="center">
         <v-sheet width="600" height="450" class="white ma-2" elevation="1">
           <vue-fabric ref="remote_canvas" :width="600" :height="450"></vue-fabric>
           <vue-fabric ref="local_canvas" :width="600" :height="450"></vue-fabric>
