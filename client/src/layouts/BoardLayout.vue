@@ -126,12 +126,12 @@
       <v-row v-else d-flex align="center" justify="center">
         <v-sheet width="600" height="450" class="white ma-2" elevation="1">
           <div style="position: absolute; top: 0px; left: 0px;">
-            <canvas id="canvas_remote" width="600" height="450">
+            <canvas ref="remote_canvas" width="600" height="450">
               Your browser doesn't support canvas.
             </canvas>
           </div>
           <div style="position: absolute; top: 0px; left: 0px;">
-            <canvas id="canvas_local" width="600" height="450">
+            <canvas ref="local_canvas" width="600" height="450">
               Your browser doesn't support canvas.
             </canvas>
           </div>
@@ -282,7 +282,7 @@
       }
     },
     mounted: async function () {
-      this.canvas = new fabric.Canvas('canvas_local', {
+      this.canvas = new fabric.Canvas(this.$refs.local_canvas, {
         isDrawingMode: true
       })
       fabric.Object.prototype.transparentCorners = false
