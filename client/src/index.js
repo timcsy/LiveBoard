@@ -5,6 +5,7 @@ import adapter from 'webrtc-adapter'
 import Vue from 'vue'
 import vuetify from './plugins/vuetify'
 
+import fabric from 'fabric'
 import 'vue-fabric/dist/vue-fabric.min.css'
 import { Fabric } from 'vue-fabric'
 Vue.use(Fabric)
