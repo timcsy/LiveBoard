@@ -52,16 +52,16 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item>
+        <v-list-item v-if="isCalling">
           <v-switch v-model="drawMode" inset label="物件/繪圖模式" class="ml-1" color="primary"></v-switch>
         </v-list-item>
 
-        <v-subheader>畫筆大小</v-subheader>
-        <v-slider v-model="brushSize" min="0" max="200" hide-details class="ml-1"></v-slider>
-        <v-text-field v-model="brushSize" width="30px" single-line hide-details type="number"></v-text-field>
+        <v-subheader v-if="isCalling">畫筆大小</v-subheader>
+        <v-slider v-model="brushSize" min="0" max="200" hide-details class="ml-1" v-if="isCalling"></v-slider>
+        <v-text-field v-model="brushSize" width="60px" class="ml-1 pr-2" single-line hide-details type="number" v-if="isCalling"></v-text-field>
 
-        <v-subheader>畫筆顏色</v-subheader>
-        <v-color-picker show-swatches v-model="color"></v-color-picker>
+        <v-subheader v-if="isCalling">畫筆顏色</v-subheader>
+        <v-color-picker show-swatches v-model="color" v-if="isCalling"></v-color-picker>
 
       </v-list>
     </v-navigation-drawer>
