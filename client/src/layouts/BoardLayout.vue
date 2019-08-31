@@ -124,17 +124,18 @@
       </v-row>
       
       <v-row v-else d-flex align="center" justify="center">
-        <vue-fabric ref="remote_canvas" :width="600" :height="450" style="position: absolute; top:0; left:0;"></vue-fabric>
-        <vue-fabric ref="local_canvas" :width="600" :height="450" style="position: absolute; top:0; left:0;"></vue-fabric>
-        <!-- <v-sheet width="600" height="450" class="white ma-2" elevation="1">
-          
-          <div>
-            
+        <v-sheet width="600" height="450" class="white ma-2" elevation="1">
+          <div style="position: absolute; top: 0px; left: 0px;">
+            <canvas id="canvas_remote" width="600" height="450">
+              Your browser doesn't support canvas.
+            </canvas>
           </div>
-          <div style="position: absolute">
-            
+          <div style="position: absolute; top: 0px; left: 0px;">
+            <canvas id="canvas_local" width="600" height="450">
+              Your browser doesn't support canvas.
+            </canvas>
           </div>
-        </v-sheet> -->
+        </v-sheet>
 
       </v-row>
     </v-content>
@@ -143,21 +144,23 @@
       <v-list subheader>
         <v-subheader>Conversation</v-subheader>
 
-        <v-list-item
-          :class="record.isLocal? 'white': 'grey lighten-2'"
-          v-for="(record, index) in chat"
-          :key="index"
-        >
-          <v-avatar size="36" class="mr-2">
-            <img v-if="record.isLocal && user.picture" :src="user.picture">
-            <img v-else-if="!record.isLocal && receiver.picture" :src="receiver.picture">
-            <v-icon v-else x-large>account_circle</v-icon>
-          </v-avatar>
+        <v-container id="chat" fill-height class="overflow-y-auto">
+          <v-list-item
+            :class="record.isLocal? 'white': 'grey lighten-2'"
+            v-for="(record, index) in chat"
+            :key="index"
+          >
+            <v-avatar size="36" class="mr-2">
+              <img v-if="record.isLocal && user.picture" :src="user.picture">
+              <img v-else-if="!record.isLocal && receiver.picture" :src="receiver.picture">
+              <v-icon v-else x-large>account_circle</v-icon>
+            </v-avatar>
 
-          <span>
-            {{record.text}}
-          </span>
-        </v-list-item>
+            <span>
+              {{record.text}}
+            </span>
+          </v-list-item>
+        </v-container>
         
       </v-list>
     </v-navigation-drawer>
@@ -171,8 +174,8 @@
   import Session from '../modules/Session'
   import LiveStream from '../modules/LiveStream'
   import Speech from '../modules/Speech'
-  // import { fabric } from 'fabric'
-  // import Board from '../modules/Board'
+  import { fabric } from 'fabric'
+  import Board from '../modules/Board'
   export default {
     data: () => ({
       drawer: null,
@@ -228,7 +231,7 @@
         this.stream.init(this.session, stream)
         this.speech.init(this.session, stream)
         this.speech.startRecognition()
-        // this.board.init(this.session, this.canvas, this.canvas_remote)
+        this.board.init(this.session, this.canvas, this.canvas_remote)
 
         this.showCallBtn = false
         this.showHangupBtn = true
@@ -252,7 +255,7 @@
         this.session = new Session()
         this.stream = new LiveStream()
         this.speech = new Speech()
-        // this.board = new Board()
+        this.board = new Board()
         // setting ws events
         ws.on('session:invite', msg => {
           this.inviteList.push(msg.data)
@@ -279,16 +282,16 @@
       }
     },
     mounted: async function () {
-      // this.canvas = new fabric.Canvas('canvas_local', {
-      //   isDrawingMode: true
-      // })
-      // fabric.Object.prototype.transparentCorners = false
-      // this.canvas.freeDrawingBrush = new fabric['PencilBrush'](this.canvas)
-      // this.canvas.freeDrawingBrush.color = 'black'
-      // this.canvas.freeDrawingBrush.width = 10
-      // this.canvas_remote = new fabric.Canvas('canvas_remote', {
-      //   isDrawingMode: false
-      // })
+      this.canvas = new fabric.Canvas('canvas_local', {
+        isDrawingMode: true
+      })
+      fabric.Object.prototype.transparentCorners = false
+      this.canvas.freeDrawingBrush = new fabric['PencilBrush'](this.canvas)
+      this.canvas.freeDrawingBrush.color = 'black'
+      this.canvas.freeDrawingBrush.width = 10
+      this.canvas_remote = new fabric.Canvas('canvas_remote', {
+        isDrawingMode: false
+      })
     }
   }
 </script>
