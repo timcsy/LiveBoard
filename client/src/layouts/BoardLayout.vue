@@ -121,7 +121,7 @@
           </v-sheet>
         </v-col>
       
-        <v-sheet v-else width="600" height="450" class="white" elevation="1" class="m-4">
+        <v-sheet v-else width="600" height="450" class="white m-4" elevation="1">
           <div style="position: absolute;">
             <canvas id="canvas_remote" width="600" height="450">
               Your browser doesn't support canvas.
