@@ -146,11 +146,11 @@
           v-for="(record, index) in chat"
           :key="index"
         >
-          <v-list-item-avatar>
-            <v-img size="40" v-if="record.isLocal && user.picture" :src="user.picture"></v-img>
-            <v-img size="40" v-else-if="!record.isLocal && receiver.picture" :src="receiver.picture"></v-img>
-            <v-icon v-else>account_circle</v-icon>
-          </v-list-item-avatar>
+          <v-avatar size="40">
+            <img v-if="record.isLocal && user.picture" :src="user.picture">
+            <img v-else-if="!record.isLocal && receiver.picture" :src="receiver.picture">
+            <v-icon v-else x-large>account_circle</v-icon>
+          </v-avatar>
 
           <span>
             {{record.text}}
