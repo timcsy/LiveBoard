@@ -123,7 +123,7 @@
         </v-col>
       </v-row>
       
-      <v-layout ref="square" v-else v-resize="onResize()" d-flex align-center justify-center fill-height fluid>
+      <v-layout ref="square" v-else v-resize="onResize" d-flex align-center justify-center fill-height fluid>
         <v-sheet :width="squareSize" :height="squareSize" class="white ma-2" elevation="1">
           <div style="position: absolute">
             <canvas id="remote_canvas" width="0" height="0"></canvas>
