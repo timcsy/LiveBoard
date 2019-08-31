@@ -22,7 +22,7 @@ class Board {
 			const difference = deep.diff(this.last_canvas, this.canvas.toJSON())
 			if (difference) {
 				this.session.send('canvas:render', {diff: difference})
-				difference.forEach(function (change) {
+				difference.forEach(change => {
 					deep.applyChange(this.last_canvas, true, change)
 				})
 			}
