@@ -57,10 +57,8 @@
         </v-list-item>
 
         <v-subheader>畫筆大小</v-subheader>
-        <v-slider v-model="brushSize" min="0" max="200" hide-details>
-          <template v-slot:append>
-            <v-text-field v-model="brushSize" width="30px" single-line hide-details type="number"></v-text-field>
-          </template>
+        <v-slider v-model="brushSize" min="0" max="200" hide-details class="ml-1">
+        <v-text-field v-model="brushSize" width="30px" single-line hide-details type="number"></v-text-field>
         </v-slider>
 
         <v-subheader>畫筆顏色</v-subheader>
