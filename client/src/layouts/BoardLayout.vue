@@ -85,38 +85,39 @@
       
     </v-app-bar>
 
-    <v-content light class="grey lighten-4" fill-height>
+    <v-content light class="isCalling? grey lighten-4: white" fill-height>
       <v-container fluid fill-height>
         <v-layout align-center justify-start column>
           
           <slot></slot>
+          <v-flex sm12 md8 lg6 d-flex v-if="!isCalling">
+            <v-sheet class="d-flex" elevation="1">
+              <v-list subheader light>
+                <v-subheader>Invitations</v-subheader>
 
-          <v-sheet class="d-lg-flex" elevation="1" v-if="!isCalling">
-            <v-list subheader light>
-              <v-subheader>Invitations</v-subheader>
+                <v-list-item
+                  v-for="(invitation, index) in inviteList"
+                  :key="invitation.id"
+                >
+                  <v-list-item-avatar>
+                    <v-img v-if="invitation.inviter.picture" :src="invitation.inviter.picture"></v-img>
+                    <v-icon v-else>account_circle</v-icon>
+                  </v-list-item-avatar>
 
-              <v-list-item
-                v-for="(invitation, index) in inviteList"
-                :key="invitation.id"
-              >
-                <v-list-item-avatar>
-                  <v-img v-if="invitation.inviter.picture" :src="invitation.inviter.picture"></v-img>
-                  <v-icon v-else>account_circle</v-icon>
-                </v-list-item-avatar>
+                  <v-list-item-content>
+                    <v-list-item-title v-text="invitation.inviter.name"></v-list-item-title>
+                  </v-list-item-content>
 
-                <v-list-item-content>
-                  <v-list-item-title v-text="invitation.inviter.name"></v-list-item-title>
-                </v-list-item-content>
-
-                <v-list-item-icon @click="accept(index)">
-                  <v-icon>call</v-icon>
-                </v-list-item-icon>
-                <v-list-item-icon @click="decline(index)">
-                  <v-icon>call_end</v-icon>
-                </v-list-item-icon>
-              </v-list-item>
-            </v-list>
-          </v-sheet>
+                  <v-list-item-icon @click="accept(index)">
+                    <v-icon color="light-green">call</v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-icon @click="decline(index)">
+                    <v-icon color="red">call_end</v-icon>
+                  </v-list-item-icon>
+                </v-list-item>
+              </v-list>
+            </v-sheet>
+          </v-flex>
 
           <v-sheet width="600" height="450" v-else class="white" elevation="1">
             <div style="position: absolute;">
@@ -168,10 +169,7 @@
           return [
             {icon: 'home', text: '首頁', url: '/'},
             {icon: 'account_circle', text: 'Link Account', url: '/connect/login'},
-            {icon: 'account_circle', text: 'Log out', url: '/logout'},
-            { divider: true },
-            { heading: 'Board' },
-            { icon: 'touch_app', text: 'Reminders' }
+            {icon: 'account_circle', text: 'Log out', url: '/logout'}
           ]
         }
       }
