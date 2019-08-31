@@ -53,7 +53,7 @@
         </v-list-item>
 
         <v-subheader>Pencil Color</v-subheader>
-        <v-color-picker show-swatches></v-color-picker>
+        <v-color-picker show-swatches v-model="color"></v-color-picker>
 
       </v-list>
     </v-navigation-drawer>
@@ -92,7 +92,7 @@
       </v-app-bar-nav-icon>
 
       <v-app-bar-nav-icon @click.stop="changeBrush()" v-if="isCalling">
-        <v-icon v-if="brush == 'pencil'">mdi-eraser</v-icon>
+        <v-icon v-if="brush == 'pencil'">{{mdiEraser}}</v-icon>
         <v-icon v-else>brush</v-icon>
       </v-app-bar-nav-icon>
 
@@ -181,6 +181,7 @@
   import LiveStream from '../modules/LiveStream'
   import Speech from '../modules/Speech'
   import Board from '../modules/Board'
+  import { mdiEraser } from '@mdi/js'
   export default {
     data: () => ({
       drawer: null,
@@ -200,7 +201,9 @@
       },
       chat: [],
       squareSize: 0,
-      brush: 'pencil'
+      brush: 'pencil',
+      mdiEraser: mdiAccount,
+      color: 'black'
     }),
     props: {
       items: {
@@ -271,6 +274,11 @@
         this.stream.close()
         this.speech.stopRecognition()
         this.chat = []
+      }
+    },
+    watch: {
+      color: function(value) {
+        this.board.setColor(value)
       }
     },
     created: async function () {

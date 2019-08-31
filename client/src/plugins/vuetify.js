@@ -19,5 +19,5 @@ export default new Vuetify({
 				success: colors.lightGreen
       },
     },
-  },
+	}
 })

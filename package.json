@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@mdi/js": "^4.2.95",
     "axios": "^0.18.0",
     "bcrypt": "^3.0.0",
     "deep-diff": "^1.0.2",
