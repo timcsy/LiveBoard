@@ -7,15 +7,15 @@ class Board {
 		fabric.Object.prototype.transparentCorners = false
 	}
 
-	init(session) {
+	init(session, size) {
 		this.session = session
 		this.canvas = new fabric.Canvas('local_canvas', {
 			isDrawingMode: true
 		})
-		this.canvas.setDimensions({width:100, height:100})
 		this.remote_canvas = new fabric.Canvas('remote_canvas', {
 			isDrawingMode: false
 		})
+		this.setSize(size)
 		this.setBrush('pencil')
 		this.setColor('black')
 		this.setWidth(10)
@@ -38,6 +38,13 @@ class Board {
 			})
 			this.remote_canvas.loadFromJSON(JSON.stringify(this.last_remote_canvas))
 		})
+	}
+
+	setSize(size) {
+		this.canvas.setDimensions({ width: size, height: size })
+		this.canvas.zoomToPoint({ x: 512, y: 512 }, size / 1024)
+		this.remote_canvas.setDimensions({ width: size, height: size })
+		this.remote_canvas.zoomToPoint({ x: 512, y: 512 }, size / 1024)
 	}
 
 	clear() {

@@ -124,12 +124,12 @@
       </v-row>
       
       <v-layout ref="square" v-else d-flex align-center justify-center fill-height fluid>
-        <v-sheet width="600" height="450" class="white ma-2" elevation="1">
+        <v-sheet :width="squareSize" :height="squareSize" class="white ma-2" elevation="1">
           <div style="position: absolute">
-            <canvas id="remote_canvas" width="600" height="450"></canvas>
+            <canvas id="remote_canvas" width="0" height="0"></canvas>
           </div>
           <div style="position: absolute">
-            <canvas id="local_canvas" width="600" height="450"></canvas>
+            <canvas id="local_canvas" width="0" height="0"></canvas>
           </div>
         </v-sheet>
 
@@ -186,7 +186,8 @@
         name: '',
         picture: ''
       },
-      chat: []
+      chat: [],
+      squareSize: 0
     }),
     props: {
       items: {
@@ -231,9 +232,10 @@
         this.receiver = this.session.receiver
 
         this.$nextTick(function () {
-          this.board.init(this.session)
-          console.log(this.$refs.square)
-          console.log(this.$refs.square.clientWidth, this.$refs.square.clientHeight)
+          const size = (this.$refs.square.clientWidth > this.$refs.square.clientHeight)?
+            this.$refs.square.clientHeight: this.$refs.square.clientWidth
+          this.squareSize = size
+          this.board.init(this.session, size - 8)
         })
       },
       close: async function () { // for both side
