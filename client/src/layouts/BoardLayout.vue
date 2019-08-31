@@ -125,8 +125,8 @@
       
       <v-row v-else d-flex align="center" justify="center">
         <v-sheet width="600" height="450" class="white ma-2" elevation="1">
-          <vue-fabric ref="remote_canvas" width="600" height="450"></vue-fabric>
-          <vue-fabric ref="local_canvas" width="600" height="450"></vue-fabric>
+          <vue-fabric ref="remote_canvas" :width="600" :height="450"></vue-fabric>
+          <vue-fabric ref="local_canvas" :width="600" :height="450"></vue-fabric>
           <!-- <div style="position: absolute">
             <canvas id="canvas_remote" width="600" height="450">
               Your browser doesn't support canvas.
@@ -146,23 +146,21 @@
       <v-list subheader>
         <v-subheader>Conversation</v-subheader>
 
-        <v-container id="chat" fill-height class="overflow-y-auto">
-          <v-list-item
-            :class="record.isLocal? 'white': 'grey lighten-2'"
-            v-for="(record, index) in chat"
-            :key="index"
-          >
-            <v-avatar size="36" class="mr-2">
-              <img v-if="record.isLocal && user.picture" :src="user.picture">
-              <img v-else-if="!record.isLocal && receiver.picture" :src="receiver.picture">
-              <v-icon v-else x-large>account_circle</v-icon>
-            </v-avatar>
+        <v-list-item
+          :class="record.isLocal? 'white': 'grey lighten-2'"
+          v-for="(record, index) in chat"
+          :key="index"
+        >
+          <v-avatar size="36" class="mr-2">
+            <img v-if="record.isLocal && user.picture" :src="user.picture">
+            <img v-else-if="!record.isLocal && receiver.picture" :src="receiver.picture">
+            <v-icon v-else x-large>account_circle</v-icon>
+          </v-avatar>
 
-            <span>
-              {{record.text}}
-            </span>
-          </v-list-item>
-        </v-container>
+          <span>
+            {{record.text}}
+          </span>
+        </v-list-item>
         
       </v-list>
     </v-navigation-drawer>
