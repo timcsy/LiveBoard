@@ -202,7 +202,7 @@
       chat: [],
       squareSize: 0,
       brush: 'pencil',
-      mdiEraser: mdiAccount,
+      mdiEraser: mdiEraser,
       color: 'black'
     }),
     props: {
