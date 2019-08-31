@@ -61,7 +61,7 @@
         </v-list-item>
 
         <v-subheader>畫筆大小</v-subheader>
-        <v-range-slider v-model="brushSize" min="0" max="200">
+        <v-range-slider v-model="brushSize" min="0" max="200"></v-range-slider>
         <template v-slot:append>
           <v-text-field v-model="brushSize" width="60px" single-line type="number"></v-text-field>
         </template>
