@@ -131,7 +131,7 @@
           </div>
         </v-sheet>
 
-        <v-col sm="12" md="6" lg="4" v-if="!isCalling">
+        <v-col sm="12" md="6" lg="4" v-if="isCalling">
           <v-sheet d-flex elevation="1">
             <v-list d-flex subheader light>
               <v-subheader>Conversation</v-subheader>
@@ -144,7 +144,7 @@
                 <v-list-item-avatar>
                   <v-img v-if="record.isLocal && user.picture" :src="user.picture"></v-img>
                   <v-img v-else-if="!record.isLocal && receiver.picture" :src="receiver.picture"></v-img>
-                  <v-icon v-else>account_circle</v-icon>
+                  <v-icon x-large v-else>account_circle</v-icon>
                 </v-list-item-avatar>
 
                 <v-list-item-content>
