@@ -123,7 +123,7 @@
         </v-col>
       </v-row>
       
-      <v-layout ref="square" v-else d-flex align-center justify-center fill-height fluid>
+      <v-layout ref="square" v-else v-resize="onResize()" d-flex align-center justify-center fill-height fluid>
         <v-sheet :width="squareSize" :height="squareSize" class="white ma-2" elevation="1">
           <div style="position: absolute">
             <canvas id="remote_canvas" width="0" height="0"></canvas>
@@ -237,6 +237,14 @@
           this.squareSize = size
           this.board.init(this.session, size - 8)
         })
+      },
+      onResize: function() {
+        if (this.board.canvas) {
+          const size = (this.$refs.square.clientWidth > this.$refs.square.clientHeight)?
+            this.$refs.square.clientHeight: this.$refs.square.clientWidth
+          this.squareSize = size
+          this.board.setSize(size - 8)
+        }
       },
       close: async function () { // for both side
         this.showCallBtn = true
