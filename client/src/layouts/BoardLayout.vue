@@ -62,8 +62,8 @@
     </v-app-bar>
 
     <v-content light fill-height>
-      <v-container fluid class="white" fill-height>
-        <v-layout align-center justify-start column>
+      <v-container fluid fill-height class="grey lighten-4">
+        <v-layout align-center justify-start column class="grey lighten-4">
           
           <slot></slot>
 
@@ -96,18 +96,18 @@
             </v-list>
           </v-container>
 
-          <v-container v-else>
+          <v-sheet v-else class="white">
             <div style="position: absolute;">
-              <canvas id="canvas_remote" width="600" height="450" style="border:1px solid #aaa">
+              <canvas id="canvas_remote" width="600" height="450">
                 Your browser doesn't support canvas.
               </canvas>
             </div>
             <div style="position: absolute;">
-              <canvas id="canvas_local" width="600" height="450" style="border:1px solid #aaa">
+              <canvas id="canvas_local" width="600" height="450">
                 Your browser doesn't support canvas.
               </canvas>
             </div>
-          </v-container>
+          </v-sheet>
 
         </v-layout>
       </v-container>
