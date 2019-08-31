@@ -144,23 +144,21 @@
       <v-list subheader>
         <v-subheader>Conversation</v-subheader>
 
-        <v-container id="chat" fill-height class="overflow-y-auto">
-          <v-list-item
-            :class="record.isLocal? 'white': 'grey lighten-2'"
-            v-for="(record, index) in chat"
-            :key="index"
-          >
-            <v-avatar size="36" class="mr-2">
-              <img v-if="record.isLocal && user.picture" :src="user.picture">
-              <img v-else-if="!record.isLocal && receiver.picture" :src="receiver.picture">
-              <v-icon v-else x-large>account_circle</v-icon>
-            </v-avatar>
+        <v-list-item
+          :class="record.isLocal? 'white': 'grey lighten-2'"
+          v-for="(record, index) in chat"
+          :key="index"
+        >
+          <v-avatar size="36" class="mr-2">
+            <img v-if="record.isLocal && user.picture" :src="user.picture">
+            <img v-else-if="!record.isLocal && receiver.picture" :src="receiver.picture">
+            <v-icon v-else x-large>account_circle</v-icon>
+          </v-avatar>
 
-            <span>
-              {{record.text}}
-            </span>
-          </v-list-item>
-        </v-container>
+          <span>
+            {{record.text}}
+          </span>
+        </v-list-item>
         
       </v-list>
     </v-navigation-drawer>
@@ -282,9 +280,12 @@
       }
     },
     mounted: async function () {
+      console.log(fabric)
+      console.log(this.$refs.local_canvas)
       this.canvas = new fabric.Canvas(this.$refs.local_canvas, {
         isDrawingMode: true
       })
+      console.log(this.canvas)
       fabric.Object.prototype.transparentCorners = false
       this.canvas.freeDrawingBrush = new fabric['PencilBrush'](this.canvas)
       this.canvas.freeDrawingBrush.color = 'black'
