@@ -131,8 +131,8 @@
           </div>
         </v-sheet>
 
-        <v-col sm="12" md="6" lg="4" v-if="isCalling">
-          <v-sheet d-flex elevation="1">
+        <v-col sm="12" md="6" lg="4" v-if="isCalling" fill-height>
+          <v-sheet d-flex elevation="1" fill-height>
             <v-list d-flex subheader light>
               <v-subheader>Conversation</v-subheader>
 
@@ -141,7 +141,7 @@
                 v-for="(record, index) in chat"
                 :key="index"
               >
-                <v-list-item-avatar>
+                <v-list-item-avatar size="48">
                   <v-img v-if="record.isLocal && user.picture" :src="user.picture"></v-img>
                   <v-img v-else-if="!record.isLocal && receiver.picture" :src="receiver.picture"></v-img>
                   <v-icon x-large v-else>account_circle</v-icon>
