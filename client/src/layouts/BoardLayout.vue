@@ -203,7 +203,7 @@
       squareSize: 0,
       brush: 'pencil',
       mdiEraser: mdiEraser,
-      color: 'black'
+      color: '#000000'
     }),
     props: {
       items: {
@@ -278,7 +278,7 @@
     },
     watch: {
       color: function(value) {
-        this.board.setColor(value)
+        if (this.board.canvas) this.board.setColor(value)
       }
     },
     created: async function () {
