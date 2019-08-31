@@ -252,6 +252,7 @@
         this.isCalling = false
         this.stream.close()
         this.speech.stopRecognition()
+        this.chat = []
       }
     },
     created: async function () {
