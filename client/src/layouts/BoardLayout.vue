@@ -58,7 +58,7 @@
 
         <v-subheader v-if="isCalling">畫筆大小</v-subheader>
         <v-slider v-model="brushSize" min="0" max="200" hide-details class="ml-1" v-if="isCalling"></v-slider>
-        <v-text-field v-model="brushSize" width="60px" class="ml-1 pr-2" single-line hide-details type="number" v-if="isCalling"></v-text-field>
+        <v-text-field v-model="brushSize" class="px-2" single-line hide-details type="number" v-if="isCalling"></v-text-field>
 
         <v-subheader v-if="isCalling">畫筆顏色</v-subheader>
         <v-color-picker show-swatches v-model="color" v-if="isCalling"></v-color-picker>
