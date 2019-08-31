@@ -259,7 +259,7 @@
       changeBrush: function() {
         if (this.brush == 'pencil') this.brush = 'eraser'
         else this.brush = 'pencil'
-        // this.board.setBrush(this.brush)
+        this.board.setBrush(this.brush)
       },
       close: async function () { // for both side
         this.showCallBtn = true

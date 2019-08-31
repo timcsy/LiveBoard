@@ -77,7 +77,7 @@ class Board {
 	}
 
 	setColor(color) {
-		if (this.brush == null) {
+		if (this.brush == 'pencil') {
 			this.color = color
 			this.canvas.freeDrawingBrush.color = this.color
 		}
