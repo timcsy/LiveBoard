@@ -52,6 +52,9 @@
           </v-list-item-content>
         </v-list-item>
 
+        <v-subheader>Pencil Color</v-subheader>
+        <v-color-picker show-swatches></v-color-picker>
+
       </v-list>
     </v-navigation-drawer>
 
