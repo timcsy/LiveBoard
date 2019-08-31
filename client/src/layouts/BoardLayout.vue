@@ -62,11 +62,11 @@
       <v-btn icon v-if="!isCalling" @click="call()">
         <v-icon>call</v-icon>
       </v-btn>
-      <v-avatar>
+      <v-avatar v-if="isCalling">
         <img v-if="receiver.picture" :src="receiver.picture">
         <v-icon v-else x-large>account_circle</v-icon>
       </v-avatar>
-      <span class="title ml-3 mr-5" v-if="isCalling">receiver.name</span>
+      <span class="title ml-3 mr-5" v-if="isCalling">{{receiver.name}}</span>
       <v-btn icon v-if="isCalling" @click="hangup()">
         <v-icon>call_end</v-icon>
       </v-btn>
