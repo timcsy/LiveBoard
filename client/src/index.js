@@ -5,6 +5,10 @@ import adapter from 'webrtc-adapter'
 import Vue from 'vue'
 import vuetify from './plugins/vuetify'
 
+import 'vue-fabric/dist/vue-fabric.min.css'
+import { Fabric } from 'vue-fabric'
+Vue.use(Fabric)
+
 import MainLayout from './layouts/MainLayout.vue'
 import CenteredForm from './layouts/CenteredForm.vue'
 import BoardLayout from './layouts/BoardLayout.vue'

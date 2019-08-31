@@ -124,8 +124,18 @@
       </v-row>
       
       <v-row v-else d-flex align="center" justify="center">
+        <vue-fabric ref="canvas" width="800" height="450"></vue-fabric>
         <v-sheet width="600" height="450" class="white ma-2" elevation="1">
-          <slot></slot>
+          <div style="position: absolute">
+            <canvas id="canvas_remote" width="600" height="450">
+              Your browser doesn't support canvas.
+            </canvas>
+          </div>
+          <div style="position: absolute">
+            <canvas id="canvas_local" width="600" height="450">
+              Your browser doesn't support canvas.
+            </canvas>
+          </div>
         </v-sheet>
 
       </v-row>
@@ -222,7 +232,7 @@
         this.stream.init(this.session, stream)
         this.speech.init(this.session, stream)
         this.speech.startRecognition()
-        this.board.init(this.session)
+        this.board.init(this.session, this.canvas, this.canvas_remote)
 
         this.showCallBtn = false
         this.showHangupBtn = true
@@ -271,6 +281,18 @@
       } catch (err) {
         this.user = null
       }
+    },
+    mounted: async function () {
+      this.canvas = new fabric.Canvas('canvas_local', {
+        isDrawingMode: true
+      })
+      fabric.Object.prototype.transparentCorners = false
+      this.canvas.freeDrawingBrush = new fabric['PencilBrush'](this.canvas)
+      this.canvas.freeDrawingBrush.color = 'black'
+      this.canvas.freeDrawingBrush.width = 10
+      this.canvas_remote = new fabric.Canvas('canvas_remote', {
+        isDrawingMode: false
+      })
     }
   }
 </script>

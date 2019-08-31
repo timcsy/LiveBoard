@@ -7,14 +7,10 @@ class Board {
 		fabric.Object.prototype.transparentCorners = false
 	}
 
-	init(session) {
+	init(session, local_canvas, remote_canvas) {
 		this.session = session
-		this.canvas = new fabric.Canvas('canvas_local', {
-			isDrawingMode: true
-		})
-		this.remote_canvas = new fabric.Canvas('canvas_remote', {
-			isDrawingMode: false
-		})
+		this.canvas = local_canvas
+		this.remote_canvas = remote_canvas
 		this.setBrush('pencil')
 		this.setColor('black')
 		this.setWidth(10)
