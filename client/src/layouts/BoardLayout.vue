@@ -126,12 +126,12 @@
       <v-row v-else d-flex align="center" justify="center">
         <v-sheet width="600" height="450" class="white ma-2" elevation="1">
           <div style="position: absolute; top: 0px; left: 0px;">
-            <canvas ref="remote_canvas" width="600" height="450">
+            <canvas id="remote_canvas" ref="remote_canvas" width="600" height="450">
               Your browser doesn't support canvas.
             </canvas>
           </div>
           <div style="position: absolute; top: 0px; left: 0px;">
-            <canvas ref="local_canvas" width="600" height="450">
+            <canvas id="local_canvas" ref="local_canvas" width="600" height="450">
               Your browser doesn't support canvas.
             </canvas>
           </div>
@@ -238,6 +238,8 @@
 
         console.log(fabric)
         console.log(this.$refs.local_canvas)
+        console.log(document.getElementById('local_canvas'))
+        console.log(this.$el.querySelector('#local_canvas'))
         this.canvas = new fabric.Canvas(this.$refs.local_canvas, {
           isDrawingMode: true
         })
