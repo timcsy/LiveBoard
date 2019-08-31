@@ -22,6 +22,9 @@ class MainSocket {
         this.ws.send(this.msgs.shift())
       }
 		}
+		this.ws.onclose = () => {
+			this.init()
+		}
 	}
 
 	send(data) {
