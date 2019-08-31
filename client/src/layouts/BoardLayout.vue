@@ -125,18 +125,12 @@
       
       <v-row v-else d-flex align="center" justify="center">
         <v-sheet width="600" height="450" class="white ma-2" elevation="1">
-          <vue-fabric ref="remote_canvas" :width="600" :height="450" style="position: absolute"></vue-fabric>
-          <vue-fabric ref="local_canvas" :width="600" :height="450" style="position: absolute"></vue-fabric>
-          <!-- <div style="position: absolute">
-            <canvas id="canvas_remote" width="600" height="450">
-              Your browser doesn't support canvas.
-            </canvas>
+          <div style="position: absolute">
+            <vue-fabric ref="remote_canvas" :width="600" :height="450"></vue-fabric>
           </div>
           <div style="position: absolute">
-            <canvas id="canvas_local" width="600" height="450">
-              Your browser doesn't support canvas.
-            </canvas>
-          </div> -->
+            <vue-fabric ref="local_canvas" :width="600" :height="450"></vue-fabric>
+          </div>
         </v-sheet>
 
       </v-row>
@@ -175,7 +169,7 @@
   import LiveStream from '../modules/LiveStream'
   import Speech from '../modules/Speech'
   // import { fabric } from 'fabric'
-  import Board from '../modules/Board'
+  // import Board from '../modules/Board'
   export default {
     data: () => ({
       drawer: null,
@@ -231,7 +225,7 @@
         this.stream.init(this.session, stream)
         this.speech.init(this.session, stream)
         this.speech.startRecognition()
-        this.board.init(this.session, this.canvas, this.canvas_remote)
+        // this.board.init(this.session, this.canvas, this.canvas_remote)
 
         this.showCallBtn = false
         this.showHangupBtn = true
@@ -255,7 +249,7 @@
         this.session = new Session()
         this.stream = new LiveStream()
         this.speech = new Speech()
-        this.board = new Board()
+        // this.board = new Board()
         // setting ws events
         ws.on('session:invite', msg => {
           this.inviteList.push(msg.data)
