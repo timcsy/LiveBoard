@@ -12,6 +12,7 @@ class Board {
 		this.canvas = new fabric.Canvas('local_canvas', {
 			isDrawingMode: true
 		})
+		this.canvas.setDimensions({width:100, height:100})
 		this.remote_canvas = new fabric.Canvas('remote_canvas', {
 			isDrawingMode: false
 		})
