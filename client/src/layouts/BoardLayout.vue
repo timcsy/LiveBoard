@@ -81,7 +81,8 @@
       <v-btn icon v-if="isCalling" @click="hangup()">
         <v-icon>call_end</v-icon>
       </v-btn>
-      <v-spacer></v-spacer>
+      
+      <div class="flex-grow-1"></div>
 
       <v-app-bar-nav-icon @click.stop="rightDrawer = !rightDrawer" v-if="isCalling">
         <v-icon>chat</v-icon>
