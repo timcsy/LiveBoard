@@ -124,8 +124,8 @@
       </v-row>
       
       <v-row v-else d-flex align="center" justify="center">
-        <vue-fabric ref="remote_canvas" :width="600" :height="450" style="position: absolute; z-index:0"></vue-fabric>
-        <vue-fabric ref="local_canvas" :width="600" :height="450" style="position: absolute; z-index:1"></vue-fabric>
+        <vue-fabric ref="remote_canvas" :width="600" :height="450" style="position: absolute; top:0; left:0;"></vue-fabric>
+        <vue-fabric ref="local_canvas" :width="600" :height="450" style="position: absolute; top:0; left:0;"></vue-fabric>
         <!-- <v-sheet width="600" height="450" class="white ma-2" elevation="1">
           
           <div>
