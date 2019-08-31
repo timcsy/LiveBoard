@@ -125,11 +125,11 @@
       
       <v-row v-else d-flex align="center" justify="center">
         <v-sheet width="600" height="450" class="white ma-2" elevation="1">
-          <div style="position: absolute">
+          <!-- <div style="position: absolute">
             <canvas id="canvas_remote" width="600" height="450">
               Your browser doesn't support canvas.
             </canvas>
-          </div>
+          </div> -->
           <div style="position: absolute">
             <canvas id="canvas_local" width="600" height="450">
               Your browser doesn't support canvas.
