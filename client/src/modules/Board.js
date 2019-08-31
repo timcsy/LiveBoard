@@ -53,14 +53,6 @@ class Board {
 
 	switchMode() {
 		this.canvas.isDrawingMode = !this.canvas.isDrawingMode
-		// if (canvas.isDrawingMode) {
-		// 	drawingModeEl.innerHTML = '修改'
-		// 	drawingOptionsEl.style.display = ''
-		// }
-		// else {
-		// 	drawingModeEl.innerHTML = '繪圖'
-		// 	drawingOptionsEl.style.display = 'none'
-		// }
 	}
 
 	setBrush(brush) {

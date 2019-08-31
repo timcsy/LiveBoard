@@ -52,7 +52,21 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-subheader>Pencil Color</v-subheader>
+        <v-list-item>
+          <v-list-item-content class="grey--text">
+            物件模式
+            <v-switch v-model="drawMode" inset></v-switch>
+            繪圖模式
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-subheader>畫筆大小</v-subheader>
+        <v-range-slider v-model="brushSize" min="0" max="200">
+        <template v-slot:append>
+          <v-text-field v-model="brushSize" width="60px" single-line type="number"></v-text-field>
+        </template>
+
+        <v-subheader>畫筆顏色</v-subheader>
         <v-color-picker show-swatches v-model="color"></v-color-picker>
 
       </v-list>
@@ -203,6 +217,8 @@
       squareSize: 0,
       brush: 'pencil',
       mdiEraser: mdiEraser,
+      drawMode: true,
+      brushSize: 10,
       color: '#000000'
     }),
     props: {
@@ -277,6 +293,12 @@
       }
     },
     watch: {
+      drawMode: function (mode) {
+        if (this.board.canvas) this.board.switchMode()
+      },
+      brushSize: function (size) {
+        if (this.board.canvas) this.board.setWidth(size)
+      },
       color: function(value) {
         if (this.board.canvas) this.board.setColor(value)
       }
