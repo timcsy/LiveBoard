@@ -124,16 +124,17 @@
       </v-row>
       
       <v-row v-else d-flex align="center" justify="center">
-        <v-sheet width="600" height="450" class="white ma-2" elevation="1">
-          <vue-fabric ref="remote_canvas" :width="600" :height="450" style="position: absolute"></vue-fabric>
-          <vue-fabric ref="local_canvas" :width="600" :height="450" style="position: absolute"></vue-fabric>
-          <!-- <div>
+        <vue-fabric ref="remote_canvas" :width="600" :height="450" style="position: absolute"></vue-fabric>
+        <vue-fabric ref="local_canvas" :width="600" :height="450" style="position: absolute"></vue-fabric>
+        <!-- <v-sheet width="600" height="450" class="white ma-2" elevation="1">
+          
+          <div>
             
           </div>
           <div style="position: absolute">
             
-          </div> -->
-        </v-sheet>
+          </div>
+        </v-sheet> -->
 
       </v-row>
     </v-content>
