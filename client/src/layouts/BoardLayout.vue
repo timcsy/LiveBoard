@@ -133,7 +133,7 @@
 
         <v-col sm="12" md="6" lg="4" v-if="isCalling" fill-height>
           <v-sheet d-flex elevation="1" fill-height>
-            <v-list d-flex subheader light fill-height style="overflow: overflow:scroll">
+            <v-list d-flex subheader light fill-height style="overflow:scroll">
               <v-subheader>Conversation</v-subheader>
 
               <v-list-item
