@@ -83,7 +83,7 @@
       </v-btn>
       <v-spacer></v-spacer>
 
-      <v-app-bar-nav-icon @click.stop="rightDrawer = !rightDrawer">
+      <v-app-bar-nav-icon @click.stop="rightDrawer = !rightDrawer" v-if="isCalling">
         <v-icon>chat</v-icon>
       </v-app-bar-nav-icon>
       
@@ -138,7 +138,7 @@
       </v-row>
     </v-content>
 
-    <v-navigation-drawer v-model="rightDrawer" fixed clipped right app light>
+    <v-navigation-drawer v-model="rightDrawer" fixed clipped right app light v-if="isCalling">
       <v-list subheader>
         <v-subheader>Conversation</v-subheader>
 
