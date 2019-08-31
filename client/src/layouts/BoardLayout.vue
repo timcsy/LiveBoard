@@ -140,7 +140,7 @@
       </v-row>
     </v-content>
 
-    <v-navigation-drawer ref="chat" v-model="rightDrawer" fixed clipped right app light v-if="isCalling">
+    <v-navigation-drawer id="chat" v-model="rightDrawer" fixed clipped right app light v-if="isCalling">
       <v-list subheader>
         <v-subheader>Conversation</v-subheader>
         <v-list-item
@@ -268,7 +268,7 @@
         })
         ws.on('speech:remote', async (msg) => {
           this.chat.push({isLocal: false, text: msg.data})
-          this.$refs.chat.scrollTop = this.$refs.chat.scrollHeight
+          this.$el.querySelector('#id').scrollTop = this.$el.querySelector('#id').scrollHeight
         })
         ws.on('session:close', async (msg) => { // for passive side (w.r.t. hangup)
           await this.close()
