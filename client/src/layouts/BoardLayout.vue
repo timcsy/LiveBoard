@@ -147,14 +147,14 @@
           v-for="(record, index) in chat"
           :key="index"
         >
-          <v-list-item-avatar>
+          <v-list-item-avatar size="40">
             <v-img v-if="record.isLocal && user.picture" :src="user.picture"></v-img>
             <v-img v-else-if="!record.isLocal && receiver.picture" :src="receiver.picture"></v-img>
-            <v-icon size="48" v-else>account_circle</v-icon>
+            <v-icon v-else>account_circle</v-icon>
           </v-list-item-avatar>
 
           <v-list-item-content>
-            <v-list-item-title v-text="record.text"></v-list-item-title>
+            {{record.text}}
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -173,7 +173,7 @@
   export default {
     data: () => ({
       drawer: null,
-      rightDrawer: true,
+      rightDrawer: null,
       user: {
         name: '',
         picture: ''
