@@ -87,8 +87,8 @@
 
     <v-content light class="grey lighten-4" fill-height>
 
-      <v-row d-flex v-if="!isCalling" align-center>
-        <v-col sm="12" md="8" lg="6" justify-center>
+      <v-row d-flex v-if="!isCalling" align="start" justify="center">
+        <v-col sm="12" md="8" lg="6">
           <v-sheet d-flex elevation="1">
             <v-list d-flex subheader light>
               <v-subheader>Invitations</v-subheader>
