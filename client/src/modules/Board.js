@@ -5,15 +5,15 @@ import ws from './MainSocket'
 class Board {
 	constructor() {
 		fabric.Object.prototype.transparentCorners = false
-		this.setBrush('pencil')
-		this.setColor('#000')
-		this.setWidth(10)
 	}
 
 	init(session, local_canvas, remote_canvas) {
 		this.session = session
 		this.canvas = local_canvas
 		this.remote_canvas = remote_canvas
+		this.setBrush('pencil')
+		this.setColor('#000')
+		this.setWidth(10)
 		this.clear()
 		this.last_canvas = {}
 		this.last_remote_canvas = {}
