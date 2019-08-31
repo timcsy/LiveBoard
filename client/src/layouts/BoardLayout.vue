@@ -96,7 +96,7 @@
             </v-list>
           </v-container>
 
-          <v-sheet v-else class="white">
+          <v-sheet v-else class="white" elevation="1">
             <div style="position: absolute;">
               <canvas id="canvas_remote" width="600" height="450">
                 Your browser doesn't support canvas.
