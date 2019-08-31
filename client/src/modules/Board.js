@@ -10,10 +10,9 @@ class Board {
 	init(session, local_canvas, remote_canvas) {
 		this.session = session
 		this.canvas = local_canvas
-		console.log(this.canvas)
 		this.remote_canvas = remote_canvas
 		this.setBrush('pencil')
-		this.setColor('#000')
+		this.setColor('black')
 		this.setWidth(10)
 		this.clear()
 		this.last_canvas = {}
@@ -24,13 +23,13 @@ class Board {
 			if (difference) {
 				this.session.send('canvas:render', {diff: difference})
 				difference.forEach(function (change) {
-					deep.diff.applyChange(this.last_canvas, true, change)
+					deep.applyChange(this.last_canvas, true, change)
 				})
 			}
 		})
 		ws.on('canvas:render', msg => {
 			msg.data.diff.forEach(change => {
-				deep.diff.applyChange(this.last_remote_canvas, true, change)
+				deep.applyChange(this.last_remote_canvas, true, change)
 			})
 			this.remote_canvas.loadFromJSON(JSON.stringify(this.last_remote_canvas))
 		})
