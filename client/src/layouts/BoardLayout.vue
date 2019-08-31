@@ -82,11 +82,11 @@
         <v-icon>call_end</v-icon>
       </v-btn>
 
+      <div class="flex-grow-1"></div>
+
       <v-app-bar-nav-icon @click.stop="rightDrawer = !rightDrawer" v-if="isCalling">
         <v-icon>chat</v-icon>
       </v-app-bar-nav-icon>
-
-      <span class="flex"></span>
       
     </v-app-bar>
 
