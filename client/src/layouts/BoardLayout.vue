@@ -85,13 +85,13 @@
       
     </v-app-bar>
 
-    <v-content light color="grey lighten-4" fill-height>
+    <v-content light class="grey lighten-4" fill-height>
       <v-container fluid fill-height>
         <v-layout align-center justify-start column>
           
           <slot></slot>
 
-          <v-row justify-center v-if="!isCalling">
+          <v-row d-flex v-if="!isCalling">
             <v-col sm="12" md="8" lg="6">
               <v-sheet class="d-flex" elevation="1">
                 <v-list subheader light>
