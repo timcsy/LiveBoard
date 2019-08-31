@@ -235,21 +235,22 @@
         this.showHangupBtn = true
         this.isCalling = true
         this.receiver = this.session.receiver
-
-        console.log(fabric)
-        console.log(this.$refs.local_canvas)
-        console.log(document.getElementById('local_canvas'))
-        console.log(this.$el.querySelector('#local_canvas'))
-        this.canvas = new fabric.Canvas(this.$refs.local_canvas, {
-          isDrawingMode: true
-        })
-        console.log(this.canvas)
-        fabric.Object.prototype.transparentCorners = false
-        this.canvas.freeDrawingBrush = new fabric['PencilBrush'](this.canvas)
-        this.canvas.freeDrawingBrush.color = 'black'
-        this.canvas.freeDrawingBrush.width = 10
-        this.canvas_remote = new fabric.Canvas('canvas_remote', {
-          isDrawingMode: false
+        this.$nextTick(function () {
+          console.log(fabric)
+          console.log(this.$refs.local_canvas)
+          console.log(document.getElementById('local_canvas'))
+          console.log(this.$el.querySelector('#local_canvas'))
+          this.canvas = new fabric.Canvas(this.$refs.local_canvas, {
+            isDrawingMode: true
+          })
+          console.log(this.canvas)
+          fabric.Object.prototype.transparentCorners = false
+          this.canvas.freeDrawingBrush = new fabric['PencilBrush'](this.canvas)
+          this.canvas.freeDrawingBrush.color = 'black'
+          this.canvas.freeDrawingBrush.width = 10
+          this.canvas_remote = new fabric.Canvas('canvas_remote', {
+            isDrawingMode: false
+          })
         })
       },
       close: async function () { // for both side
