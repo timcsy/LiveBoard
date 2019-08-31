@@ -49,7 +49,7 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer">
         <v-icon>menu</v-icon>
       </v-app-bar-nav-icon>
-      <span class="title ml-3 mr-5">Liveboard</span>
+      <span class="title ml-3 mr-5" v-if="!isCalling">Liveboard</span>
       <v-text-field
         solo-inverted
         flat
@@ -57,8 +57,21 @@
         label="Contact"
         prepend-inner-icon="search"
         v-model="contact"
+        v-if="!isCalling"
       ></v-text-field>
+      <v-btn icon v-if="!isCalling" @click="call()">
+        <v-icon>call</v-icon>
+      </v-btn>
+      <v-avatar>
+        <img v-if="receiver.picture" :src="receiver.picture">
+        <v-icon v-else x-large>account_circle</v-icon>
+      </v-avatar>
+      <span class="title ml-3 mr-5" v-if="isCalling">receiver.name</span>
+      <v-btn icon v-if="isCalling" @click="hangup()">
+        <v-icon>call_end</v-icon>
+      </v-btn>
       <v-spacer></v-spacer>
+      
     </v-app-bar>
 
     <v-content light class="grey lighten-4" fill-height>
@@ -133,7 +146,8 @@
       showHangupBtn: false,
       contact: '',
       isCalling: false,
-      inviteList: []
+      inviteList: [],
+      receiver: {}
     }),
     props: {
       items: {
@@ -158,6 +172,8 @@
       },
       accept: async function (index) {
         this.session.accept(this.inviteList[index].id, this.inviteList[index].inviter)
+        this.$set('receiver.name', this.inviteList[index].inviter.name)
+        this.$set('receiver.picture', this.inviteList[index].inviter.picture)
       },
       decline: async function (index) {
         this.session.decline(this.inviteList[index].id)
