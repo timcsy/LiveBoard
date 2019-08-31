@@ -9,7 +9,18 @@
 	</head>
 	<body>
 		<div id="app">
-			<board-layout></board-layout>
+			<board-layout>
+				<div style="position: absolute">
+					<canvas id="canvas_remote" width="600" height="450">
+						Your browser doesn't support canvas.
+					</canvas>
+				</div>
+				<div style="position: absolute">
+					<canvas id="canvas_local" width="600" height="450">
+						Your browser doesn't support canvas.
+					</canvas>
+				</div>
+			</board-layout>
 		</div>
 	</body>
 </html>
