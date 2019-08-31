@@ -160,7 +160,7 @@
               {{record.text}}
             </span>
           </v-list-item>
-        <v-container>
+        </v-container>
         
       </v-list>
     </v-navigation-drawer>
