@@ -43,7 +43,7 @@
         <v-subheader>Board</v-subheader>
         <v-list-item>
           <v-list-item-action>
-            <v-icon>pencil</v-icon>
+            <v-icon>home</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title class="grey--text">
@@ -91,7 +91,7 @@
           
           <slot></slot>
 
-          <v-sheet elevation="1" v-if="!isCalling">
+          <v-sheet class="d-lg-flex" elevation="1" v-if="!isCalling">
             <v-list subheader light>
               <v-subheader>Invitations</v-subheader>
 
