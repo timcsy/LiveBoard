@@ -53,13 +53,12 @@
         </v-list-item>
 
         <v-list-item>
-          <v-switch v-model="drawMode" inset label="物件/繪圖模式" class="ml-1"></v-switch>
+          <v-switch v-model="drawMode" inset label="物件/繪圖模式" class="ml-1" color="primary"></v-switch>
         </v-list-item>
 
         <v-subheader>畫筆大小</v-subheader>
-        <v-slider v-model="brushSize" min="0" max="200" hide-details class="ml-1">
+        <v-slider v-model="brushSize" min="0" max="200" hide-details class="ml-1"></v-slider>
         <v-text-field v-model="brushSize" width="30px" single-line hide-details type="number"></v-text-field>
-        </v-slider>
 
         <v-subheader>畫筆顏色</v-subheader>
         <v-color-picker show-swatches v-model="color"></v-color-picker>
