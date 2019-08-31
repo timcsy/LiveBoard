@@ -142,11 +142,11 @@
       <v-list subheader>
         <v-subheader>Conversation</v-subheader>
         <v-list-item
-          color="record.isLocal? 'white': 'grey lighten-2'"
+          :class="record.isLocal? 'white': 'grey lighten-2'"
           v-for="(record, index) in chat"
           :key="index"
         >
-          <v-avatar size="40">
+          <v-avatar size="36" class="mr-8">
             <img v-if="record.isLocal && user.picture" :src="user.picture">
             <img v-else-if="!record.isLocal && receiver.picture" :src="receiver.picture">
             <v-icon v-else x-large>account_circle</v-icon>
