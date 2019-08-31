@@ -12,7 +12,7 @@ class Board {
 		this.canvas = new fabric.Canvas('local_canvas', {
 			isDrawingMode: true
 		})
-		this.canvas_remote = new fabric.Canvas('remote_canvas', {
+		this.remote_canvas = new fabric.Canvas('remote_canvas', {
 			isDrawingMode: false
 		})
 		this.setBrush('pencil')
