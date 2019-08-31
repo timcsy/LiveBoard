@@ -121,19 +121,20 @@
           </v-sheet>
         </v-col>
       
-
-        <v-sheet width="600" height="450" v-else class="white" elevation="1">
-          <div style="position: absolute;">
-            <canvas id="canvas_remote" width="600" height="450">
-              Your browser doesn't support canvas.
-            </canvas>
-          </div>
-          <div style="position: absolute;">
-            <canvas id="canvas_local" width="600" height="450">
-              Your browser doesn't support canvas.
-            </canvas>
-          </div>
-        </v-sheet>
+        <v-layout v-else>
+          <v-sheet width="600" height="450" class="white" elevation="1">
+            <div style="position: absolute;">
+              <canvas id="canvas_remote" width="600" height="450">
+                Your browser doesn't support canvas.
+              </canvas>
+            </div>
+            <div style="position: absolute;">
+              <canvas id="canvas_local" width="600" height="450">
+                Your browser doesn't support canvas.
+              </canvas>
+            </div>
+          </v-sheet>
+        </v-layout>
 
       </v-row>
     </v-content>
@@ -146,7 +147,7 @@
           v-for="(record, index) in chat"
           :key="index"
         >
-          <v-avatar size="36" class="mr-8">
+          <v-avatar size="36">
             <img v-if="record.isLocal && user.picture" :src="user.picture">
             <img v-else-if="!record.isLocal && receiver.picture" :src="receiver.picture">
             <v-icon v-else x-large>account_circle</v-icon>
