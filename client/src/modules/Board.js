@@ -10,6 +10,7 @@ class Board {
 	init(session, local_canvas, remote_canvas) {
 		this.session = session
 		this.canvas = local_canvas
+		console.log(this.canvas)
 		this.remote_canvas = remote_canvas
 		this.setBrush('pencil')
 		this.setColor('#000')
