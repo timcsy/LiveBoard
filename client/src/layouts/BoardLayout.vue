@@ -62,7 +62,8 @@
       <v-btn icon v-if="!isCalling" @click="call()">
         <v-icon>call</v-icon>
       </v-btn>
-      <v-avatar v-if="isCalling">
+
+      <v-avatar size="40" v-if="isCalling">
         <img v-if="receiver.picture" :src="receiver.picture">
         <v-icon v-else x-large>account_circle</v-icon>
       </v-avatar>
@@ -80,9 +81,7 @@
           
           <slot></slot>
 
-          <v-container v-if="!isCalling">
-            <v-btn v-if="showCallBtn" @click="call()">Call</v-btn>
-            <v-btn v-if="showHangupBtn" @click="hangup()">Hangup</v-btn>
+          <v-sheet elevation="1" v-if="!isCalling">
             <v-list subheader light>
               <v-subheader>Invitations</v-subheader>
 
@@ -92,7 +91,7 @@
               >
                 <v-list-item-avatar>
                   <v-img v-if="invitation.inviter.picture" :src="invitation.inviter.picture"></v-img>
-                  <v-icon v-else x-large>account_circle</v-icon>
+                  <v-icon v-else>account_circle</v-icon>
                 </v-list-item-avatar>
 
                 <v-list-item-content>
@@ -107,7 +106,7 @@
                 </v-list-item-icon>
               </v-list-item>
             </v-list>
-          </v-container>
+          </v-sheet>
 
           <v-sheet width="600" height="450" v-else class="white" elevation="1">
             <div style="position: absolute;">
@@ -157,7 +156,12 @@
         type: Array,
         default: () => {
           return [
-            {icon: 'home', text: '首頁', url: '/'}
+            {icon: 'home', text: '首頁', url: '/'},
+            {icon: 'account_circle', text: 'Link Account', url: '/connect/login'},
+            {icon: 'account_circle', text: 'Log out', url: '/logout'},
+            { divider: true },
+            { heading: 'Board' },
+            { icon: 'touch_app', text: 'Reminders' }
           ]
         }
       }
@@ -175,6 +179,7 @@
       },
       accept: async function (index) {
         this.session.accept(this.inviteList[index].id, this.inviteList[index].inviter)
+        this.inviteList.splice(index, 1)
       },
       decline: async function (index) {
         this.session.decline(this.inviteList[index].id)
