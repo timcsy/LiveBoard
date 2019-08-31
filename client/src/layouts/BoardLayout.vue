@@ -121,7 +121,7 @@
           </v-sheet>
         </v-col>
       
-        <v-sheet v-else width="600" height="450" class="white m-4" elevation="1">
+        <v-sheet v-else width="600" height="450" class="white ma-2" elevation="1">
           <div style="position: absolute;">
             <canvas id="canvas_remote" width="600" height="450">
               Your browser doesn't support canvas.
@@ -145,7 +145,7 @@
           v-for="(record, index) in chat"
           :key="index"
         >
-          <v-avatar size="36" class="mr-4">
+          <v-avatar size="36" class="mr-2">
             <img v-if="record.isLocal && user.picture" :src="user.picture">
             <img v-else-if="!record.isLocal && receiver.picture" :src="receiver.picture">
             <v-icon v-else x-large>account_circle</v-icon>
