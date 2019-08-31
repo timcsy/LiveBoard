@@ -82,7 +82,7 @@
         <v-icon>call_end</v-icon>
       </v-btn>
 
-      <div class="flex-grow-1"></div>
+      <span class="flex"></span>
 
       <v-app-bar-nav-icon @click.stop="rightDrawer = !rightDrawer" v-if="isCalling">
         <v-icon>chat</v-icon>
@@ -141,23 +141,27 @@
     </v-content>
 
     <v-navigation-drawer v-model="rightDrawer" fixed clipped right app light v-if="isCalling">
-      <v-subheader>Conversation</v-subheader>
-      <v-list id="chat" fill-height class="overflow-y-auto">
-        <v-list-item
-          :class="record.isLocal? 'white': 'grey lighten-2'"
-          v-for="(record, index) in chat"
-          :key="index"
-        >
-          <v-avatar size="36" class="mr-2">
-            <img v-if="record.isLocal && user.picture" :src="user.picture">
-            <img v-else-if="!record.isLocal && receiver.picture" :src="receiver.picture">
-            <v-icon v-else x-large>account_circle</v-icon>
-          </v-avatar>
+      <v-list subheader>
+        <v-subheader>Conversation</v-subheader>
 
-          <span>
-            {{record.text}}
-          </span>
-        </v-list-item>        
+        <v-container id="chat" fill-height class="overflow-y-auto">
+          <v-list-item
+            :class="record.isLocal? 'white': 'grey lighten-2'"
+            v-for="(record, index) in chat"
+            :key="index"
+          >
+            <v-avatar size="36" class="mr-2">
+              <img v-if="record.isLocal && user.picture" :src="user.picture">
+              <img v-else-if="!record.isLocal && receiver.picture" :src="receiver.picture">
+              <v-icon v-else x-large>account_circle</v-icon>
+            </v-avatar>
+
+            <span>
+              {{record.text}}
+            </span>
+          </v-list-item>
+        </v-container>
+        
       </v-list>
     </v-navigation-drawer>
 
@@ -263,12 +267,9 @@
         })
         ws.on('speech:local', async (msg) => {
           this.chat.push({isLocal: true, text: msg.data})
-          console.log(this.$el.querySelector('#chat').scrollTop, this.$el.querySelector('#chat').scrollHeight)
-          this.$el.querySelector('#chat').scrollTop = this.$el.querySelector('#chat').scrollHeight
         })
         ws.on('speech:remote', async (msg) => {
           this.chat.push({isLocal: false, text: msg.data})
-          this.$el.querySelector('#chat').scrollTop = this.$el.querySelector('#chat').scrollHeight
         })
         ws.on('session:close', async (msg) => { // for passive side (w.r.t. hangup)
           await this.close()
