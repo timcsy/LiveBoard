@@ -124,9 +124,10 @@
       </v-row>
       
       <v-row v-else d-flex align="center" justify="center">
-        <vue-fabric ref="canvas" width="800" height="450"></vue-fabric>
         <v-sheet width="600" height="450" class="white ma-2" elevation="1">
-          <div style="position: absolute">
+          <vue-fabric ref="remote_canvas" width="600" height="450"></vue-fabric>
+          <vue-fabric ref="local_canvas" width="600" height="450"></vue-fabric>
+          <!-- <div style="position: absolute">
             <canvas id="canvas_remote" width="600" height="450">
               Your browser doesn't support canvas.
             </canvas>
@@ -135,7 +136,7 @@
             <canvas id="canvas_local" width="600" height="450">
               Your browser doesn't support canvas.
             </canvas>
-          </div>
+          </div> -->
         </v-sheet>
 
       </v-row>
@@ -283,16 +284,16 @@
       }
     },
     mounted: async function () {
-      this.canvas = new fabric.Canvas('canvas_local', {
-        isDrawingMode: true
-      })
-      fabric.Object.prototype.transparentCorners = false
-      this.canvas.freeDrawingBrush = new fabric['PencilBrush'](this.canvas)
-      this.canvas.freeDrawingBrush.color = 'black'
-      this.canvas.freeDrawingBrush.width = 10
-      this.canvas_remote = new fabric.Canvas('canvas_remote', {
-        isDrawingMode: false
-      })
+      // this.canvas = new fabric.Canvas('canvas_local', {
+      //   isDrawingMode: true
+      // })
+      // fabric.Object.prototype.transparentCorners = false
+      // this.canvas.freeDrawingBrush = new fabric['PencilBrush'](this.canvas)
+      // this.canvas.freeDrawingBrush.color = 'black'
+      // this.canvas.freeDrawingBrush.width = 10
+      // this.canvas_remote = new fabric.Canvas('canvas_remote', {
+      //   isDrawingMode: false
+      // })
     }
   }
 </script>
