@@ -86,9 +86,9 @@
     </v-app-bar>
 
     <v-content light class="grey lighten-4" fill-height>
+      <v-row d-flex align="start" justify="center">
 
-      <v-row d-flex v-if="!isCalling" align="start" justify="center">
-        <v-col sm="12" md="8" lg="6">
+        <v-col sm="12" md="8" lg="6" v-if="!isCalling">
           <v-sheet d-flex elevation="1">
             <v-list d-flex subheader light>
               <v-subheader>Invitations</v-subheader>
@@ -116,21 +116,46 @@
             </v-list>
           </v-sheet>
         </v-col>
+      
+
+        <v-sheet width="600" height="450" v-else class="white" elevation="1">
+          <div style="position: absolute;">
+            <canvas id="canvas_remote" width="600" height="450">
+              Your browser doesn't support canvas.
+            </canvas>
+          </div>
+          <div style="position: absolute;">
+            <canvas id="canvas_local" width="600" height="450">
+              Your browser doesn't support canvas.
+            </canvas>
+          </div>
+        </v-sheet>
+
+        <v-col sm="12" md="6" lg="4" v-if="!isCalling">
+          <v-sheet d-flex elevation="1">
+            <v-list d-flex subheader light>
+              <v-subheader>Conversation</v-subheader>
+
+              <v-list-item
+                color="record.isLocal? white: grey lighten-2"
+                v-for="(record, index) in chat"
+                :key="index"
+              >
+                <v-list-item-avatar>
+                  <v-img v-if="record.isLocal && user.picture" :src="user.picture"></v-img>
+                  <v-img v-else-if="!record.isLocal && receiver.picture" :src="receiver.picture"></v-img>
+                  <v-icon v-else>account_circle</v-icon>
+                </v-list-item-avatar>
+
+                <v-list-item-content>
+                  <v-list-item-title v-text="record.text"></v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </v-sheet>
+        </v-col>
+
       </v-row>
-
-      <v-sheet width="600" height="450" v-else class="white" elevation="1">
-        <div style="position: absolute;">
-          <canvas id="canvas_remote" width="600" height="450">
-            Your browser doesn't support canvas.
-          </canvas>
-        </div>
-        <div style="position: absolute;">
-          <canvas id="canvas_local" width="600" height="450">
-            Your browser doesn't support canvas.
-          </canvas>
-        </div>
-      </v-sheet>
-
     </v-content>
   </v-app>
 </template>
@@ -157,7 +182,8 @@
       receiver: {
         name: '',
         picture: ''
-      }
+      },
+      chat: []
     }),
     props: {
       items: {
@@ -229,6 +255,12 @@
         ws.on('webrtc:start', async (msg) => { // for receiver side
           await this.ready()
           this.stream.start()
+        })
+        ws.on('speech:local', async (msg) => {
+          this.chat.push({isLocal: true, text: msg.data})
+        })
+        ws.on('speech:remote', async (msg) => {
+          this.chat.push({isLocal: false, text: msg.data})
         })
         ws.on('session:close', async (msg) => { // for passive side (w.r.t. hangup)
           await this.close()
