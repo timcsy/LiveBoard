@@ -81,7 +81,7 @@
       <v-btn icon v-if="isCalling" @click="hangup()">
         <v-icon>call_end</v-icon>
       </v-btn>
-      
+
       <div class="flex-grow-1"></div>
 
       <v-app-bar-nav-icon @click.stop="rightDrawer = !rightDrawer" v-if="isCalling">
@@ -91,9 +91,9 @@
     </v-app-bar>
 
     <v-content light class="grey lighten-4" fill-height>
-      <v-row d-flex align="start" justify="center">
 
-        <v-col sm="12" md="8" lg="6" v-if="!isCalling">
+      <v-row v-if="!isCalling" d-flex align="start" justify="center">
+        <v-col sm="12" md="8" lg="6">
           <v-sheet d-flex elevation="1">
             <v-list d-flex subheader light>
               <v-subheader>Invitations</v-subheader>
@@ -121,8 +121,10 @@
             </v-list>
           </v-sheet>
         </v-col>
+      </v-row>
       
-        <v-sheet v-else width="600" height="450" class="white ma-2" elevation="1">
+      <v-row v-else d-flex align="center" justify="center">
+        <v-sheet width="600" height="450" class="white ma-2" elevation="1">
           <div style="position: absolute;">
             <canvas id="canvas_remote" width="600" height="450">
               Your browser doesn't support canvas.
@@ -138,7 +140,7 @@
       </v-row>
     </v-content>
 
-    <v-navigation-drawer v-model="rightDrawer" fixed clipped right app light v-if="isCalling">
+    <v-navigation-drawer ref="chat" v-model="rightDrawer" fixed clipped right app light v-if="isCalling">
       <v-list subheader>
         <v-subheader>Conversation</v-subheader>
         <v-list-item
@@ -261,9 +263,11 @@
         })
         ws.on('speech:local', async (msg) => {
           this.chat.push({isLocal: true, text: msg.data})
+          this.$refs.chat.scrollTop = this.$refs.chat.scrollHeight
         })
         ws.on('speech:remote', async (msg) => {
           this.chat.push({isLocal: false, text: msg.data})
+          this.$refs.chat.scrollTop = this.$refs.chat.scrollHeight
         })
         ws.on('session:close', async (msg) => { // for passive side (w.r.t. hangup)
           await this.close()
