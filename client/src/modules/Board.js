@@ -27,6 +27,10 @@ class Board {
 				})
 			}
 		})
+		this.canvas.on('mouse:up', e => {
+			// calculate the diff and send to the other
+			console.log(e)
+		})
 		ws.on('canvas:render', msg => {
 			msg.data.diff.forEach(change => {
 				deep.applyChange(this.last_remote_canvas, true, change)
