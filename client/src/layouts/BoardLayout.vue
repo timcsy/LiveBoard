@@ -123,10 +123,10 @@
         </v-col>
       </v-row>
       
-      <v-row  d-flex align="center" justify="center">
+      <v-row v-else d-flex align="center" justify="center">
         <v-sheet width="600" height="450" class="white ma-2" elevation="1">
-          <vue-fabric ref="remote_canvas" :width="600" :height="450"></vue-fabric>
-          <vue-fabric ref="local_canvas" :width="600" :height="450"></vue-fabric>
+          <vue-fabric ref="remote_canvas" :width="600" :height="450" style="position: absolute"></vue-fabric>
+          <vue-fabric ref="local_canvas" :width="600" :height="450" style="position: absolute"></vue-fabric>
           <!-- <div style="position: absolute">
             <canvas id="canvas_remote" width="600" height="450">
               Your browser doesn't support canvas.
@@ -174,7 +174,7 @@
   import Session from '../modules/Session'
   import LiveStream from '../modules/LiveStream'
   import Speech from '../modules/Speech'
-  import { fabric } from 'fabric'
+  // import { fabric } from 'fabric'
   import Board from '../modules/Board'
   export default {
     data: () => ({
