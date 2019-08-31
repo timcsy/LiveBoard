@@ -219,6 +219,20 @@
       accept: async function (index) {
         this.session.accept(this.inviteList[index].id, this.inviteList[index].inviter)
         this.inviteList.splice(index, 1)
+
+        console.log(fabric)
+        console.log(this.$refs.local_canvas)
+        this.canvas = new fabric.Canvas(this.$refs.local_canvas, {
+          isDrawingMode: true
+        })
+        console.log(this.canvas)
+        fabric.Object.prototype.transparentCorners = false
+        this.canvas.freeDrawingBrush = new fabric['PencilBrush'](this.canvas)
+        this.canvas.freeDrawingBrush.color = 'black'
+        this.canvas.freeDrawingBrush.width = 10
+        this.canvas_remote = new fabric.Canvas('canvas_remote', {
+          isDrawingMode: false
+        })
       },
       decline: async function (index) {
         this.session.decline(this.inviteList[index].id)
@@ -280,19 +294,7 @@
       }
     },
     mounted: async function () {
-      console.log(fabric)
-      console.log(this.$refs.local_canvas)
-      this.canvas = new fabric.Canvas(this.$refs.local_canvas, {
-        isDrawingMode: true
-      })
-      console.log(this.canvas)
-      fabric.Object.prototype.transparentCorners = false
-      this.canvas.freeDrawingBrush = new fabric['PencilBrush'](this.canvas)
-      this.canvas.freeDrawingBrush.color = 'black'
-      this.canvas.freeDrawingBrush.width = 10
-      this.canvas_remote = new fabric.Canvas('canvas_remote', {
-        isDrawingMode: false
-      })
+      
     }
   }
 </script>
