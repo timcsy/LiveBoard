@@ -42,9 +42,9 @@ class Board {
 
 	setSize(size) {
 		this.canvas.setDimensions({ width: size, height: size })
-		this.canvas.setZoom(size / 1024)
+		this.canvas.setZoom(size / 1440)
 		this.remote_canvas.setDimensions({ width: size, height: size })
-		this.remote_canvas.setZoom(size / 1024)
+		this.remote_canvas.setZoom(size / 1440)
 	}
 
 	clear() {
