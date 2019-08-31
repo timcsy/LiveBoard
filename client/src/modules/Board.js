@@ -64,6 +64,7 @@ class Board {
 	}
 
 	setBrush(brush) {
+		this.brush = brush
 		this.canvas.freeDrawingBrush = new fabric['PencilBrush'](this.canvas)
 		if (brush == 'pencil') {
 			this.canvas.freeDrawingBrush.color = this.color
@@ -76,8 +77,10 @@ class Board {
 	}
 
 	setColor(color) {
-		this.color = color
-		this.canvas.freeDrawingBrush.color = this.color
+		if (this.brush == null) {
+			this.color = color
+			this.canvas.freeDrawingBrush.color = this.color
+		}
 	}
 
 	setWidth(width) {

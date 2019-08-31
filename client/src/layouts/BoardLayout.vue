@@ -84,6 +84,15 @@
 
       <div class="flex-grow-1"></div>
 
+      <v-app-bar-nav-icon @click.stop=";" v-if="isCalling">
+        <v-icon>add</v-icon>
+      </v-app-bar-nav-icon>
+
+      <v-app-bar-nav-icon @click.stop="changeBrush()" v-if="isCalling">
+        <v-icon v-if="brush == 'pencil'">mdi-eraser</v-icon>
+        <v-icon v-else>brush</v-icon>
+      </v-app-bar-nav-icon>
+
       <v-app-bar-nav-icon @click.stop="rightDrawer = !rightDrawer" v-if="isCalling">
         <v-icon>chat</v-icon>
       </v-app-bar-nav-icon>
@@ -187,7 +196,8 @@
         picture: ''
       },
       chat: [],
-      squareSize: 0
+      squareSize: 0,
+      brush: 'pencil'
     }),
     props: {
       items: {
@@ -245,6 +255,11 @@
           this.squareSize = size
           this.board.setSize(size - 8)
         }
+      },
+      changeBrush: function() {
+        if (this.brush == 'pencil') this.brush = 'eraser'
+        else this.brush = 'pencil'
+        this.board.setBrush(this.brush)
       },
       close: async function () { // for both side
         this.showCallBtn = true
