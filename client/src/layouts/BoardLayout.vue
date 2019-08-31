@@ -285,6 +285,10 @@
       this.canvas = new fabric.Canvas('canvas_local', {
         isDrawingMode: true
       })
+      fabric.Object.prototype.transparentCorners = false
+      this.canvas.freeDrawingBrush = new fabric['PencilBrush'](this.canvas)
+      this.canvas.freeDrawingBrush.color = 'black'
+      this.canvas.freeDrawingBrush.width = 10
       this.canvas_remote = new fabric.Canvas('canvas_remote', {
         isDrawingMode: false
       })
