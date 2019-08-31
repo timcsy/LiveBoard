@@ -55,7 +55,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar color="primary" app fixed clipped-left>
+    <v-app-bar color="primary" app fixed clipped-left clipped-right>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer">
         <v-icon>menu</v-icon>
       </v-app-bar-nav-icon>
@@ -147,10 +147,10 @@
           v-for="(record, index) in chat"
           :key="index"
         >
-          <v-list-item-avatar size="48">
+          <v-list-item-avatar>
             <v-img v-if="record.isLocal && user.picture" :src="user.picture"></v-img>
             <v-img v-else-if="!record.isLocal && receiver.picture" :src="receiver.picture"></v-img>
-            <v-icon x-large v-else>account_circle</v-icon>
+            <v-icon size="48" v-else>account_circle</v-icon>
           </v-list-item-avatar>
 
           <v-list-item-content>
@@ -173,7 +173,7 @@
   export default {
     data: () => ({
       drawer: null,
-      rightDrawer: null,
+      rightDrawer: true,
       user: {
         name: '',
         picture: ''
