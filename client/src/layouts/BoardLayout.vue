@@ -87,7 +87,7 @@
 
     <v-content light class="grey lighten-4" fill-height>
 
-      <v-row d-flex v-if="!isCalling">
+      <v-row d-flex v-if="!isCalling" justify-center>
         <v-col sm="12" md="8" lg="6" align-center>
           <v-sheet d-flex elevation="1">
             <v-list d-flex subheader light>
