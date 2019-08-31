@@ -233,7 +233,7 @@
         this.$nextTick(function () {
           this.board.init(this.session)
           console.log(this.$refs.square)
-          console.log(this.$refs.square.width, this.$refs.square.height)
+          console.log(this.$refs.square.clientWidth, this.$refs.square.clientHeight)
         })
       },
       close: async function () { // for both side
