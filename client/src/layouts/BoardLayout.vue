@@ -147,7 +147,10 @@
       contact: '',
       isCalling: false,
       inviteList: [],
-      receiver: {}
+      receiver: {
+        name: '',
+        picture: ''
+      }
     }),
     props: {
       items: {
@@ -172,8 +175,6 @@
       },
       accept: async function (index) {
         this.session.accept(this.inviteList[index].id, this.inviteList[index].inviter)
-        this.$set('receiver.name', this.inviteList[index].inviter.name)
-        this.$set('receiver.picture', this.inviteList[index].inviter.picture)
       },
       decline: async function (index) {
         this.session.decline(this.inviteList[index].id)
@@ -188,6 +189,7 @@
         this.showCallBtn = false
         this.showHangupBtn = true
         this.isCalling = true
+        this.receiver = this.session.receiver
       },
       close: async function () { // for both side
         this.showCallBtn = true
