@@ -252,14 +252,14 @@
         if (this.board.canvas) {
           const size = (this.$refs.square.clientWidth > this.$refs.square.clientHeight)?
             this.$refs.square.clientHeight: this.$refs.square.clientWidth
-          this.squareSize = size
+          this.squareSize = size - 8
           this.board.setSize(size - 8)
         }
       },
       changeBrush: function() {
         if (this.brush == 'pencil') this.brush = 'eraser'
         else this.brush = 'pencil'
-        this.board.setBrush(this.brush)
+        // this.board.setBrush(this.brush)
       },
       close: async function () { // for both side
         this.showCallBtn = true
