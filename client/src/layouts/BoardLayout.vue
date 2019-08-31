@@ -82,6 +82,10 @@
         <v-icon>call_end</v-icon>
       </v-btn>
       <v-spacer></v-spacer>
+
+      <v-app-bar-nav-icon @click.stop="rightDrawer = !rightDrawer">
+        <v-icon>chat</v-icon>
+      </v-app-bar-nav-icon>
       
     </v-app-bar>
 
@@ -131,32 +135,31 @@
           </div>
         </v-sheet>
 
-        <v-col sm="12" md="6" lg="4" v-if="isCalling" fill-height>
-          <v-sheet d-flex elevation="1" fill-height>
-            <v-list d-flex subheader light fill-height style="overflow:scroll">
-              <v-subheader>Conversation</v-subheader>
-
-              <v-list-item
-                color="record.isLocal? white: grey lighten-2"
-                v-for="(record, index) in chat"
-                :key="index"
-              >
-                <v-list-item-avatar size="48">
-                  <v-img v-if="record.isLocal && user.picture" :src="user.picture"></v-img>
-                  <v-img v-else-if="!record.isLocal && receiver.picture" :src="receiver.picture"></v-img>
-                  <v-icon x-large v-else>account_circle</v-icon>
-                </v-list-item-avatar>
-
-                <v-list-item-content>
-                  <v-list-item-title v-text="record.text"></v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-            </v-list>
-          </v-sheet>
-        </v-col>
-
       </v-row>
     </v-content>
+
+    <v-navigation-drawer v-model="rightDrawer" fixed clipped right app light>
+      <v-list subheader>
+        <v-subheader>Conversation</v-subheader>
+
+        <v-list-item
+          color="record.isLocal? white: grey lighten-2"
+          v-for="(record, index) in chat"
+          :key="index"
+        >
+          <v-list-item-avatar size="48">
+            <v-img v-if="record.isLocal && user.picture" :src="user.picture"></v-img>
+            <v-img v-else-if="!record.isLocal && receiver.picture" :src="receiver.picture"></v-img>
+            <v-icon x-large v-else>account_circle</v-icon>
+          </v-list-item-avatar>
+
+          <v-list-item-content>
+            <v-list-item-title v-text="record.text"></v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
   </v-app>
 </template>
 
@@ -170,6 +173,7 @@
   export default {
     data: () => ({
       drawer: null,
+      rightDrawer: null,
       user: {
         name: '',
         picture: ''
