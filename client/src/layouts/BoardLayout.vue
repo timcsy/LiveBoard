@@ -123,7 +123,7 @@
         </v-col>
       </v-row>
       
-      <v-row v-else d-flex align="center" justify="center">
+      <v-layout v-else d-flex align-center justify-center fill-height fluid>
         <v-sheet width="600" height="450" class="white ma-2" elevation="1">
           <div style="position: absolute">
             <canvas id="remote_canvas" width="600" height="450"></canvas>
@@ -133,7 +133,7 @@
           </div>
         </v-sheet>
 
-      </v-row>
+      </v-layout>
     </v-content>
 
     <v-navigation-drawer v-model="rightDrawer" fixed clipped right app light v-if="isCalling">
@@ -168,7 +168,6 @@
   import Session from '../modules/Session'
   import LiveStream from '../modules/LiveStream'
   import Speech from '../modules/Speech'
-  import { fabric } from 'fabric'
   import Board from '../modules/Board'
   export default {
     data: () => ({
@@ -232,13 +231,7 @@
         this.receiver = this.session.receiver
 
         this.$nextTick(function () {
-          this.canvas = new fabric.Canvas('local_canvas', {
-            isDrawingMode: true
-          })
-          this.canvas_remote = new fabric.Canvas('remote_canvas', {
-            isDrawingMode: false
-          })
-          this.board.init(this.session, this.canvas, this.canvas_remote)
+          this.board.init(this.session)
         })
       },
       close: async function () { // for both side
