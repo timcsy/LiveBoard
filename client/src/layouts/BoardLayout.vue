@@ -219,6 +219,22 @@
       accept: async function (index) {
         this.session.accept(this.inviteList[index].id, this.inviteList[index].inviter)
         this.inviteList.splice(index, 1)
+      },
+      decline: async function (index) {
+        this.session.decline(this.inviteList[index].id)
+        this.inviteList.splice(index, 1)
+      },
+      ready: async function () { // for both side
+        const stream = await navigator.mediaDevices.getUserMedia({audio: true, video: false})
+        this.stream.init(this.session, stream)
+        this.speech.init(this.session, stream)
+        this.speech.startRecognition()
+        // this.board.init(this.session, this.canvas, this.canvas_remote)
+
+        this.showCallBtn = false
+        this.showHangupBtn = true
+        this.isCalling = true
+        this.receiver = this.session.receiver
 
         console.log(fabric)
         console.log(this.$refs.local_canvas)
@@ -233,22 +249,6 @@
         this.canvas_remote = new fabric.Canvas('canvas_remote', {
           isDrawingMode: false
         })
-      },
-      decline: async function (index) {
-        this.session.decline(this.inviteList[index].id)
-        this.inviteList.splice(index, 1)
-      },
-      ready: async function () { // for both side
-        const stream = await navigator.mediaDevices.getUserMedia({audio: true, video: false})
-        this.stream.init(this.session, stream)
-        this.speech.init(this.session, stream)
-        this.speech.startRecognition()
-        this.board.init(this.session, this.canvas, this.canvas_remote)
-
-        this.showCallBtn = false
-        this.showHangupBtn = true
-        this.isCalling = true
-        this.receiver = this.session.receiver
       },
       close: async function () { // for both side
         this.showCallBtn = true
