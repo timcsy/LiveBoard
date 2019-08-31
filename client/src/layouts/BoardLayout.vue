@@ -123,7 +123,7 @@
         </v-col>
       </v-row>
       
-      <v-layout v-else d-flex align-center justify-center fill-height fluid>
+      <v-layout ref="square" v-else d-flex align-center justify-center fill-height fluid>
         <v-sheet width="600" height="450" class="white ma-2" elevation="1">
           <div style="position: absolute">
             <canvas id="remote_canvas" width="600" height="450"></canvas>
@@ -232,6 +232,8 @@
 
         this.$nextTick(function () {
           this.board.init(this.session)
+          console.log(this.$refs.square)
+          console.log(this.$refs.square.width, this.$refs.square.height)
         })
       },
       close: async function () { // for both side
