@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="grey lighten-4">
     
     <v-navigation-drawer v-model="drawer" fixed clipped class="grey lighten-4" app light>
       <v-list dense class="grey lighten-4">
