@@ -87,55 +87,50 @@
 
     <v-content light class="grey lighten-4" fill-height>
       <v-container fluid fill-height>
-        <v-layout align-center justify-start column>
-          
-          <slot></slot>
+        <v-row d-flex v-if="!isCalling">
+          <v-col sm="12" md="8" lg="6">
+            <v-sheet class="d-flex" elevation="1">
+              <v-list subheader light>
+                <v-subheader>Invitations</v-subheader>
 
-          <v-row d-flex v-if="!isCalling">
-            <v-col sm="12" md="8" lg="6">
-              <v-sheet class="d-flex" elevation="1">
-                <v-list subheader light>
-                  <v-subheader>Invitations</v-subheader>
+                <v-list-item
+                  v-for="(invitation, index) in inviteList"
+                  :key="invitation.id"
+                >
+                  <v-list-item-avatar>
+                    <v-img v-if="invitation.inviter.picture" :src="invitation.inviter.picture"></v-img>
+                    <v-icon v-else>account_circle</v-icon>
+                  </v-list-item-avatar>
 
-                  <v-list-item
-                    v-for="(invitation, index) in inviteList"
-                    :key="invitation.id"
-                  >
-                    <v-list-item-avatar>
-                      <v-img v-if="invitation.inviter.picture" :src="invitation.inviter.picture"></v-img>
-                      <v-icon v-else>account_circle</v-icon>
-                    </v-list-item-avatar>
+                  <v-list-item-content>
+                    <v-list-item-title v-text="invitation.inviter.name"></v-list-item-title>
+                  </v-list-item-content>
 
-                    <v-list-item-content>
-                      <v-list-item-title v-text="invitation.inviter.name"></v-list-item-title>
-                    </v-list-item-content>
+                  <v-list-item-icon @click="accept(index)">
+                    <v-icon color="light-green">call</v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-icon @click="decline(index)">
+                    <v-icon color="red">call_end</v-icon>
+                  </v-list-item-icon>
+                </v-list-item>
+              </v-list>
+            </v-sheet>
+          </v-col>
+        </v-row>
 
-                    <v-list-item-icon @click="accept(index)">
-                      <v-icon color="light-green">call</v-icon>
-                    </v-list-item-icon>
-                    <v-list-item-icon @click="decline(index)">
-                      <v-icon color="red">call_end</v-icon>
-                    </v-list-item-icon>
-                  </v-list-item>
-                </v-list>
-              </v-sheet>
-            </v-col>
-          </v-row>
+        <v-sheet width="600" height="450" v-else class="white" elevation="1">
+          <div style="position: absolute;">
+            <canvas id="canvas_remote" width="600" height="450">
+              Your browser doesn't support canvas.
+            </canvas>
+          </div>
+          <div style="position: absolute;">
+            <canvas id="canvas_local" width="600" height="450">
+              Your browser doesn't support canvas.
+            </canvas>
+          </div>
+        </v-sheet>
 
-          <v-sheet width="600" height="450" v-else class="white" elevation="1">
-            <div style="position: absolute;">
-              <canvas id="canvas_remote" width="600" height="450">
-                Your browser doesn't support canvas.
-              </canvas>
-            </div>
-            <div style="position: absolute;">
-              <canvas id="canvas_local" width="600" height="450">
-                Your browser doesn't support canvas.
-              </canvas>
-            </div>
-          </v-sheet>
-
-        </v-layout>
       </v-container>
     </v-content>
   </v-app>
