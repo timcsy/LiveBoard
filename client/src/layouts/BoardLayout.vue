@@ -125,15 +125,11 @@
       
       <v-row v-else d-flex align="center" justify="center">
         <v-sheet width="600" height="450" class="white ma-2" elevation="1">
-          <div style="position: absolute; top: 0px; left: 0px;">
-            <canvas id="remote_canvas" ref="remote_canvas" width="600" height="450">
-              Your browser doesn't support canvas.
-            </canvas>
+          <div style="position: absolute">
+            <canvas id="remote_canvas" width="600" height="450"></canvas>
           </div>
-          <div style="position: absolute; top: 0px; left: 0px;">
-            <canvas id="local_canvas" ref="local_canvas" width="600" height="450">
-              Your browser doesn't support canvas.
-            </canvas>
+          <div style="position: absolute">
+            <canvas id="local_canvas" width="600" height="450"></canvas>
           </div>
         </v-sheet>
 
@@ -229,28 +225,20 @@
         this.stream.init(this.session, stream)
         this.speech.init(this.session, stream)
         this.speech.startRecognition()
-        // this.board.init(this.session, this.canvas, this.canvas_remote)
 
         this.showCallBtn = false
         this.showHangupBtn = true
         this.isCalling = true
         this.receiver = this.session.receiver
+
         this.$nextTick(function () {
-          console.log(fabric)
-          console.log(this.$refs.local_canvas)
-          console.log(document.getElementById('local_canvas'))
-          console.log(this.$el.querySelector('#local_canvas'))
-          this.canvas = new fabric.Canvas(this.$refs.local_canvas, {
+          this.canvas = new fabric.Canvas('local_canvas', {
             isDrawingMode: true
           })
-          console.log(this.canvas)
-          fabric.Object.prototype.transparentCorners = false
-          this.canvas.freeDrawingBrush = new fabric['PencilBrush'](this.canvas)
-          this.canvas.freeDrawingBrush.color = 'black'
-          this.canvas.freeDrawingBrush.width = 10
-          this.canvas_remote = new fabric.Canvas('canvas_remote', {
+          this.canvas_remote = new fabric.Canvas('remote_canvas', {
             isDrawingMode: false
           })
+          this.board.init(this.session, this.canvas, this.canvas_remote)
         })
       },
       close: async function () { // for both side
@@ -295,9 +283,6 @@
       } catch (err) {
         this.user = null
       }
-    },
-    mounted: async function () {
-      
     }
   }
 </script>
