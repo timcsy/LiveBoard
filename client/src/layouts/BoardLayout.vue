@@ -140,7 +140,7 @@
       </v-row>
     </v-content>
 
-    <v-navigation-drawer v-model="rightDrawer" fixed clipped right app light v-if="isCalling">
+    <v-navigation-drawer ref="chat" v-model="rightDrawer" fixed clipped right app light v-if="isCalling">
       <v-list subheader>
         <v-subheader>Conversation</v-subheader>
         <v-list-item
