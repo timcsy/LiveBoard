@@ -263,12 +263,12 @@
         })
         ws.on('speech:local', async (msg) => {
           this.chat.push({isLocal: true, text: msg.data})
-          console.log(this.$refs.chat.scrollTop, this.$refs.chat.scrollHeight)
-          this.$refs.chat.scrollTop = this.$refs.chat.scrollHeight
+          console.log(this.$el.querySelector('#chat').scrollTop, this.$el.querySelector('#chat').scrollHeight)
+          this.$el.querySelector('#chat').scrollTop = this.$el.querySelector('#chat').scrollHeight
         })
         ws.on('speech:remote', async (msg) => {
           this.chat.push({isLocal: false, text: msg.data})
-          this.$el.querySelector('#id').scrollTop = this.$el.querySelector('#id').scrollHeight
+          this.$el.querySelector('#chat').scrollTop = this.$el.querySelector('#chat').scrollHeight
         })
         ws.on('session:close', async (msg) => { // for passive side (w.r.t. hangup)
           await this.close()
