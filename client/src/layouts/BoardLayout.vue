@@ -140,7 +140,7 @@
       </v-row>
     </v-content>
 
-    <v-navigation-drawer ref="chat" v-model="rightDrawer" fixed clipped right app light v-if="isCalling">
+    <v-navigation-drawer v-model="rightDrawer" fixed clipped right app light v-if="isCalling">
       <v-list subheader>
         <v-subheader>Conversation</v-subheader>
         <v-list-item
@@ -263,6 +263,7 @@
         })
         ws.on('speech:local', async (msg) => {
           this.chat.push({isLocal: true, text: msg.data})
+          console.log(this.$refs.chat.scrollTop, this.$refs.chat.scrollHeight)
           this.$refs.chat.scrollTop = this.$refs.chat.scrollHeight
         })
         ws.on('speech:remote', async (msg) => {
