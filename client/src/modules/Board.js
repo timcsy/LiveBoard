@@ -17,7 +17,7 @@ class Board {
 		this.clear()
 		this.last_canvas = {}
 		this.last_remote_canvas = {}
-		this.canvas.on('canvas:render', e => {
+		this.canvas.on('after:render', e => {
 			// calculate the diff and send to the other
 			const difference = deep.diff(this.last_canvas, this.canvas.toJSON())
 			if (difference) {
