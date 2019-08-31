@@ -82,11 +82,11 @@
         <v-icon>call_end</v-icon>
       </v-btn>
 
-      <span class="flex"></span>
-
       <v-app-bar-nav-icon @click.stop="rightDrawer = !rightDrawer" v-if="isCalling">
         <v-icon>chat</v-icon>
       </v-app-bar-nav-icon>
+
+      <span class="flex"></span>
       
     </v-app-bar>
 
@@ -175,6 +175,7 @@
   import LiveStream from '../modules/LiveStream'
   import Speech from '../modules/Speech'
   import { fabric } from 'fabric'
+  import Board from '../modules/Board'
   export default {
     data: () => ({
       drawer: null,
@@ -230,6 +231,7 @@
         this.stream.init(this.session, stream)
         this.speech.init(this.session, stream)
         this.speech.startRecognition()
+        this.board.init(this.session, this.canvas, this.canvas_remote)
 
         this.showCallBtn = false
         this.showHangupBtn = true
@@ -253,6 +255,7 @@
         this.session = new Session()
         this.stream = new LiveStream()
         this.speech = new Speech()
+        this.board = new Board()
         // setting ws events
         ws.on('session:invite', msg => {
           this.inviteList.push(msg.data)
@@ -279,10 +282,10 @@
       }
     },
     mounted: async function () {
-      const canvas = new fabric.Canvas('canvas_local', {
+      this.canvas = new fabric.Canvas('canvas_local', {
         isDrawingMode: true
       })
-      const canvas_remote = new fabric.Canvas('canvas_remote', {
+      this.canvas_remote = new fabric.Canvas('canvas_remote', {
         isDrawingMode: false
       })
     }

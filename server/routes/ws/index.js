@@ -134,6 +134,11 @@ router.all('/data', RBAC.auth(), async (ctx) => {
 								ws.send(JSON.stringify({on: 'speech:data', data: {data: msg.data.data}}))
 						}
 
+						else if (msg.on == 'canvas:render') {
+							console.log(ctx.state.user + message)
+							ws.send(JSON.stringify({on: 'canvas:render', data: msg.data}))
+						}
+
 						else if (msg.on == 'session:close') {
 							console.log(ctx.state.user + message)
 							const id = session._id + ctx.state.user
