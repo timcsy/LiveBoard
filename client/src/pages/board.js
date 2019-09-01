@@ -1,6 +1,6 @@
 import { Vue, vuetify } from '../main'
 
-import BoardLayout from './layouts/BoardLayout.vue'
+import BoardLayout from '../layouts/BoardLayout.vue'
 
 Vue.component('board-layout', BoardLayout)
 

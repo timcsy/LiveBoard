@@ -1,7 +1,7 @@
 import { Vue, vuetify } from '../main'
 
-import MainLayout from './layouts/MainLayout.vue'
-import SummaryCard from './components/SummaryCard.vue'
+import MainLayout from '../layouts/MainLayout.vue'
+import SummaryCard from '../components/SummaryCard.vue'
 
 Vue.component('main-layout', MainLayout)
 Vue.component('summary-card', SummaryCard)
