@@ -58,7 +58,7 @@
         </v-layout>
       </v-container>
 
-      <v-btn v-if="fab" :href="url" fab dark large color="accent" fixed right bottom>
+      <v-btn v-if="fab" :href="url" fab dark large color="accent" fixed right bottom :link="!!url">
         <v-icon dark>{{fab}}</v-icon>
       </v-btn>
       
