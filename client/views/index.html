@@ -9,48 +9,9 @@
 	</head>
 	<body>
 		<div id="app">
-			<main-layout :items="items">
-				<v-container fluid grid-list-md>
-					<v-layout row wrap>
-
-						<summary-card title="第一頁" text="...這是第一頁 這是第一頁 這是第一頁 這是第一頁 這是第一頁 這是第一頁..." thumbnail=""></summary-card>
-						<summary-card></summary-card>
-						<summary-card></summary-card>
-						<summary-card></summary-card>
-						<summary-card></summary-card>
-						<summary-card></summary-card>
-						<summary-card></summary-card>
-						<summary-card></summary-card>
-						<summary-card></summary-card>
-						<summary-card></summary-card>
-						<summary-card></summary-card>
-						<summary-card></summary-card>
-						<summary-card></summary-card>
-						<summary-card></summary-card>
-						<summary-card></summary-card>
-						<summary-card></summary-card>
-						<summary-card></summary-card>
-						<summary-card></summary-card>
-						<summary-card></summary-card>
-						<summary-card></summary-card>
-
-					</v-layout>
-				</v-container>
-			</main-layout>
+			<main-layout :items="items"></main-layout>
 		</div>
 
-		<script>
-			new Vue({
-				data: {
-					items: [
-						{icon: 'home', text: '首頁', url: '/'},
-						{icon: 'account_circle', text: '登入', url: '/login'},
-						{icon: 'account_circle', text: '註冊', url: '/signup'},
-						{ divider: true }
-					]
-				},
-				vuetify
-			}).$mount('#app')
-		</script>
+		<script src="index.bundle.js"></script>
 	</body>
 </html>

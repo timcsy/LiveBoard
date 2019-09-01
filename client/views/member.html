@@ -5,27 +5,40 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' rel="stylesheet">
-		<title>Live Board</title>
+		<title>Live Board - 瀏覽</title>
 	</head>
 	<body>
 		<div id="app">
 			<main-layout>
+				<v-container fluid grid-list-md>
+					<v-layout row wrap>
 
+						<summary-card title="第一頁" text="...這是第一頁 這是第一頁 這是第一頁 這是第一頁 這是第一頁 這是第一頁..." thumbnail=""></summary-card>
+						<summary-card></summary-card>
+						<summary-card></summary-card>
+						<summary-card></summary-card>
+						<summary-card></summary-card>
+						<summary-card></summary-card>
+						<summary-card></summary-card>
+						<summary-card></summary-card>
+						<summary-card></summary-card>
+						<summary-card></summary-card>
+						<summary-card></summary-card>
+						<summary-card></summary-card>
+						<summary-card></summary-card>
+						<summary-card></summary-card>
+						<summary-card></summary-card>
+						<summary-card></summary-card>
+						<summary-card></summary-card>
+						<summary-card></summary-card>
+						<summary-card></summary-card>
+						<summary-card></summary-card>
+
+					</v-layout>
+				</v-container>
 			</main-layout>
 		</div>
 
-		<script src="index.bundle.js">
-			new Vue({
-				data: {
-					items: [
-						{icon: 'account_circle', text: '連結帳號', url: '/connect/login'},
-						{icon: 'account_circle', text: '登出', url: '/logout'},
-						{ divider: true },
-						{icon: 'call', text: '通話', url: '/board'},
-					]
-				},
-				vuetify
-			}).$mount('#app')
-		</script>
+		<script src="member.bundle.js"></script>
 	</body>
 </html>

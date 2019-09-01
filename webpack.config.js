@@ -4,10 +4,24 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 
-module.exports = {
+const pages = [
+  'index',
+  'login',
+  'signup',
+  'member',
+  'connect_login',
+  'connect_signup',
+  'data/index',
+  'board/index'
+]
+
+const config = {
   mode: 'development',
   entry: {
-    index: './client/src/index.js'
+    index: './client/src/pages/index.js',
+    login: './client/src/pages/login.js',
+    member: './client/src/pages/member.js',
+    board: './client/src/pages/board.js'
   },
   module: {
     rules: [
@@ -34,42 +48,6 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(['dist']),
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: path.resolve(__dirname, 'client/views/index.html'),
-      inject: false
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'login.html',
-      template: path.resolve(__dirname, 'client/views/login.html'),
-      inject: false
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'signup.html',
-      template: path.resolve(__dirname, 'client/views/signup.html')
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'member.html',
-      template: path.resolve(__dirname, 'client/views/member.html'),
-      inject: false
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'connect_login.html',
-      template: path.resolve(__dirname, 'client/views/connect_login.html')
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'connect_signup.html',
-      template: path.resolve(__dirname, 'client/views/connect_signup.html')
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'data/index.html',
-      template: path.resolve(__dirname, 'client/views/data/index.html')
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'board/index.html',
-      template: path.resolve(__dirname, 'client/views/board/index.html'),
-      inject: false
-    }),
     new VueLoaderPlugin(),
     new VuetifyLoaderPlugin()
   ],
@@ -83,3 +61,13 @@ module.exports = {
     path: path.resolve(__dirname, 'client/dist')
   }
 }
+
+pages.forEach(p => {
+  config.plugins.push(new HtmlWebpackPlugin({
+    filename: 'board/index.html',
+    template: path.resolve(__dirname, `client/views/${p}.html`),
+    inject: false
+  }))
+})
+
+module.exports = config
