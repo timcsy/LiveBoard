@@ -63,7 +63,6 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer">
         <v-icon>menu</v-icon>
       </v-app-bar-nav-icon>
-      <span class="title ml-3 mr-5" v-if="!isCalling">Liveboard</span>
       <v-text-field
         solo-inverted
         flat
@@ -77,11 +76,6 @@
         <v-icon>call</v-icon>
       </v-btn>
 
-      <v-avatar size="40" v-if="isCalling">
-        <img v-if="receiver.picture" :src="receiver.picture">
-        <v-icon v-else x-large>account_circle</v-icon>
-      </v-avatar>
-      <span class="title ml-3 mr-5" v-if="isCalling">{{receiver.name}}</span>
       <v-btn icon v-if="isCalling" @click="hangup()">
         <v-icon>call_end</v-icon>
       </v-btn>
@@ -109,7 +103,7 @@
         <v-col sm="12" md="8" lg="6">
           <v-sheet d-flex elevation="1">
             <v-list d-flex subheader light>
-              <v-subheader>Invitations</v-subheader>
+              <v-subheader>通話邀請</v-subheader>
 
               <v-list-item
                 v-for="(invitation, index) in inviteList"
