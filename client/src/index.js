@@ -15,6 +15,9 @@ Vue.component('centered-form', CenteredForm)
 Vue.component('board-layout', BoardLayout)
 Vue.component('summary-card', SummaryCard)
 
+window.Vue = Vue
+window.vuetify = vuetify
+
 // new Vue({
 // 	data: {
 // 		items: [
