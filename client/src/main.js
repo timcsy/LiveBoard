@@ -5,4 +5,4 @@ import adapter from 'webrtc-adapter'
 import Vue from 'vue'
 import vuetify from './plugins/vuetify'
 
-export default { Vue, vuetify }
+export { Vue, vuetify }
