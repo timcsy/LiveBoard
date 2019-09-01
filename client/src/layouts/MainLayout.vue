@@ -60,6 +60,12 @@
       
     </v-content>
 
+    <v-fab-transition>
+      <v-btn fab large bottom right>
+        <v-icon>call</v-icon>
+      </v-btn>
+    </v-fab-transition>
+
   </v-app>
 </template>
 
@@ -81,6 +87,10 @@
             {icon: 'home', text: '首頁', url: '/'}
           ]
         }
+      },
+      fab: {
+        type: Boolean,
+        default: false
       }
     },
     methods: {

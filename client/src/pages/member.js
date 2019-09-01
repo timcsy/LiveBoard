@@ -13,7 +13,8 @@ new Vue({
 			{icon: 'account_circle', text: '登出', url: '/logout'},
 			{ divider: true },
 			{icon: 'call', text: '通話', url: '/board'}
-		]
+		],
+		fab: true
 	},
 	vuetify
 }).$mount('#app')
