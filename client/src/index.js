@@ -15,8 +15,7 @@ Vue.component('centered-form', CenteredForm)
 Vue.component('board-layout', BoardLayout)
 Vue.component('summary-card', SummaryCard)
 
-const app = new Vue({
-	el: '#app',
+new Vue({
 	data: {
 		items: [
 			{icon: 'home', text: '首頁', url: '/'},
@@ -29,3 +28,30 @@ const app = new Vue({
 	},
 	vuetify
 }).$mount('#app')
+
+new Vue({
+	data: {
+		
+	},
+	vuetify
+}).$mount('#login_app')
+
+new Vue({
+	data: {
+		items: [
+			{icon: 'account_circle', text: '連結帳號', url: '/connect/login'},
+			{icon: 'account_circle', text: '登出', url: '/logout'},
+			{ divider: true },
+			{icon: 'call', text: '通話', url: '/board'},
+		]
+	},
+	vuetify
+}).$mount('#member_app')
+
+
+new Vue({
+	data: {
+		
+	},
+	vuetify
+}).$mount('#board_app')

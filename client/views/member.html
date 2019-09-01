@@ -8,24 +8,10 @@
 		<title>Live Board</title>
 	</head>
 	<body>
-		<div id="app">
+		<div id="member_app">
 			<main-layout>
 				
 			</main-layout>
 		</div>
-
-		<script>
-			new Vue({
-				data: {
-					items: [
-						{icon: 'account_circle', text: '連結帳號', url: '/connect/login'},
-            {icon: 'account_circle', text: '登出', url: '/logout'},
-						{ divider: true },
-						{icon: 'call', text: '通話', url: '/board'},
-					]
-				},
-				vuetify
-			}).$mount('#app')
-		</script>
 	</body>
 </html>
