@@ -52,11 +52,9 @@
     </v-app-bar>
 
     <v-content light class="grey lighten-4" fill-height>
-      <v-layout fluid fill-height align-center justify-start>
         
-        <slot></slot>
-
-      </v-layout>
+      <slot></slot>
+      
     </v-content>
 
   </v-app>
