@@ -64,7 +64,7 @@ const config = {
 
 pages.forEach(p => {
   config.plugins.push(new HtmlWebpackPlugin({
-    filename: 'board/index.html',
+    filename: `${p}.html`,
     template: path.resolve(__dirname, `client/views/${p}.html`),
     inject: false
   }))
