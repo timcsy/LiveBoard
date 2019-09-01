@@ -53,11 +53,9 @@
 
     <v-content light class="grey lighten-4" fill-height>
       <v-container fill-height>
-        <v-row>
-          <v-col xs="12" sm="6" md="4">
-            <slot></slot>
-          </v-col>
-        </v-row>
+        <v-layout wrap>
+          <slot></slot>
+        </v-layout>
       </v-container>
       
     </v-content>

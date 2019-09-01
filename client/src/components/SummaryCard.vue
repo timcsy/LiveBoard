@@ -1,19 +1,21 @@
 <template>
-	<v-card color="white" light>
-		<v-list-item three-line>
-			<v-list-item-content class="align-self-start">
-				<v-list-item-title class="headline mb-2" v-text="title"></v-list-item-title>
-				<v-list-item-subtitle v-text="text"></v-list-item-subtitle>
-			</v-list-item-content>
+	<v-flex xs12 sm6 md4>
+		<v-card color="white" light>
+			<v-list-item three-line>
+				<v-list-item-content class="align-self-start">
+					<v-list-item-title class="headline mb-2" v-text="title"></v-list-item-title>
+					<v-list-item-subtitle v-text="text"></v-list-item-subtitle>
+				</v-list-item-content>
 
-			<v-list-item-avatar size="125" tile>
-				<v-img :src="thumbnail"></v-img>
-			</v-list-item-avatar>
-		</v-list-item>
-		<v-card-actions>
-			<v-btn text>{{action}}</v-btn>
-		</v-card-actions>
-	</v-card>
+				<v-list-item-avatar size="125" tile>
+					<v-img :src="thumbnail"></v-img>
+				</v-list-item-avatar>
+			</v-list-item>
+			<v-card-actions>
+				<v-btn text>{{action}}</v-btn>
+			</v-card-actions>
+		</v-card>
+	</v-flex>
   <!-- <v-flex xs12 sm6 md4>
 		<v-card color="white" light>
 			<v-layout>
