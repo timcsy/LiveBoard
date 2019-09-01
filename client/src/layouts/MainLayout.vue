@@ -57,14 +57,12 @@
           <slot></slot>
         </v-layout>
       </v-container>
+
+      <v-btn v-if="fab" fab dark large color="accent" fixed right bottom>
+        <v-icon dark>{{fab}}</v-icon>
+      </v-btn>
       
     </v-content>
-
-    <v-fab-transition>
-      <v-btn fab large bottom right>
-        <v-icon>call</v-icon>
-      </v-btn>
-    </v-fab-transition>
 
   </v-app>
 </template>
@@ -89,8 +87,8 @@
         }
       },
       fab: {
-        type: Boolean,
-        default: false
+        type: String,
+        default: ''
       }
     },
     methods: {

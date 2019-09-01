@@ -14,7 +14,7 @@ new Vue({
 			{ divider: true },
 			{icon: 'call', text: '通話', url: '/board'}
 		],
-		fab: true
+		fab: 'call'
 	},
 	vuetify
 }).$mount('#app')
