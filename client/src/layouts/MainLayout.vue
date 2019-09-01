@@ -54,7 +54,7 @@
     <v-content light class="grey lighten-4" fill-height>
       <v-container fill-height>
         <v-row>
-          <v-col>
+          <v-col xs12 sm6 md4>
             <slot></slot>
           </v-col>
         </v-row>
