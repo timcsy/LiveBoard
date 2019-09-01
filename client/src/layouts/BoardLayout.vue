@@ -40,9 +40,9 @@
         </template>
 
         <v-divider dark class="my-3"></v-divider>
-        <v-subheader>畫板設定</v-subheader>
-        <v-list-item>
-          <v-btn class="ml-1" @click="board.clear()" v-if="isCalling">清除畫板</v-btn>
+        <v-subheader v-if="isCalling">畫板設定</v-subheader>
+        <v-list-item v-if="isCalling">
+          <v-btn class="ml-1" @click="board.clear()">清除畫板</v-btn>
         </v-list-item>
 
         <v-list-item v-if="isCalling">
