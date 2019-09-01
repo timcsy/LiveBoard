@@ -1,5 +1,21 @@
 <template>
-  <v-flex xs12 sm6 md4>
+	<v-card>
+		<v-list-item three-line>
+			<v-list-item-content class="align-self-start">
+				<v-list-item-title class="headline mb-2" v-text="item.title"></v-list-item-title>
+				<v-list-item-subtitle :v-text="text"></v-list-item-subtitle>
+			</v-list-item-content>
+
+			<v-list-item-avatar size="125" tile>
+				<v-img :src="thumbnail"></v-img>
+			</v-list-item-avatar>
+			<v-divider light></v-divider>
+			<v-card-actions>
+				<v-btn text>{{action}}</v-btn>
+			</v-card-actions>
+		</v-list-item>
+	</v-card>
+  <!-- <v-flex xs12 sm6 md4>
 		<v-card color="white" light>
 			<v-layout>
 				<v-flex xs5 align-self-center pl-4>
@@ -23,7 +39,7 @@
 				<v-btn text>詳細內容</v-btn>
 			</v-card-actions>
 		</v-card>
-	</v-flex>
+	</v-flex> -->
 </template>
 
 <script>
@@ -43,6 +59,10 @@
 			text: {
 				type: String,
 				default: '...第幾頁文字文字文字文字文字 文字文字文字文字文字文字文字文字文字...'
+			},
+			action: {
+				type: String,
+				default: '查看'
 			}
     },
     methods: {
