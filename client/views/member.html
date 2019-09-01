@@ -5,14 +5,27 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' rel="stylesheet">
-		<title>Member Area</title>
+		<title>Live Board</title>
 	</head>
 	<body>
 		<div id="app">
 			<main-layout>
-				<a href="/connect/login">Link Account</a>
-				<a href="/logout">Log out</a>
+				
 			</main-layout>
 		</div>
+
+		<script>
+			new Vue({
+				data: {
+					items: [
+						{icon: 'account_circle', text: '連結帳號', url: '/connect/login'},
+            {icon: 'account_circle', text: '登出', url: '/logout'},
+						{ divider: true },
+						{icon: 'call', text: '通話', url: '/board'},
+					]
+				},
+				vuetify
+			}).$mount('#app')
+		</script>
 	</body>
 </html>

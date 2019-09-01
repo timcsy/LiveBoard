@@ -70,6 +70,7 @@
         label="對方使用者名稱"
         prepend-inner-icon="search"
         v-model="contact"
+        class="px-1"
         v-if="!isCalling"
       ></v-text-field>
       <v-btn icon v-if="!isCalling" @click="call()">

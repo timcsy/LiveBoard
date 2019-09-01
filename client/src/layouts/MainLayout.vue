@@ -1,8 +1,8 @@
 <template>
-  <v-app>
+  <v-app class="grey lighten-4">
 
     <v-navigation-drawer v-model="drawer" fixed clipped class="grey lighten-4" app light>
-      <v-list dense class="grey lighten-4" subheader>
+      <v-list dense subheader class="grey lighten-4">
         <div v-if="user">
           <v-toolbar flat class="transparent">
             <v-list class="pa-0">
@@ -45,25 +45,18 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer">
         <v-icon>menu</v-icon>
       </v-app-bar-nav-icon>
-      <span class="title ml-3 mr-5">Liveboard</span>
-      <v-text-field
-        solo-inverted
-        flat
-        hide-details
-        label="Search"
-        prepend-inner-icon="search"
-      ></v-text-field>
-      <v-spacer></v-spacer>
+      <span class="title ml-3 mr-5">Live Board</span>
+
+      <div class="flex-grow-1"></div>
+
     </v-app-bar>
 
-    <v-content light fill-height>
-      <v-container fluid class="grey lighten-4" fill-height>
-        <v-layout align-center justify-start>
-          
-          <slot></slot>
+    <v-content light class="grey lighten-4" fill-height>
+      <v-layout fluid fill-height align-center justify-start>
+        
+        <slot></slot>
 
-        </v-layout>
-      </v-container>
+      </v-layout>
     </v-content>
 
   </v-app>

@@ -6,22 +6,22 @@
           <v-flex xs12 sm8 md4>
             <v-card class="elevation-12" light>
               <v-toolbar dark color="primary">
-                <v-toolbar-title>Login form</v-toolbar-title>
+                <v-toolbar-title>登入</v-toolbar-title>
               </v-toolbar>
               <v-card-text>
                 <form :action="action" method="POST" ref="form">
-                  <v-text-field prepend-icon="person" name="username" label="Username" type="text"></v-text-field>
-                  <v-text-field id="password" prepend-icon="lock" name="password" label="Password" type="password"></v-text-field>
+                  <v-text-field prepend-icon="person" name="username" label="使用者名稱" type="text"></v-text-field>
+                  <v-text-field id="password" prepend-icon="lock" name="password" label="密碼" type="password"></v-text-field>
                 </form>
-                or
+                或
                 <br />
-                <a href="/signup">Sign up</a>
+                <a href="/signup">註冊</a>
                 <br />
-                <a href="/auth/facebook">Log in with Facebook</a>
+                <a href="/auth/facebook">使用 Facebook 登入</a>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" @click="submit">Login</v-btn>
+                <v-btn color="primary" @click="submit">登入</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>

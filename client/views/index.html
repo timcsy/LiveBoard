@@ -38,5 +38,19 @@
 				</v-container>
 			</main-layout>
 		</div>
+
+		<script>
+			new Vue({
+				data: {
+					items: [
+						{icon: 'home', text: '首頁', url: '/'},
+						{icon: 'account_circle', text: '登入', url: '/login'},
+						{icon: 'account_circle', text: '註冊', url: '/signup'},
+						{ divider: true }
+					]
+				},
+				vuetify
+			}).$mount('#app')
+		</script>
 	</body>
 </html>
