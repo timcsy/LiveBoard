@@ -53,7 +53,7 @@
 
     <v-content light class="grey lighten-4" fill-height>
       <v-container fill-height>
-        <v-layout wrap class="gutter-1">
+        <v-layout wrap>
           <slot></slot>
         </v-layout>
       </v-container>
