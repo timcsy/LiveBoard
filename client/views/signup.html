@@ -4,20 +4,14 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-		<title>註冊</title>
+		<link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' rel="stylesheet">
+		<title>Live Board - 註冊</title>
 	</head>
 	<body>
-		<form action="/signup" method="POST">
-			使用者名稱: <input type="text" name="username" />
-			<br />
-			密碼: <input type="password" name="password" />
-			<br />
-			<input type="submit" />
-		</form>
-		或
-		<br />
-		<a href="/login">登入</a>
-		<br />
-		<a href="/auth/facebook">使用 Facebook 註冊</a>
+		<div id="app">
+			<centered-form action="註冊" url="/login" another="登入" facebook="使用 Facebook 註冊"></centered-form>
+		</div>
+
+		<script src="auth.bundle.js"></script>
 	</body>
 </html>

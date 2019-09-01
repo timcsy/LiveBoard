@@ -19,7 +19,7 @@ const config = {
   mode: 'development',
   entry: {
     index: './client/src/pages/index.js',
-    login: './client/src/pages/login.js',
+    auth: './client/src/pages/auth.js',
     member: './client/src/pages/member.js',
     board: './client/src/pages/board.js'
   },
