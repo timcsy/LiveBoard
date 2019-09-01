@@ -1,5 +1,5 @@
 <template>
-	<v-card>
+	<v-card xs12 sm6 md4 color="white" light>
 		<v-list-item three-line>
 			<v-list-item-content class="align-self-start">
 				<v-list-item-title class="headline mb-2" :v-text="title"></v-list-item-title>
@@ -9,7 +9,6 @@
 			<v-list-item-avatar size="125" tile>
 				<v-img :src="thumbnail"></v-img>
 			</v-list-item-avatar>
-			<v-divider light></v-divider>
 			<v-card-actions>
 				<v-btn text>{{action}}</v-btn>
 			</v-card-actions>
