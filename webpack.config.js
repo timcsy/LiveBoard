@@ -36,11 +36,13 @@ module.exports = {
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: path.resolve(__dirname, 'client/views/index.html')
+      template: path.resolve(__dirname, 'client/views/index.html'),
+      inject: false
     }),
     new HtmlWebpackPlugin({
       filename: 'login.html',
-      template: path.resolve(__dirname, 'client/views/login.html')
+      template: path.resolve(__dirname, 'client/views/login.html'),
+      inject: false
     }),
     new HtmlWebpackPlugin({
       filename: 'signup.html',
@@ -48,7 +50,8 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       filename: 'member.html',
-      template: path.resolve(__dirname, 'client/views/member.html')
+      template: path.resolve(__dirname, 'client/views/member.html'),
+      inject: false
     }),
     new HtmlWebpackPlugin({
       filename: 'connect_login.html',
@@ -64,7 +67,8 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       filename: 'board/index.html',
-      template: path.resolve(__dirname, 'client/views/board/index.html')
+      template: path.resolve(__dirname, 'client/views/board/index.html'),
+      inject: false
     }),
     new VueLoaderPlugin(),
     new VuetifyLoaderPlugin()
