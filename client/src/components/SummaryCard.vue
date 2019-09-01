@@ -2,7 +2,7 @@
 	<v-card>
 		<v-list-item three-line>
 			<v-list-item-content class="align-self-start">
-				<v-list-item-title class="headline mb-2" v-text="item.title"></v-list-item-title>
+				<v-list-item-title class="headline mb-2" :v-text="title"></v-list-item-title>
 				<v-list-item-subtitle :v-text="text"></v-list-item-subtitle>
 			</v-list-item-content>
 
