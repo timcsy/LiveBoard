@@ -53,7 +53,7 @@
 
     <v-content light class="grey lighten-4" fill-height>
       <v-container fill-height>
-        <v-layout wrap>
+        <v-layout wrap justify-space-between>
           <slot></slot>
         </v-layout>
       </v-container>
