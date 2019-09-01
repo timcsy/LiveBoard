@@ -15,6 +15,7 @@ class Board {
 		this.remote_canvas = new fabric.Canvas('remote_canvas', {
 			isDrawingMode: false
 		})
+		this.page = 1
 		this.setSize(size)
 		this.setBrush('pencil')
 		this.setColor('black')
@@ -23,21 +24,29 @@ class Board {
 		this.last_canvas = {}
 		this.last_remote_canvas = {}
 		this.canvas.on('after:render', e => {
+			this.timeOffset = Date.now() - this.startTime
 			// calculate the diff and send to the other
 			const difference = deep.diff(this.last_canvas, this.canvas.toJSON())
 			if (difference) {
-				this.session.send('canvas:render', {diff: difference})
+				this.session.send('canvas:render', {diff: difference, page: this.page, time: this.timeOffset})
 				difference.forEach(change => {
 					deep.applyChange(this.last_canvas, true, change)
 				})
 			}
 		})
 		ws.on('canvas:render', msg => {
+			if (msg.data.page != this.page) {
+				this.page = msg.data.page
+				this.clear()
+			}
 			msg.data.diff.forEach(change => {
 				deep.applyChange(this.last_remote_canvas, true, change)
 			})
 			this.remote_canvas.loadFromJSON(JSON.stringify(this.last_remote_canvas))
 		})
+		this.startTime = Date.now()
+		this.timeOffset = 0
+		this.session.send('canvas:start', {time: this.startTime})
 	}
 
 	setSize(size) {
@@ -49,6 +58,11 @@ class Board {
 
 	clear() {
 		this.canvas.clear()
+	}
+
+	add() {
+		this.clear()
+		this.page++
 	}
 
 	switchMode() {

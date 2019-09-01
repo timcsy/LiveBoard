@@ -68,7 +68,7 @@
         solo-inverted
         flat
         hide-details
-        label="Contact"
+        label="對方使用者名稱"
         prepend-inner-icon="search"
         v-model="contact"
         v-if="!isCalling"
@@ -88,7 +88,7 @@
 
       <div class="flex-grow-1"></div>
 
-      <v-app-bar-nav-icon @click.stop=";" v-if="isCalling">
+      <v-app-bar-nav-icon @click.stop="board.add()" v-if="isCalling">
         <v-icon>add</v-icon>
       </v-app-bar-nav-icon>
 
@@ -151,7 +151,7 @@
 
     <v-navigation-drawer v-model="rightDrawer" fixed clipped right app light v-if="isCalling">
       <v-list subheader>
-        <v-subheader>Conversation</v-subheader>
+        <v-subheader>對話</v-subheader>
 
         <v-list-item
           :class="record.isLocal? 'white': 'grey lighten-2'"
@@ -214,8 +214,8 @@
         default: () => {
           return [
             {icon: 'home', text: '首頁', url: '/'},
-            {icon: 'account_circle', text: 'Link Account', url: '/connect/login'},
-            {icon: 'account_circle', text: 'Log out', url: '/logout'}
+            {icon: 'account_circle', text: '連結帳號', url: '/connect/login'},
+            {icon: 'account_circle', text: '登出', url: '/logout'}
           ]
         }
       }
