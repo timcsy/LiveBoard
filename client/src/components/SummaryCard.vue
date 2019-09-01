@@ -1,6 +1,6 @@
 <template>
 	<v-flex xs12 sm6 md4>
-		<v-card color="white" light class="pa-1">
+		<v-card color="white" light class="ma-1">
 			<v-list-item three-line>
 				<v-list-item-content class="align-self-start">
 					<v-list-item-title class="headline mb-2" v-text="title"></v-list-item-title>
