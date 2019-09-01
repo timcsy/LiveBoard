@@ -16,31 +16,6 @@
 			</v-card-actions>
 		</v-card>
 	</v-flex>
-  <!-- <v-flex xs12 sm6 md4>
-		<v-card color="white" light>
-			<v-layout>
-				<v-flex xs5 align-self-center pl-4>
-					<v-img
-						:src="thumbnail"
-						height="125px"
-						contain
-					></v-img>
-				</v-flex>
-				<v-flex xs7>
-					<v-card-title primary-title>
-						<div>
-							<div class="headline">{{title}}</div>
-							<span>{{text}}</span>
-						</div>
-					</v-card-title>
-				</v-flex>
-			</v-layout>
-			<v-divider light></v-divider>
-			<v-card-actions>
-				<v-btn text>詳細內容</v-btn>
-			</v-card-actions>
-		</v-card>
-	</v-flex> -->
 </template>
 
 <script>
