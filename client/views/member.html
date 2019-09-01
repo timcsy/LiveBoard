@@ -8,10 +8,27 @@
 		<title>Live Board</title>
 	</head>
 	<body>
-		<div id="member_app">
+		<div id="app">
 			<main-layout>
-				
+
 			</main-layout>
 		</div>
+
+		<% for (var i=0; i < htmlWebpackPlugin.files.js.length; i++) {%>
+			<script type="text/javascript" src="<%= htmlWebpackPlugin.files.js[i] %>"></script>
+		<% } %>
+		<script>
+			new Vue({
+				data: {
+					items: [
+						{icon: 'account_circle', text: '連結帳號', url: '/connect/login'},
+						{icon: 'account_circle', text: '登出', url: '/logout'},
+						{ divider: true },
+						{icon: 'call', text: '通話', url: '/board'},
+					]
+				},
+				vuetify
+			}).$mount('#app')
+		</script>
 	</body>
 </html>
