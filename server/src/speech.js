@@ -39,10 +39,6 @@ function startRecognitionStream(id, callback) {
 					// console.log('restarted stream serverside')
 				}
 			})
-			.on('end', () => {
-				recognizeStreams[id] = null
-				clients[id] = null
-			})
 	}
 }
 
@@ -54,7 +50,7 @@ function stopRecognitionStream(id) {
 }
 
 function writeStream(id, data) {
-	if (recognizeStreams[id]) {
+	if (!recognizeStreams[id].ending && !recognizeStreams[id].ended && !recognizeStreams[id].finished) {
 		recognizeStreams[id].write(data)
 	}
 }
