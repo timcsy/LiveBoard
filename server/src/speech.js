@@ -39,6 +39,9 @@ function startRecognitionStream(id, callback) {
 					// console.log('restarted stream serverside')
 				}
 			})
+			.on('end', () => {
+				stop(id)
+			})
 	}
 }
 
