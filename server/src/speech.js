@@ -50,7 +50,7 @@ function stopRecognitionStream(id) {
 }
 
 function writeStream(id, data) {
-	if (!recognizeStreams[id].ending && !recognizeStreams[id].ended && !recognizeStreams[id].finished) {
+	if (!recognizeStreams[id].destroyed) {
 		recognizeStreams[id].write(data)
 	}
 }
