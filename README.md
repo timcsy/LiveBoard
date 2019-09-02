@@ -5,6 +5,10 @@ Demo
 ---
 https://liveboard.tew.tw
 
+說明
+---
+https://timcsy.tew.tw/data/LiveBoard.pdf
+
 安裝
 ---
 ```

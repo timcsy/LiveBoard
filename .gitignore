@@ -5,3 +5,4 @@ client/config.js
 client/dist
 package-lock.json
 resources/
+.DS_Store
