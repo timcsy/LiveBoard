@@ -39,8 +39,9 @@ function startRecognitionStream(id, callback) {
 					// console.log('restarted stream serverside')
 				}
 			})
-			.on('finish', () => {
-				stop(id)
+			.on('end', () => {
+				recognizeStreams[id] = null
+				clients[id] = null
 			})
 	}
 }
