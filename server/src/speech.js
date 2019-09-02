@@ -21,7 +21,6 @@ function startRecognitionStream(id, callback) {
 		recognizeStreams[id] = clients[id].streamingRecognize(request)
 			.on('error', (err) => {
 				console.error(err.message)
-				stop(id)
 			})
 			.on('data', (data) => {
 				console.log(
@@ -50,7 +49,7 @@ function stopRecognitionStream(id) {
 }
 
 function writeStream(id, data) {
-	if (!recognizeStreams[id].destroyed) {
+	if (recognizeStreams[id] && !recognizeStreams[id].destroyed) {
 		recognizeStreams[id].write(data)
 	}
 }
