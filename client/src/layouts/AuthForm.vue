@@ -63,6 +63,10 @@
         if (this.action == 'login') return '登入'
         else if (this.action == 'signup') return '註冊'
       },
+      anotherText: function() {
+        if (this.action == 'login') return '註冊'
+        else if (this.action == 'signup') return '登入'
+      },
       url: function() {
         if (this.action == 'login') return (this.connect? '/connect': '') + '/login'
         else if (this.action == 'signup') return (this.connect? '/connect': '') + '/signup'
