@@ -9,6 +9,11 @@ class LiveStream {
       'iceServers': [
         {
           'urls': 'stun:stun.l.google.com:19302'
+        },
+        {
+          urls: 'turn:tew.tw',
+          credential: 'turnn4zj6fu4',
+          username: 'tew'
         }
       ]
     }
