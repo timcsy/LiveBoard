@@ -15,7 +15,7 @@
   "dependencies": {
     "@mdi/js": "^4.2.95",
     "axios": "^0.18.0",
-    "bcrypt": "^3.0.0",
+    "bcrypt": "^5.0.0",
     "deep-diff": "^1.0.2",
     "ejs": "^2.6.1",
     "fabric": "^3.4.0",
